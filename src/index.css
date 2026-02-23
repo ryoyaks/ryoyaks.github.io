@@ -64,6 +64,11 @@ section {
 }
 
 @layer components {
+  .title-white-text {
+    background: #fdfdfd;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .gradient-title {
     background: linear-gradient(
       180deg,

@@ -5,19 +5,13 @@ import React, { Suspense } from "react";
 import GradientSpheres from "../components/GradientSpheres";
 import { Model } from "../components/models/2026YA";
 import TitleHeader from "../components/TitleHeader";
-import LinkIcon from "../components/LinkIcon";
-import { linkSections } from "../constants"; 
 
 import { Environment } from "@react-three/drei";
 /**
  * About 組件：採用 Bento Grid 佈局，展示創作者簡介、3D 模型與社交動態
  */
 const About = () => {
-  // 將陣列轉成以 name 為 key 的物件，方便直接 index 存取
-  const links = linkSections[0].links.reduce((acc, link) => {
-    acc[link.name] = link;
-    return acc;
-  }, {});
+
   return (
     <section id="about" className="flex-center relative md:p-0 px-5">
       {/* 背景裝飾：流動感漸層球體 */}
@@ -26,17 +20,17 @@ const About = () => {
         sphere2Class="about-gradient-sphere about-sphere-2"
       />
 
-      <div className="container w-full h-full md:my-40 my-20 relative z-10">
+      <div className="container w-full h-full  relative z-10">
         {/* 區塊標題：數字編號與主副標題 */}
         <TitleHeader
           title="About Me"
-          number="01"
-          text="Passionate Creator, Lifelong Learner"
+          number="02"
+          text="Creator, Who interetested in Everything"
         />
 
         <div className="md:mt-20 mt-10">
           {/* 主佈局：使用 12 欄格狀系統 */}
-          <div className="grid grid-cols-12 md:grid-rows-3 gap-5">
+          <div className="grid grid-cols-12 md:grid-rows-1 gap-5">
             
             {/* --- 左上區塊：個人品牌簡介 (佔 7 欄) --- */}
             <div className="md:col-span-7 col-span-12 row-span-1">
@@ -53,10 +47,8 @@ const About = () => {
                     RyoyakS
                   </h1>
                   <p className="md:text-2xl mt-2 leading-relaxed text-white-600">
-                    I am a digital artist and multi-disciplinary content creator 
-                    specializing in character illustration. Beyond 2D art, I leverage 
-                    Blender, Unity, and Unreal Engine to bridge the gap between 
-                    illustration and 3D/interactive media.
+                    A digital artist and multi-disciplinary content creator 
+                    specializing in character illustration. .
                   </p>
                 </div>
               </div>
@@ -87,58 +79,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            {/* LINKS start */}
-            {/* --- Link 區塊 (佔 8 欄) --- */}
-            <div className="md:col-span-12 col-span-12 row-span-1">
-              <div className="bg-black-300 rounded-2xl p-7 h-full flex flex-col">
-                {/* 標題與副標題 */}
-                <div className="flex justify-between items-center mb-6">
-                  <h1 className="text-white text-2xl font-bold italic uppercase leading-none">Links</h1>
-                  <p className="text-white-500 text-sm hidden md:block">Follow Me On</p>
-                </div>
-                
-                {/* Grid 容器 */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 flex-grow content-start">
-                  {[
-                    "twitter", "facebook", "pixiv", "youtube", "twitch", 
-                    "fanbox", "myacg", "melonbooks", "marshmallow", "paypal"
-                  ].map((key) => {
-                    const item = links[key];
-                    if (!item) return null;
 
-                    // 判斷 Case
-                    let type = "square"; // 預設 Case 1
-                    let colSpan = "col-span-1";
-
-                    if (key === "fanbox") {
-                      type = "full";     // Case 3: 長型完整 Icon
-                      colSpan = "sm:col-span-2 col-span-2"; // 佔兩格
-                    } else if (key === "myacg") {
-                      type = "wide";     // Case 2: 文字 + Icon
-                      colSpan = "sm:col-span-2 col-span-2"; // 佔兩格
-                    }
-
-                    return (
-                      <a 
-                        key={key} 
-                        href={item.href} 
-                        target="_blank" 
-                        rel="noreferrer"
-                        // 動態切換 col-span，確保長方形能佔兩格
-                        className={`block active:scale-95 transition-transform ${colSpan}`}
-                      >
-                        <LinkIcon icon={item} type={type} />
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-
-            {/* LINKS end */}
- 
-
-            
           </div>
         </div>
       </div>
@@ -149,31 +90,3 @@ const About = () => {
 export default About;
 
 
-
-
-//  {/* --- 中間區塊：設計與開發技能說明 (各佔 6 欄) --- */}
-//             <div className="md:col-span-6 col-span-12 row-span-1">
-//               <div className="bg-black-300 rounded-2xl p-7 w-full h-full">
-//                 <div className="flex flex-col h-full justify-center gap-2">
-//                   <h1 className="gradient-title md:text-3xl text-2xl font-medium">
-//                     Web Design & Dev
-//                   </h1>
-//                   <p className="md:text-xl text-white-600">
-//                     Cleanly Designed, Conversion-focused, and built for easy updates.
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             <div className="md:col-span-6 col-span-12 row-span-1">
-//               <div className="bg-black-300 rounded-2xl p-7 w-full h-full">
-//                 <div className="flex flex-col h-full justify-center gap-2">
-//                   <h1 className="gradient-title md:text-3xl text-2xl font-medium">
-//                     UX UI Design
-//                   </h1>
-//                   <p className="md:text-xl text-white-600">
-//                     Seamless web or mobile app design to wow your users.
-//                   </p>
-//                 </div>
-//               </div>
-//             </div>

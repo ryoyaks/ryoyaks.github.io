@@ -8,8 +8,9 @@ const Contact = () => {
       <div className="w-full h-full container md:my-40 my-20">
         <TitleHeader
           title="Contact Me"
-          number="04"
-          text="Let's collaborate on tailored, sustainable solutions"
+          number="05"
+          // 委託、合作、商業詢問等
+          text="For commissions, collaborations, or business inquiries, feel free to reach out!"
         />
         <div className="mt-20">
           <div className="grid grid-cols-12">

@@ -10,6 +10,7 @@ import {
   Projects,
   Sidebar,
   TechStack,
+  Linktree
 } from "./sections";
 
 const MainContent = () => (
@@ -18,7 +19,8 @@ const MainContent = () => (
     {/* <Loader /> */}
     <Sidebar />
     <Hero />
-    <About />/
+    <Linktree />
+    <About />
     <TechStack />
     <Projects />
     <Contact />

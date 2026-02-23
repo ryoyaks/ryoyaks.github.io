@@ -8,9 +8,9 @@ const TechStack = () => {
       <div className="w-full md:my-40 my-20">
         <div className="container mx-auto md:p-0 px-5">
           <TitleHeader
-            title="TECH STACK"
-            number="02"
-            text="My Go-To Tools for Crafting Solutions"
+            title="Tools"
+            number="03"
+            text="Tools I Use For Creation"
           />
         </div>
         <div className="md:mt-20 mt-10 relative">
@@ -18,12 +18,20 @@ const TechStack = () => {
           <div className="tech-stack-gradient-right-box w-36 h-full absolute bottom-0 right-0 z-20"></div>
           <div className="marquee h-52">
             <div className="marquee-box md:gap-12 gap-5">
-              {iconsList.map((icon, index) => (
-                <LinkIcon key={index} icon={icon} />
-              ))}
-              {iconsList.map((icon, index) => (
-                <LinkIcon key={index} icon={icon} />
-              ))}
+              {/* SELECT ONLY TOOLS IN  iconsList*/}
+              {[
+                "blender", "photoshop", "illustrator", "clipstudiopaint", "unity", "unreal", "figma"
+              ].map((iconName, index) => {
+                const icon = iconsList.find(i => i.name === iconName);
+                return icon ? <LinkIcon key={index} icon={icon} /> : null;
+              })}
+              {[
+                "blender", "photoshop", "illustrator", "clipstudiopaint", "unity", "unreal", "figma"
+              ].map((iconName, index) => {
+                const icon = iconsList.find(i => i.name === iconName);
+                return icon ? <LinkIcon key={index} icon={icon} /> : null;
+              })}
+              
             </div>
           </div>
         </div>

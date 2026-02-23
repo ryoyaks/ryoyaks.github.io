@@ -31,7 +31,8 @@ const NavBar = () => {
             </div>
           ))}
           <div className="flex items-center gap-4">
-            <a
+            {/* Download CV */}
+            {/* <a
               href="/My-Resume.pdf"
               download
               className="relative bg-blue-300 text-black-100 font-semibold py-2 px-5 rounded-full shadow-lg
@@ -40,7 +41,7 @@ const NavBar = () => {
             >
               <span className="relative z-10">Download CV</span>
               <div className="absolute inset-0 bg-blue-300 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-            </a>
+            </a> */}
             <a
               href="#contact"
               onClick={scrollToContact}
