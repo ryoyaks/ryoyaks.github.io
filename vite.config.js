@@ -5,4 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: "/", // 確保資源從根目錄讀取
+  build: {
+    assetsInlineLimit: 0, // 確保大檔案不會被轉成 base64 導致崩潰
+  }
 });
