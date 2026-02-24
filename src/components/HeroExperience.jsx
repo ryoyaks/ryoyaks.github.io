@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import React, { Suspense } from "react";
-import { Model } from "../components/models/2026YA";
+import { Model } from "../components/models/6YAbeta";
 import { Environment } from "@react-three/drei";
 
 const HeroExperience = () => {
