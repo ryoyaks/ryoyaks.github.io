@@ -3,7 +3,7 @@ import { Canvas } from "@react-three/fiber";
 
 import React, { Suspense } from "react";
 import GradientSpheres from "../components/GradientSpheres";
-import { Model } from "../components/models/6YAbeta";
+import { Model } from "../components/models/6YAbeta1";
 import TitleHeader from "../components/TitleHeader";
 
 import { Environment } from "@react-three/drei";
