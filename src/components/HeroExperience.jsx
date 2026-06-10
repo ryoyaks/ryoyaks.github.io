@@ -10,19 +10,47 @@ const isDebug =
   (typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("debug") === "1");
 
+const ENV_PRESETS = [
+  "sunset",
+  "dawn",
+  "night",
+  "warehouse",
+  "forest",
+  "apartment",
+  "studio",
+  "city",
+  "park",
+  "lobby",
+];
+
 const LIGHT_DEFAULTS = {
-  dark: { ambient: 3.0, key: 1.3, fill: 5.0, envIntensity: 1.1, exposure: 0.7 },
-  light: { ambient: 1.5, key: 1.0, fill: 2.0, envIntensity: 0.7, exposure: 0.85 },
+  dark: {
+    preset: "city",
+    ambient: 3.0,
+    key: 1.3,
+    fill: 5.0,
+    envIntensity: 1.1,
+    exposure: 0.7,
+  },
+  light: {
+    preset: "apartment",
+    ambient: 1.5,
+    key: 1.0,
+    fill: 2.0,
+    envIntensity: 0.7,
+    exposure: 0.85,
+  },
 };
 
 const CAMERA_DEFAULTS = {
-  desktop: { position: [0, 0, 5], target: [0, 0, 0], fov: 90 },
+  desktop: { position: [-0.24, 0.22, 4.75], target: [-1.05, 0.01, -0.18], fov: 90 },
   mobile: { position: [0, 0, 5], target: [0, 0, 0], fov: 90 },
 };
 
-// Bridges the live three.js camera + OrbitControls back into the leva monitor
-// field, and exposes refs the snapshot button can read.
-const CameraBridge = ({ fov, setMonitor, cameraRef, orbitRef }) => {
+// Lives inside Canvas: keeps the three.js camera + leva in sync.
+// In debug, OrbitControls is active and feeds live position into leva.
+// In prod, just applies defaults via useEffect; no OrbitControls renders.
+const CameraBridge = ({ position, target, fov, setMonitor, cameraRef, orbitRef }) => {
   const { camera } = useThree();
 
   useEffect(() => {
@@ -30,14 +58,19 @@ const CameraBridge = ({ fov, setMonitor, cameraRef, orbitRef }) => {
   }, [camera, cameraRef]);
 
   useEffect(() => {
+    camera.position.fromArray(position);
     camera.fov = fov;
+    camera.lookAt(target[0], target[1], target[2]);
     camera.updateProjectionMatrix();
-  }, [camera, fov]);
+  }, [camera, position, target, fov]);
+
+  if (!isDebug) return null;
 
   return (
     <OrbitControls
       makeDefault
       enableDamping
+      target={target}
       ref={(c) => {
         orbitRef.current = c;
       }}
@@ -124,10 +157,11 @@ const HeroExperience = () => {
   const lights = useControls(
     `Lights (${theme})`,
     {
+      preset: { value: lightDefaults.preset, options: ENV_PRESETS },
       ambient: { value: lightDefaults.ambient, min: 0, max: 5, step: 0.05 },
       key: { value: lightDefaults.key, min: 0, max: 5, step: 0.1 },
       fill: { value: lightDefaults.fill, min: 0, max: 5, step: 0.1 },
-      envIntensity: { value: lightDefaults.envIntensity, min: 0, max: 2, step: 0.05 },
+      envIntensity: { value: lightDefaults.envIntensity, min: 0, max: 3, step: 0.05 },
       exposure: { value: lightDefaults.exposure, min: 0.1, max: 2, step: 0.05 },
     },
     { collapsed: true },
@@ -146,10 +180,12 @@ const HeroExperience = () => {
         gl={{ toneMappingExposure: lights.exposure }}
       >
         <ambientLight intensity={lights.ambient} color="#ffffff" />
-        <Environment preset="city" environmentIntensity={lights.envIntensity} />
+        <Environment preset={lights.preset} environmentIntensity={lights.envIntensity} />
         <directionalLight position={[2, 2, 5]} intensity={lights.key} color="#ffffff" />
         <directionalLight position={[-3, 2, -2]} intensity={lights.fill} color="#ffffff" />
         <CameraBridge
+          position={cameraDefaults.position}
+          target={cameraDefaults.target}
           fov={cam.fov}
           setMonitor={setCam}
           cameraRef={cameraRef}
