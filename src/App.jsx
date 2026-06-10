@@ -1,30 +1,27 @@
+import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
-import {
-  About,
-  Contact,
-  Footer,
-  Hero,
-  Loader,
-  NavBar,
-  Projects,
-  Sidebar,
-  TechStack,
-  Linktree
-} from "./sections";
+import { Hero, NavBar, Sidebar, Linktree } from "./sections";
+
+const About = lazy(() => import("./sections/About"));
+const TechStack = lazy(() => import("./sections/TechStack"));
+const Projects = lazy(() => import("./sections/Projects"));
+const Contact = lazy(() => import("./sections/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
 
 const MainContent = () => (
   <>
     <NavBar />
-    {/* <Loader /> */}
     <Sidebar />
     <Hero />
     <Linktree />
-    <About />
-    <TechStack />
-    <Projects />
-    <Contact />
-    <Footer />
+    <Suspense fallback={null}>
+      <About />
+      <TechStack />
+      <Projects />
+      <Contact />
+      <Footer />
+    </Suspense>
   </>
 );
 

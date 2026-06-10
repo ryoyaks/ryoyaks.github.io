@@ -13,7 +13,7 @@ const NavBar = () => {
     <div className="w-full flex-center fixed z-50 top-0 left-0 md:p-0 px-5">
       <div className="container md:my-10 my-5 flex items-center justify-between">
         <img
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="logo"
           className="md:size-12 size-10 object-cover object-center"
         />

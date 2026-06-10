@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="w-full flex-center flex-col md:gap-10 gap-7 bg-black-300 py-10">
       <div>
         <img
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="logo"
           className="w-7 h-7 object-cover object-center"
         />
