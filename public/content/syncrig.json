@@ -3,8 +3,8 @@
     "eyebrow": "Product",
     "headline": "Mocap that lets you keep creating",
     "body": "Drop in a photo, video, or webcam — get an editable 3D pose. Built for illustrators, animators, and VTubers who don't want to spend half their day posing reference figures.",
-    "poster": "/syncrig-poster.webp",
-    "video": "/syncrig-demo.webm",
+    "poster": "/media/syncrig/demo-poster.webp",
+    "video": "/media/syncrig/demo.webm",
     "ctas": [
       { "label": "Join the waitlist", "href": "#syncrig-waitlist", "variant": "solid" },
       { "label": "Watch the demo", "href": "#syncrig-demo", "variant": "outline" }
@@ -44,32 +44,32 @@
         "id": "illustration",
         "title": "Illustration reference",
         "body": "Skip the figure-photo hunt. Pose a 3D body to the exact angle you need, then trace.",
-        "poster": "/syncrig-poster.webp",
-        "video": "/syncrig-demo.webm",
+        "poster": "/media/syncrig/demo-poster.webp",
+        "video": "/media/syncrig/demo.webm",
         "placeholder": true
       },
       {
         "id": "vtuber",
         "title": "VTuber rigging & streaming",
         "body": "Webcam → live 3D pose → VMC stream. Avatar tracking without a dedicated suit.",
-        "poster": "/syncrig-poster.webp",
-        "video": "/syncrig-demo.webm",
+        "poster": "/media/syncrig/demo-poster.webp",
+        "video": "/media/syncrig/demo.webm",
         "placeholder": true
       },
       {
         "id": "animation",
         "title": "Animation pre-vis",
         "body": "Block out a shot from a phone video. Send the timeline to Blender for clean-up.",
-        "poster": "/syncrig-poster.webp",
-        "video": "/syncrig-demo.webm",
+        "poster": "/media/syncrig/demo-poster.webp",
+        "video": "/media/syncrig/demo.webm",
         "placeholder": true
       },
       {
         "id": "research",
         "title": "Research & teaching",
         "body": "A drop-in mocap baseline for HCI experiments, animation classes, and biomechanics demos.",
-        "poster": "/syncrig-poster.webp",
-        "video": "/syncrig-demo.webm",
+        "poster": "/media/syncrig/demo-poster.webp",
+        "video": "/media/syncrig/demo.webm",
         "placeholder": true
       }
     ]
@@ -77,8 +77,8 @@
   "demo": {
     "eyebrow": "Demo",
     "headline": "See it work.",
-    "poster": "/syncrig-poster.webp",
-    "video": "/syncrig-demo.webm",
+    "poster": "/media/syncrig/demo-poster.webp",
+    "video": "/media/syncrig/demo.webm",
     "caption": "Hover (desktop) or scroll into view (mobile) to play."
   },
   "tutorials": {
@@ -90,7 +90,7 @@
         "id": "tut-1",
         "title": "Quick start: from photo to pose",
         "duration": "2 min",
-        "poster": "/syncrig-poster.webp",
+        "poster": "/media/syncrig/demo-poster.webp",
         "video": null,
         "placeholder": true
       },
@@ -98,7 +98,7 @@
         "id": "tut-2",
         "title": "Exporting to Blender",
         "duration": "—",
-        "poster": "/syncrig-poster.webp",
+        "poster": "/media/syncrig/demo-poster.webp",
         "video": null,
         "placeholder": true
       },
@@ -106,7 +106,7 @@
         "id": "tut-3",
         "title": "Live VMC streaming to VTuber rigs",
         "duration": "—",
-        "poster": "/syncrig-poster.webp",
+        "poster": "/media/syncrig/demo-poster.webp",
         "video": null,
         "placeholder": true
       },
@@ -114,7 +114,7 @@
         "id": "tut-4",
         "title": "Working with multiple inputs",
         "duration": "—",
-        "poster": "/syncrig-poster.webp",
+        "poster": "/media/syncrig/demo-poster.webp",
         "video": null,
         "placeholder": true
       }
