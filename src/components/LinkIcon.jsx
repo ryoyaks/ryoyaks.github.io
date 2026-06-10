@@ -12,7 +12,7 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
   // 統一外殼樣式：h-full 讓它跟旁邊的方形一樣高
 
-  const baseClass = "w-full h-full bg-black-200  border-white/5 transition-all duration-500 group overflow-hidden flex items-center";
+  const baseClass = "w-full h-full bg-[var(--bg-elev)] border border-[var(--border)] transition-all duration-300 group overflow-hidden flex items-center";
 
 
 
@@ -73,7 +73,12 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
           <img src={displaySrc} alt={icon?.name} className="md:size-24 size-20 object-contain" />
 
-          <span className="text-white font-medium text-bold md:text-xl">{icon?.displayName}</span>
+          <div className="flex flex-col">
+            <span className="text-[var(--fg)] font-semibold md:text-base text-sm leading-tight">{icon?.displayName}</span>
+            {icon?.subLabel && (
+              <span className="text-[var(--fg-muted)] text-xs mt-0.5">{icon.subLabel}</span>
+            )}
+          </div>
 
         </div>
 

@@ -43,74 +43,18 @@ const iconMap = iconsList.reduce((acc, icon) => {
 export const linkList = [
   {
     links: [
-      { 
-        name: "melonbooks", // 查找用的 Key (小寫、簡單)
-        displayName: "Melonbooks | りょりょや", // 實際顯示的文字
-        href: "https://www.melonbooks.co.jp/circle/index.php?circle_id=135082", 
-        icon: iconMap.melonbooks 
-      },{ 
-        name: "myacg", // 查找用的 Key (小寫、簡單)
-        displayName: "買動漫 | 六六六亞", // 實際顯示的文字
-        href: "https://www.myacg.com.tw/seller_market.php?seller=524453", 
-        icon: iconMap.myacg 
-      },{ 
-        name: "hexbunnydoujin", // 查找用的 Key (小寫、簡單)
-        displayName: "黑市兔", // 實際顯示的文字
-        href: "https://hexbunnydoujin.tw/?search=author&id=RyoyakS", 
-        icon: iconMap.hexbunnydoujin 
-      },
-      { 
-        name: "twitter", 
-        displayName: "Twitter (X)", 
-        href: "https://x.com/RyoyakS", 
-        icon: iconMap.twitter 
-      },
-      { 
-        name: "facebook", 
-        displayName: "Facebook", 
-        href: "https://www.facebook.com/RyoyakS2nd/", 
-        icon: iconMap.facebook 
-      },{ 
-        name: "pixiv", 
-        displayName: "Pixiv", 
-        href: "https://www.pixiv.net/users/15708685", 
-        icon: iconMap.pixiv 
-      },
-      { 
-        name: "fanbox", 
-        displayName: "Fanbox", 
-        href: "https://www.fanbox.cc/@ryoyaks", 
-        icon: iconMap.fanbox 
-      },
-      { 
-        name: "youtube", 
-        displayName: "YouTube", 
-        href: "https://www.youtube.com/@RyoyakS", 
-        icon: iconMap.youtube 
-      },
-      { 
-        name: "twitch", 
-        displayName: "Twitch", 
-        href: "https://www.fanbox.cc/@ryoyaks", 
-        icon: iconMap.twitch 
-      },
-      { 
-        name: "marshmallow", 
-        displayName: "Marshmallow | 留言給我", 
-        href: "https://www.fanbox.cc/@ryoyaks", 
-        icon: iconMap.marshmallow 
-      },
-      { 
-        name: "paypal", 
-        displayName: "Paypal | 買杯咖啡給我", 
-        href: "https://www.fanbox.cc/@ryoyaks", 
-        icon: iconMap.paypal 
-      },
-      { 
-        name: "email", 
-        displayName: "Email | 委託/聯絡我", 
-        href: "mailto:ryoyaillust892763@gmail.com", 
-        icon: iconMap.email}
+      { name: "melonbooks", displayName: "Melonbooks", subLabel: "りょりょや", href: "https://www.melonbooks.co.jp/circle/index.php?circle_id=135082", icon: iconMap.melonbooks },
+      { name: "myacg", displayName: "買動漫", subLabel: "六六六亞", href: "https://www.myacg.com.tw/seller_market.php?seller=524453", icon: iconMap.myacg },
+      { name: "hexbunnydoujin", displayName: "黑市兔", subLabel: "doujin", href: "https://hexbunnydoujin.tw/?search=author&id=RyoyakS", icon: iconMap.hexbunnydoujin },
+      { name: "twitter", displayName: "Twitter (X)", subLabel: "@RyoyakS", href: "https://x.com/RyoyakS", icon: iconMap.twitter },
+      { name: "facebook", displayName: "Facebook", subLabel: "RyoyakS2nd", href: "https://www.facebook.com/RyoyakS2nd/", icon: iconMap.facebook },
+      { name: "pixiv", displayName: "Pixiv", subLabel: "15708685", href: "https://www.pixiv.net/users/15708685", icon: iconMap.pixiv },
+      { name: "fanbox", displayName: "Fanbox", subLabel: "@ryoyaks", href: "https://www.fanbox.cc/@ryoyaks", icon: iconMap.fanbox },
+      { name: "youtube", displayName: "YouTube", subLabel: "@RyoyakS", href: "https://www.youtube.com/@RyoyakS", icon: iconMap.youtube },
+      { name: "twitch", displayName: "Twitch", subLabel: "streams", href: "https://www.fanbox.cc/@ryoyaks", icon: iconMap.twitch },
+      { name: "marshmallow", displayName: "Marshmallow", subLabel: "留言給我", href: "https://www.fanbox.cc/@ryoyaks", icon: iconMap.marshmallow },
+      { name: "paypal", displayName: "PayPal", subLabel: "買杯咖啡", href: "https://www.fanbox.cc/@ryoyaks", icon: iconMap.paypal },
+      { name: "email", displayName: "Email", subLabel: "委託 / 聯絡", href: "mailto:ryoyaillust892763@gmail.com", icon: iconMap.email },
     ],
   },
 ];
