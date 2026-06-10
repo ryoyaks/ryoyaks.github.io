@@ -4,6 +4,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Make leva debug panel usable on touch devices.
+   Without this, page scroll steals the drag/slider gestures. */
+#leva__root,
+#leva__root * {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 @layer base {
   @font-face {
     font-family: "aeonik";
