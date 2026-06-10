@@ -12,7 +12,7 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
   // 統一外殼樣式：h-full 讓它跟旁邊的方形一樣高
 
-  const baseClass = "w-full h-full bg-[var(--bg-elev)] border border-[var(--border)] transition-all duration-300 group overflow-hidden flex items-center";
+  const baseClass = "w-full h-full bg-[var(--bg-elev)] transition-all duration-300 group overflow-hidden flex items-center";
 
 
 
