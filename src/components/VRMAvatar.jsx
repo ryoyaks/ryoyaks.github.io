@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { AnimationMixer } from "three";
 import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import {
@@ -8,13 +9,21 @@ import {
   createVRMAnimationClip,
 } from "@pixiv/three-vrm-animation";
 
+const registerVRM = (loader) => {
+  loader.setMeshoptDecoder(MeshoptDecoder);
+  loader.register((parser) => new VRMLoaderPlugin(parser));
+};
+
+const registerVRMA = (loader) => {
+  loader.setMeshoptDecoder(MeshoptDecoder);
+  loader.register((parser) => new VRMAnimationLoaderPlugin(parser));
+};
+
 /**
  * Static VRM renderer (no animation). Loads the .vrm once.
  */
 const StaticVRM = ({ url, scale, position, rotation }) => {
-  const gltf = useLoader(GLTFLoader, url, (loader) => {
-    loader.register((parser) => new VRMLoaderPlugin(parser));
-  });
+  const gltf = useLoader(GLTFLoader, url, registerVRM);
   const vrm = gltf?.userData?.vrm;
 
   useEffect(() => {
@@ -36,14 +45,10 @@ const StaticVRM = ({ url, scale, position, rotation }) => {
  * VRM renderer with VRMA animation loaded from a separate URL.
  */
 const AnimatedVRM = ({ url, animationUrl, scale, position, rotation }) => {
-  const gltf = useLoader(GLTFLoader, url, (loader) => {
-    loader.register((parser) => new VRMLoaderPlugin(parser));
-  });
+  const gltf = useLoader(GLTFLoader, url, registerVRM);
   const vrm = gltf?.userData?.vrm;
 
-  const vrma = useLoader(GLTFLoader, animationUrl, (loader) => {
-    loader.register((parser) => new VRMAnimationLoaderPlugin(parser));
-  });
+  const vrma = useLoader(GLTFLoader, animationUrl, registerVRMA);
   const vrmAnim = vrma?.userData?.vrmAnimations?.[0] || null;
 
   const mixerRef = useRef(null);
