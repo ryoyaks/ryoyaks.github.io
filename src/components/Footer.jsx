@@ -1,30 +1,22 @@
-import { iconsList } from "../constants";
-import LinkIcon from "./LinkIcon";
-
 const Footer = () => {
   return (
-    <div className="w-full flex-center flex-col md:gap-10 gap-7 bg-black-300 py-10">
-      <div>
-        <img
-          src="/images/logo.webp"
-          alt="logo"
-          className="w-7 h-7 object-cover object-center"
-        />
+    <footer className="w-full bg-[var(--bg-elev)] border-t border-[var(--border)] py-10 text-[var(--fg)]">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-5 md:px-0">
+        <div className="flex items-center gap-2">
+          <img
+            src="/images/logo.webp"
+            alt="logo"
+            className="w-7 h-7 object-contain"
+          />
+          <span className="text-sm opacity-70">© 2026 RyoyakS</span>
+        </div>
+        <div className="flex items-center gap-5 text-sm opacity-70">
+          <a href="https://x.com/RyoyakS" target="_blank" rel="noreferrer">Twitter</a>
+          <a href="https://www.pixiv.net/users/15708685" target="_blank" rel="noreferrer">Pixiv</a>
+          <a href="mailto:ryoyaillust892763@gmail.com">Email</a>
+        </div>
       </div>
-      {/* className="md:size-10 size-8" */}
-      <div className="flex items-center md:gap-16 gap-8">
-        {/* SELECT ONLY contact info IN  iconsList*/}
-              {[
-                 "twitter", "facebook","email"
-              ].map((iconName, index) => {
-                const icon = iconsList.find(i => i.name === iconName);
-                return icon ? <LinkIcon key={index} icon={icon} type="small" /> : null;
-              })}
-      </div>
-      <p className="font-regular md:text-lg text-sm">
-        2026 © All rights reserved.
-      </p>
-    </div>
+    </footer>
   );
 };
 
