@@ -28,8 +28,8 @@ const HeroExperience = () => {
   }, []);
 
   const avatarDefaults = isMobile
-    ? { scale: 10, posX: 1.9, posY: -9.7, posZ: -2.4, rotY: -0.25 }
-    : { scale: 9, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 };
+    ? { scale: 9, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 }
+    : { scale: 10, posX: 1.9, posY: -9.7, posZ: -2.4, rotY: -0.25 };
 
   const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
 
