@@ -9,8 +9,17 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)]"
+      className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)] film-noise"
     >
+      {/* Background marquee — huge faded repeating text */}
+      {hero?.marquee && (
+        <div className="absolute inset-0 z-0 overflow-hidden flex items-center pointer-events-none">
+          <div className="whitespace-nowrap leading-none font-black tracking-tight text-[10rem] md:text-[18rem] opacity-[0.06] hero-marquee">
+            {`${hero.marquee} · `.repeat(6)}
+          </div>
+        </div>
+      )}
+
       <div className="container mx-auto relative w-full h-full">
         {/* Top-left identity — z-0 so the 3D avatar occludes it */}
         {hero && (
