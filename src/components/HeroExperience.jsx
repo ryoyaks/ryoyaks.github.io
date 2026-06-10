@@ -20,10 +20,10 @@ const HeroExperience = () => {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Defaults match the static config we'd ship without leva.
+  // Tuned defaults. Open leva in dev (or ?debug=1 in prod) to re-tune.
   const defaults = isMobile
-    ? { scale: 6.5, posX: 0, posY: -7, posZ: 0, rotY: 0 }
-    : { scale: 9, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 };
+    ? { scale: 6, posX: 0, posY: -6, posZ: -2, rotY: 0 }
+    : { scale: 8, posX: 2, posY: -8.1, posZ: -2.4, rotY: -0.25 };
 
   const avatar = useControls(
     "Avatar",
@@ -43,7 +43,7 @@ const HeroExperience = () => {
       camX: { value: 0, min: -10, max: 10, step: 0.1 },
       camY: { value: 0, min: -10, max: 10, step: 0.1 },
       camZ: { value: 5, min: 1, max: 20, step: 0.1 },
-      fov: { value: 50, min: 20, max: 90, step: 1 },
+      fov: { value: 90, min: 20, max: 120, step: 1 },
       orbit: { value: false, label: "Drag to orbit" },
     },
     { collapsed: true }
@@ -52,10 +52,10 @@ const HeroExperience = () => {
   const lights = useControls(
     "Lights",
     {
-      ambient: { value: 0.6, min: 0, max: 3, step: 0.05 },
-      key: { value: 1.2, min: 0, max: 5, step: 0.1 },
-      fill: { value: 0.4, min: 0, max: 5, step: 0.1 },
-      envIntensity: { value: 0.5, min: 0, max: 2, step: 0.05 },
+      ambient: { value: 3.0, min: 0, max: 5, step: 0.05 },
+      key: { value: 1.3, min: 0, max: 5, step: 0.1 },
+      fill: { value: 5.0, min: 0, max: 5, step: 0.1 },
+      envIntensity: { value: 1.1, min: 0, max: 2, step: 0.05 },
       exposure: { value: 0.7, min: 0.1, max: 2, step: 0.05 },
     },
     { collapsed: true }
