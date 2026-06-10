@@ -29,8 +29,8 @@ const LIGHT_DEFAULTS = {
 };
 
 const ENV_DEFAULTS = {
-  dark: { preset: "city", envIntensity: 1.1, background: false },
-  light: { preset: "apartment", envIntensity: 0.7, background: false },
+  dark: { preset: "city", envIntensity: 1.0, background: false },
+  light: { preset: "lobby", envIntensity: 0.7, background: false },
 };
 
 const CAMERA_DEFAULTS = {
