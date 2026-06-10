@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Environment, OrbitControls } from "@react-three/drei";
-import { Leva, useControls } from "leva";
+import { Leva, useControls, button } from "leva";
 import { Model } from "./models/6YAbeta1";
 import { useTheme } from "../hooks/useTheme";
 
@@ -15,10 +15,19 @@ const LIGHT_DEFAULTS = {
   light: { ambient: 1.5, key: 1.0, fill: 2.0, envIntensity: 0.7, exposure: 0.85 },
 };
 
-// Syncs leva fov to actual camera, and writes current camera position
-// back into leva's read-only `position` display on every orbit change.
-const CameraBridge = ({ fov, setMonitor }) => {
+const CAMERA_DEFAULTS = {
+  desktop: { position: [0, 0, 5], target: [0, 0, 0], fov: 90 },
+  mobile: { position: [0, 0, 5], target: [0, 0, 0], fov: 90 },
+};
+
+// Bridges the live three.js camera + OrbitControls back into the leva monitor
+// field, and exposes refs the snapshot button can read.
+const CameraBridge = ({ fov, setMonitor, cameraRef, orbitRef }) => {
   const { camera } = useThree();
+
+  useEffect(() => {
+    cameraRef.current = camera;
+  }, [camera, cameraRef]);
 
   useEffect(() => {
     camera.fov = fov;
@@ -29,6 +38,9 @@ const CameraBridge = ({ fov, setMonitor }) => {
     <OrbitControls
       makeDefault
       enableDamping
+      ref={(c) => {
+        orbitRef.current = c;
+      }}
       onChange={(e) => {
         const c = e.target.object;
         setMonitor({
@@ -42,6 +54,8 @@ const CameraBridge = ({ fov, setMonitor }) => {
 const HeroExperience = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { theme } = useTheme();
+  const cameraRef = useRef(null);
+  const orbitRef = useRef(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -55,6 +69,7 @@ const HeroExperience = () => {
     ? { scale: 7, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 }
     : { scale: 10, posX: 1.9, posY: -9.7, posZ: -2.4, rotY: -0.25 };
 
+  const cameraDefaults = isMobile ? CAMERA_DEFAULTS.mobile : CAMERA_DEFAULTS.desktop;
   const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
 
   const avatar = useControls(
@@ -73,10 +88,37 @@ const HeroExperience = () => {
   const [cam, setCam] = useControls(
     "Camera",
     () => ({
-      position: { value: "0.00, 0.00, 5.00", editable: false, label: "pos (drag)" },
-      fov: { value: 90, min: 20, max: 120, step: 1 },
+      position: {
+        value: cameraDefaults.position.map((v) => v.toFixed(2)).join(", "),
+        editable: false,
+        label: "pos (drag)",
+      },
+      fov: { value: cameraDefaults.fov, min: 20, max: 120, step: 1 },
+      snapshot: button(() => {
+        const c = cameraRef.current;
+        const oc = orbitRef.current;
+        if (!c) {
+          console.warn("[snapshot] camera not ready");
+          return;
+        }
+        const round = (v) => Math.round(v * 100) / 100;
+        const out = {
+          position: [round(c.position.x), round(c.position.y), round(c.position.z)],
+          target: oc
+            ? [round(oc.target.x), round(oc.target.y), round(oc.target.z)]
+            : [0, 0, 0],
+          fov: Math.round(c.fov),
+        };
+        const txt = JSON.stringify(out);
+        console.log("[Camera snapshot]", out);
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText(txt);
+          console.log("→ copied to clipboard");
+        }
+      }),
     }),
-    { collapsed: true }
+    { collapsed: true },
+    [isMobile]
   );
 
   const lights = useControls(
@@ -100,14 +142,19 @@ const HeroExperience = () => {
         titleBar={{ position: { x: 0, y: 80 } }}
       />
       <Canvas
-        camera={{ position: [0, 0, 5], fov: cam.fov }}
+        camera={{ position: cameraDefaults.position, fov: cam.fov }}
         gl={{ toneMappingExposure: lights.exposure }}
       >
         <ambientLight intensity={lights.ambient} color="#ffffff" />
         <Environment preset="city" environmentIntensity={lights.envIntensity} />
         <directionalLight position={[2, 2, 5]} intensity={lights.key} color="#ffffff" />
         <directionalLight position={[-3, 2, -2]} intensity={lights.fill} color="#ffffff" />
-        <CameraBridge fov={cam.fov} setMonitor={setCam} />
+        <CameraBridge
+          fov={cam.fov}
+          setMonitor={setCam}
+          cameraRef={cameraRef}
+          orbitRef={orbitRef}
+        />
         <Suspense fallback={null}>
           <Model
             scale={[avatar.scale, avatar.scale, avatar.scale]}
