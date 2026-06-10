@@ -95,8 +95,24 @@ const Bento = () => {
                   preload="metadata"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/20 pointer-events-none" />
-                <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-white">
+                {/* Left + right edge fades to theme bg (frame the video) */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to right, var(--bg) 0%, var(--bg) 8%, transparent 35%)",
+                  }}
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to left, var(--bg) 0%, var(--bg) 8%, transparent 35%)",
+                  }}
+                />
+                {/* Subtle bottom darkening for CTA contrast on the video portion */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-[var(--fg)]">
                   <div>
                     <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
                     {featured.logo ? (

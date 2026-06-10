@@ -7,7 +7,7 @@ import { useTheme } from "../hooks/useTheme";
 
 // Hides the avatar for the first couple of animation frames so the user
 // doesn't see the bind-pose "scattered" mesh while bones/skin resolve.
-const DelayedReveal = ({ children, delay = 150 }) => {
+const DelayedReveal = ({ children, delay = 600 }) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), delay);

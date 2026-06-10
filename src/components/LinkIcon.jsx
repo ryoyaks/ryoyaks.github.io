@@ -69,24 +69,27 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
       <div className={`${baseClass} aspect-[5/1] rounded-md hover:-translate-y-1 relative`}>
 
-        {/* Background icon — anchored left, scaled past the cell edge */}
+        {/* Background icon — slightly inset from left edge, vertically centred */}
         <img
           src={displaySrc}
           alt=""
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 h-[140%] w-auto object-contain pointer-events-none opacity-90"
+          className="absolute left-3 top-1/2 -translate-y-1/2 h-[110%] w-auto object-contain pointer-events-none"
         />
 
+        {/* 40% black mask over the whole tile for legibility */}
+        <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+
         {/* Text + arrow — right portion, padded so it never sits on the icon */}
-        <div className="relative h-full w-full flex items-center justify-between pl-[42%] pr-3">
+        <div className="relative h-full w-full flex items-center justify-between pl-[35%] pr-3">
 
           <div className="flex flex-col min-w-0">
-            <span className="text-[var(--fg)] font-semibold text-sm leading-tight truncate">{icon?.displayName}</span>
+            <span className="text-white font-semibold text-sm leading-tight truncate">{icon?.displayName}</span>
             {icon?.subLabel && (
-              <span className="text-[var(--fg-muted)] text-[11px] mt-0.5 leading-tight truncate">{icon.subLabel}</span>
+              <span className="text-white/70 text-[11px] mt-0.5 leading-tight truncate">{icon.subLabel}</span>
             )}
           </div>
 
-          <img src="/images/arrowupright.svg" className="size-3.5 opacity-30 group-hover:opacity-100 transition-all shrink-0" />
+          <img src="/images/arrowupright.svg" className="size-3.5 opacity-50 group-hover:opacity-100 transition-all shrink-0 invert" />
 
         </div>
 
