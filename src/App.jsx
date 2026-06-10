@@ -3,10 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import { Hero, NavBar, Sidebar, Linktree } from "./sections";
 
-const About = lazy(() => import("./sections/About"));
-const TechStack = lazy(() => import("./sections/TechStack"));
-const Projects = lazy(() => import("./sections/Projects"));
-const Contact = lazy(() => import("./sections/Contact"));
+const Bento = lazy(() => import("./sections/Bento"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const MainContent = () => (
@@ -16,10 +13,7 @@ const MainContent = () => (
     <Hero />
     <Linktree />
     <Suspense fallback={null}>
-      <About />
-      <TechStack />
-      <Projects />
-      <Contact />
+      <Bento />
       <Footer />
     </Suspense>
   </>
@@ -28,7 +22,7 @@ const MainContent = () => (
 const App = () => {
   return (
     <Router>
-      <div className="bg-black-100">
+      <div className="min-h-screen">
         <Routes>
           <Route path="/" element={<MainContent />} />
           <Route path="*" element={<NotFound />} />
