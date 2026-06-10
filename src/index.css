@@ -271,6 +271,32 @@ section {
     background: rgba(23, 21, 31, 0.7);
     backdrop-filter: blur(10px);
   }
+
+  /* bento tool icon shine */
+  .tool-shine {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .tool-shine:hover {
+    transform: translateY(-4px);
+  }
+  .tool-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+  .tool-shine:hover::after {
+    animation: tool-shine-sweep 0.6s ease forwards;
+  }
 }
 
 @keyframes wander-left {
@@ -325,4 +351,15 @@ section {
   .testimonial-card:nth-of-type(even) {
     transform: translateY(70px);
   }
+}
+
+@keyframes tool-shine-sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-shine:hover { transform: none; }
+  .tool-shine:hover::after { animation: none; }
 }
