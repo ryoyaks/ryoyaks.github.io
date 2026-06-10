@@ -9,12 +9,12 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)] film-noise"
+      className="w-screen h-dvh overflow-hidden relative text-[var(--fg)] film-noise"
     >
-      {/* Subtle radial bloom from upper-right corner */}
+      {/* Subtle radial bloom from upper-right corner — fullscreen */}
       <div className="absolute inset-0 z-0 pointer-events-none hero-bloom" />
 
-      {/* Background marquee — huge faded repeating text */}
+      {/* Background marquee — huge faded repeating text, fullscreen */}
       {hero?.marquee && (
         <div className="absolute inset-0 z-0 overflow-hidden flex items-center pointer-events-none">
           <div className="whitespace-nowrap leading-none font-black tracking-tight text-[10rem] md:text-[18rem] opacity-[0.06] hero-marquee">
@@ -23,7 +23,14 @@ const Hero = () => {
         </div>
       )}
 
-      <div className="container mx-auto relative w-full h-full">
+      {/* 3D Canvas — fullscreen, escapes the container max-width */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+        <CanvasErrorBoundary>
+          <HeroExperience />
+        </CanvasErrorBoundary>
+      </div>
+
+      <div className="container mx-auto relative w-full h-full px-5 md:px-0">
         {/* Top-left identity — z-0 so the 3D avatar occludes it */}
         {hero && (
           <div className="md:pt-32 pt-24 relative z-0 pointer-events-none">
@@ -52,13 +59,6 @@ const Hero = () => {
             </div>
           </div>
         )}
-
-        {/* 3D in front — overlaps text */}
-        <div className="absolute inset-0 z-10 pointer-events-none">
-          <CanvasErrorBoundary>
-            <HeroExperience />
-          </CanvasErrorBoundary>
-        </div>
 
         {/* Bottom-right big title — IN FRONT of the avatar */}
         {hero?.bigTitle && (
