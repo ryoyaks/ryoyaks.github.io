@@ -16,10 +16,7 @@ export const iconsList = [
   { name: "unity", image: "/images/icon/unity.webp" },
   { name: "unreal", image: "/images/icon/unreal.webp" },
   { name: "figma", image: "/images/icon/figma.webp" },
-  { name: "procreate", image: "/images/icon/procreate.svg" },
-  { name: "mrtk", image: "/images/icon/mrtk.svg" },
-  { name: "quest", image: "/images/icon/quest.svg" },
-  { name: "openxr", image: "/images/icon/openxr.svg" },
+  { name: "procreate", image: "/images/icon/procreate.webp" },
 
   // 對應 linkList 的社交與連結圖示
   { name: "melonbooks", image: "/images/icon/melonbooks.webp" },
