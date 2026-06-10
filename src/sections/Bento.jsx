@@ -110,8 +110,8 @@ const Bento = () => {
                       "linear-gradient(to left, var(--bg) 0%, var(--bg) 8%, transparent 35%)",
                   }}
                 />
-                {/* Subtle bottom darkening for CTA contrast on the video portion */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+                {/* Stronger bottom + top darkening so header and CTA stay readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/55 pointer-events-none" />
                 <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-[var(--fg)]">
                   <div>
                     <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
