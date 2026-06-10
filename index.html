@@ -5,10 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="./assets/favicon-B8r7GybA.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RyoyakS | Content Creator & HCI Researcher</title>
-    <script type="module" crossorigin src="./assets/index-C1j1ks5s.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-B98Lq52B.css">
+    <script type="module" crossorigin src="./assets/index-DRJ6y8w9.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-W0xHZAh-.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+          var theme = saved || (prefersLight ? "light" : "dark");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
   </body>
 </html>

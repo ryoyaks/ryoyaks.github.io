@@ -1,0 +1,63 @@
+{
+  "site": {
+    "name": "RyoyakS",
+    "title": "RyoyakS | Content Creator & HCI Researcher",
+    "copyrightYear": 2026,
+    "logo": "/images/logo.webp"
+  },
+  "avatar": {
+    "url": "/media/avatar/kua_street.vrm",
+    "desktop": {
+      "scale": 1.4,
+      "position": [0.5, -1.5, 0],
+      "rotation": [0, -0.2, 0]
+    },
+    "mobile": {
+      "scale": 1.1,
+      "position": [0, -1.5, 0],
+      "rotation": [0, 0, 0]
+    },
+    "animation": null
+  },
+  "hero": {
+    "eyebrow": "Hello, I'm",
+    "name": "RyoyakS",
+    "altNames": "りょうや · 六亞",
+    "roles": "Illustrator / 3D Creator / Dev",
+    "flourish": "↘ ↘ ↘",
+    "bigTitle": "CONTENT CREATOR",
+    "exploreLabel": "Explore",
+    "marquee": "RYOYAKS · 六亞 · りょうや"
+  },
+  "about": {
+    "eyebrow": "ABOUT",
+    "headline": "A multi-disciplinary creator from Taiwan",
+    "body": "I draw, sculpt and code. My day moves between Procreate, Blender, and Python — character illustration on one screen, motion-capture research on the other.",
+    "tags": ["Illustration", "3D / VRM", "CV · HCI", "Open to commissions"]
+  },
+  "status": {
+    "eyebrow": "STATUS",
+    "label": "Open for commissions",
+    "subLabel": "Email or Marshmallow for inquiries",
+    "active": true
+  },
+  "tools": {
+    "eyebrow": "Tools I Use",
+    "order": [
+      "blender", "photoshop", "illustrator", "clipstudiopaint", "procreate",
+      "unity", "unreal", "figma"
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "label": "Get in\ntouch →",
+    "mailto": "ryoyaillust892763@gmail.com"
+  },
+  "footer": {
+    "quickLinks": [
+      { "name": "Twitter", "href": "https://x.com/RyoyakS" },
+      { "name": "Pixiv", "href": "https://www.pixiv.net/users/15708685" },
+      { "name": "Email", "href": "mailto:ryoyaillust892763@gmail.com" }
+    ]
+  }
+}

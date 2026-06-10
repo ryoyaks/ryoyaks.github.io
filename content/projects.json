@@ -1,0 +1,34 @@
+{
+  "featured": {
+    "id": "syncrig",
+    "name": "SyncRig",
+    "tagline": "Mocap that lets you keep creating",
+    "description": "A motion-capture and 3D pose reference tool for illustrators, animators, and VTubers. Drop in a photo, video, or webcam — get an editable 3D pose. Exports to Blender, broadcasts via VMC.",
+    "logo": "/media/syncrig/icon.svg",
+    "poster": "/media/syncrig/demo-poster.webp",
+    "video": "/media/syncrig/demo.webm",
+    "tags": ["mocap", "3D", "Blender", "VMC"],
+    "href": "/projects/syncrig",
+    "ctaLabel": "Read more →"
+  },
+  "more": [
+    {
+      "id": "tbd-1",
+      "name": "Coming soon",
+      "tagline": "A new tool in early R&D",
+      "placeholder": true
+    },
+    {
+      "id": "tbd-2",
+      "name": "Coming soon",
+      "tagline": "Illustration commission system",
+      "placeholder": true
+    },
+    {
+      "id": "tbd-3",
+      "name": "Coming soon",
+      "tagline": "VTuber rig automation",
+      "placeholder": true
+    }
+  ]
+}
