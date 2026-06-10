@@ -6,9 +6,8 @@ import { Model } from "./models/6YAbeta1";
 import { useTheme } from "../hooks/useTheme";
 
 const isDebug =
-  import.meta.env.DEV ||
-  (typeof window !== "undefined" &&
-    new URLSearchParams(window.location.search).get("debug") === "1");
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("debug") === "1";
 
 const ENV_PRESETS = [
   "sunset",
@@ -98,15 +97,15 @@ const HeroExperience = () => {
   const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
   const envDefaults = ENV_DEFAULTS[theme] ?? ENV_DEFAULTS.dark;
 
-  const avatar = useControls(
+  const [avatar] = useControls(
     "Avatar",
-    {
+    () => ({
       scale: { value: avatarDefaults.scale, min: 1, max: 20, step: 0.1 },
       posX: { value: avatarDefaults.posX, min: -10, max: 10, step: 0.1 },
       posY: { value: avatarDefaults.posY, min: -20, max: 5, step: 0.1 },
       posZ: { value: avatarDefaults.posZ, min: -10, max: 10, step: 0.1 },
       rotY: { value: avatarDefaults.rotY, min: -Math.PI, max: Math.PI, step: 0.05 },
-    },
+    }),
     { collapsed: true },
     [isMobile]
   );
@@ -147,25 +146,25 @@ const HeroExperience = () => {
     [isMobile]
   );
 
-  const env = useControls(
+  const [env] = useControls(
     `Environment (${theme})`,
-    {
+    () => ({
       preset: { value: envDefaults.preset, options: ENV_PRESETS },
       envIntensity: { value: envDefaults.envIntensity, min: 0, max: 3, step: 0.05 },
       background: { value: envDefaults.background, label: "show as bg" },
-    },
+    }),
     { collapsed: false },
     [theme]
   );
 
-  const lights = useControls(
+  const [lights] = useControls(
     `Lights (${theme})`,
-    {
+    () => ({
       ambient: { value: lightDefaults.ambient, min: 0, max: 5, step: 0.05 },
       key: { value: lightDefaults.key, min: 0, max: 5, step: 0.1 },
       fill: { value: lightDefaults.fill, min: 0, max: 5, step: 0.1 },
       exposure: { value: lightDefaults.exposure, min: 0.1, max: 2, step: 0.05 },
-    },
+    }),
     { collapsed: true },
     [theme]
   );

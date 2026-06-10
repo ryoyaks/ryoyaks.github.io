@@ -85,10 +85,15 @@ const Bento = () => {
           >
             {featured && (
               <>
-                <VideoCard
-                  poster={featured.poster}
+                <video
                   src={featured.video}
-                  className="absolute inset-0"
+                  poster={featured.poster}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/20 pointer-events-none" />
                 <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-white">

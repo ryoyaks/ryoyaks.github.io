@@ -67,22 +67,22 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
     return (
 
-      <div className={`${baseClass} aspect-[3/1] rounded-md justify-between px-6 hover:-translate-y-1`}>
+      <div className={`${baseClass} aspect-[5/1] rounded-md justify-between px-4 py-2 hover:-translate-y-1`}>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
 
-          <img src={displaySrc} alt={icon?.name} className="md:size-24 size-20 object-contain" />
+          <img src={displaySrc} alt={icon?.name} className="md:size-10 size-9 object-contain shrink-0" />
 
           <div className="flex flex-col">
-            <span className="text-[var(--fg)] font-semibold md:text-base text-sm leading-tight">{icon?.displayName}</span>
+            <span className="text-[var(--fg)] font-semibold text-sm leading-tight">{icon?.displayName}</span>
             {icon?.subLabel && (
-              <span className="text-[var(--fg-muted)] text-xs mt-0.5">{icon.subLabel}</span>
+              <span className="text-[var(--fg-muted)] text-[11px] mt-0.5 leading-tight">{icon.subLabel}</span>
             )}
           </div>
 
         </div>
 
-        <img src="/images/arrowupright.svg" className="size-4 opacity-30 group-hover:opacity-100 transition-all" />
+        <img src="/images/arrowupright.svg" className="size-3.5 opacity-30 group-hover:opacity-100 transition-all shrink-0" />
 
       </div>
 
