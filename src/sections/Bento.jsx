@@ -4,7 +4,10 @@ import SectionHeader from "../components/SectionHeader";
 import VideoCard from "../components/VideoCard";
 import { iconsList } from "../constants";
 
-const TOOL_ORDER = ["blender", "photoshop", "illustrator", "clipstudiopaint", "unity", "unreal", "figma"];
+const TOOL_ORDER = [
+  "blender", "photoshop", "illustrator", "clipstudiopaint", "procreate",
+  "unity", "unreal", "figma", "mrtk", "quest", "openxr",
+];
 
 const Bento = () => {
   const gridRef = useRef(null);
