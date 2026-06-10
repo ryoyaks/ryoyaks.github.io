@@ -1,5 +1,5 @@
-import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Suspense, useEffect, useState } from "react";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Leva, useControls } from "leva";
 import { Model } from "./models/6YAbeta1";
@@ -15,6 +15,30 @@ const LIGHT_DEFAULTS = {
   light: { ambient: 1.5, key: 1.0, fill: 2.0, envIntensity: 0.7, exposure: 0.85 },
 };
 
+// Syncs leva fov to actual camera, and writes current camera position
+// back into leva's read-only `position` display on every orbit change.
+const CameraBridge = ({ fov, setMonitor }) => {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    camera.fov = fov;
+    camera.updateProjectionMatrix();
+  }, [camera, fov]);
+
+  return (
+    <OrbitControls
+      makeDefault
+      enableDamping
+      onChange={(e) => {
+        const c = e.target.object;
+        setMonitor({
+          position: `${c.position.x.toFixed(2)}, ${c.position.y.toFixed(2)}, ${c.position.z.toFixed(2)}`,
+        });
+      }}
+    />
+  );
+};
+
 const HeroExperience = () => {
   const [isMobile, setIsMobile] = useState(false);
   const { theme } = useTheme();
@@ -28,7 +52,7 @@ const HeroExperience = () => {
   }, []);
 
   const avatarDefaults = isMobile
-    ? { scale: 9, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 }
+    ? { scale: 7, posX: 2, posY: -9.5, posZ: 0, rotY: -0.5 }
     : { scale: 10, posX: 1.9, posY: -9.7, posZ: -2.4, rotY: -0.25 };
 
   const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
@@ -46,15 +70,12 @@ const HeroExperience = () => {
     [isMobile]
   );
 
-  const camera = useControls(
+  const [cam, setCam] = useControls(
     "Camera",
-    {
-      camX: { value: 0, min: -10, max: 10, step: 0.1 },
-      camY: { value: 0, min: -10, max: 10, step: 0.1 },
-      camZ: { value: 5, min: 1, max: 20, step: 0.1 },
+    () => ({
+      position: { value: "0.00, 0.00, 5.00", editable: false, label: "pos (drag)" },
       fov: { value: 90, min: 20, max: 120, step: 1 },
-      orbit: { value: false, label: "Drag to orbit" },
-    },
+    }),
     { collapsed: true }
   );
 
@@ -79,14 +100,14 @@ const HeroExperience = () => {
         titleBar={{ position: { x: 0, y: 80 } }}
       />
       <Canvas
-        camera={{ position: [camera.camX, camera.camY, camera.camZ], fov: camera.fov }}
+        camera={{ position: [0, 0, 5], fov: cam.fov }}
         gl={{ toneMappingExposure: lights.exposure }}
       >
         <ambientLight intensity={lights.ambient} color="#ffffff" />
         <Environment preset="city" environmentIntensity={lights.envIntensity} />
         <directionalLight position={[2, 2, 5]} intensity={lights.key} color="#ffffff" />
         <directionalLight position={[-3, 2, -2]} intensity={lights.fill} color="#ffffff" />
-        {camera.orbit && <OrbitControls makeDefault />}
+        <CameraBridge fov={cam.fov} setMonitor={setCam} />
         <Suspense fallback={null}>
           <Model
             scale={[avatar.scale, avatar.scale, avatar.scale]}
