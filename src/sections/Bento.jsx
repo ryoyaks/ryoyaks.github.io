@@ -100,11 +100,14 @@ const Bento = () => {
                   <div>
                     <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
                     {featured.logo ? (
-                      <img
-                        src={featured.logo}
-                        alt={featured.name}
-                        className="mt-2 h-7 md:h-9 w-auto object-contain"
-                      />
+                      <div className="flex items-center gap-3 mt-2">
+                        <img
+                          src={featured.logo}
+                          alt={featured.name}
+                          className="h-10 md:h-12 w-10 md:w-12 object-contain"
+                        />
+                        <h3 className="text-2xl md:text-3xl font-black">{featured.name}</h3>
+                      </div>
                     ) : (
                       <h3 className="text-2xl md:text-3xl font-black mt-2">{featured.name}</h3>
                     )}

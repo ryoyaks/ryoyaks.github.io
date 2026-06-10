@@ -39,18 +39,25 @@ const SyncRig = () => {
               playsInline
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: "75% center" }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20 pointer-events-none" />
+            {/* Strong left-to-right gradient so headline reads against video */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent pointer-events-none" />
+            {/* Light bottom fade for the CTAs */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
             <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-12 text-white">
               <div className="text-[10px] md:text-xs tracking-[0.3em] opacity-80 uppercase">{hero.eyebrow}</div>
-              {hero.logo && (
-                <img
-                  src={hero.logo}
-                  alt="SyncRig"
-                  className="mt-3 h-10 md:h-14 w-auto object-contain"
-                />
-              )}
-              <h1 className="text-3xl md:text-6xl font-black mt-3 leading-tight max-w-3xl">{hero.headline}</h1>
+              <div className="flex items-center gap-4 mt-3">
+                {hero.logo && (
+                  <img
+                    src={hero.logo}
+                    alt="SyncRig"
+                    className="h-14 md:h-20 w-14 md:w-20 object-contain"
+                  />
+                )}
+                <div className="text-3xl md:text-5xl font-black tracking-tight">SyncRig</div>
+              </div>
+              <h1 className="text-3xl md:text-6xl font-black mt-4 leading-tight max-w-3xl">{hero.headline}</h1>
               <p className="text-sm md:text-lg opacity-90 mt-4 max-w-2xl leading-relaxed">{hero.body}</p>
               <div className="flex gap-3 mt-6 flex-wrap">
                 {hero.ctas?.map((cta) => (

@@ -5,6 +5,17 @@ import { Leva, useControls, button } from "leva";
 import { Model } from "./models/6YAbeta1";
 import { useTheme } from "../hooks/useTheme";
 
+// Hides the avatar for the first couple of animation frames so the user
+// doesn't see the bind-pose "scattered" mesh while bones/skin resolve.
+const DelayedReveal = ({ children, delay = 150 }) => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(t);
+  }, [delay]);
+  return <group visible={visible}>{children}</group>;
+};
+
 const isDebug =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).get("debug") === "1";
@@ -197,11 +208,13 @@ const HeroExperience = () => {
           orbitRef={orbitRef}
         />
         <Suspense fallback={null}>
-          <Model
-            scale={[avatar.scale, avatar.scale, avatar.scale]}
-            position={[avatar.posX, avatar.posY, avatar.posZ]}
-            rotation={[0, avatar.rotY, 0]}
-          />
+          <DelayedReveal>
+            <Model
+              scale={[avatar.scale, avatar.scale, avatar.scale]}
+              position={[avatar.posX, avatar.posY, avatar.posZ]}
+              rotation={[0, avatar.rotY, 0]}
+            />
+          </DelayedReveal>
         </Suspense>
       </Canvas>
     </>
