@@ -69,27 +69,27 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
       <div className={`${baseClass} aspect-[5/1] rounded-md hover:-translate-y-1 relative`}>
 
-        {/* Background icon — slightly inset from left edge, vertically centred */}
+        {/* Background icon — flush against the left edge, vertically centred */}
         <img
           src={displaySrc}
           alt=""
-          className="absolute left-3 top-1/2 -translate-y-1/2 h-[110%] w-auto object-contain pointer-events-none"
+          className="absolute left-0 top-1/2 -translate-y-1/2 h-full w-auto object-contain pointer-events-none"
         />
 
         {/* 40% black mask over the whole tile for legibility */}
         <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
         {/* Text + arrow — right portion, padded so it never sits on the icon */}
-        <div className="relative h-full w-full flex items-center justify-between pl-[35%] pr-3">
+        <div className="relative h-full w-full flex items-center justify-between pl-[35%] pr-4">
 
           <div className="flex flex-col min-w-0">
-            <span className="text-white font-semibold text-sm leading-tight truncate">{icon?.displayName}</span>
+            <span className="text-white font-semibold text-2xl md:text-3xl leading-tight truncate">{icon?.displayName}</span>
             {icon?.subLabel && (
-              <span className="text-white/70 text-[11px] mt-0.5 leading-tight truncate">{icon.subLabel}</span>
+              <span className="text-white/70 text-base md:text-lg mt-0.5 leading-tight truncate">{icon.subLabel}</span>
             )}
           </div>
 
-          <img src="/images/arrowupright.svg" className="size-3.5 opacity-50 group-hover:opacity-100 transition-all shrink-0 invert" />
+          <img src="/images/arrowupright.svg" className="size-5 md:size-6 opacity-50 group-hover:opacity-100 transition-all shrink-0 invert" />
 
         </div>
 
