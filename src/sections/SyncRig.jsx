@@ -41,12 +41,16 @@ const SyncRig = () => {
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectPosition: "75% center" }}
             />
-            {/* Strong left-to-right gradient so headline reads against video */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/60 to-transparent pointer-events-none" />
-            {/* Light bottom fade for the CTAs */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-            <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-12 text-white">
-              <div className="text-[10px] md:text-xs tracking-[0.3em] opacity-80 uppercase">{hero.eyebrow}</div>
+            {/* Theme-coloured gradient: opaque on left edge → transparent at 50% */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to right, var(--bg) 0%, var(--bg) 15%, transparent 50%)",
+              }}
+            />
+            <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-12 text-[var(--fg)]">
+              <div className="text-[10px] md:text-xs tracking-[0.3em] opacity-70 uppercase">{hero.eyebrow}</div>
               <div className="flex items-center gap-4 mt-3">
                 {hero.logo && (
                   <img
@@ -58,7 +62,7 @@ const SyncRig = () => {
                 <div className="text-3xl md:text-5xl font-black tracking-tight">SyncRig</div>
               </div>
               <h1 className="text-3xl md:text-6xl font-black mt-4 leading-tight max-w-3xl">{hero.headline}</h1>
-              <p className="text-sm md:text-lg opacity-90 mt-4 max-w-2xl leading-relaxed">{hero.body}</p>
+              <p className="text-sm md:text-lg opacity-80 mt-4 max-w-2xl leading-relaxed">{hero.body}</p>
               <div className="flex gap-3 mt-6 flex-wrap">
                 {hero.ctas?.map((cta) => (
                   <a
@@ -66,8 +70,8 @@ const SyncRig = () => {
                     href={cta.href}
                     className={
                       cta.variant === "solid"
-                        ? "bg-white text-black px-5 py-2.5 rounded-md font-semibold text-sm"
-                        : "border border-white/40 px-5 py-2.5 rounded-md text-sm"
+                        ? "bg-[var(--fg)] text-[var(--bg)] px-5 py-2.5 rounded-md font-semibold text-sm"
+                        : "border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-md text-sm"
                     }
                   >
                     {cta.label}
