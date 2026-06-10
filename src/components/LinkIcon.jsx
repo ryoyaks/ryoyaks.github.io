@@ -83,13 +83,13 @@ const LinkIcon = ({ icon, type = "square" }) => {
         <div className="relative h-full w-full flex items-center justify-between pl-[35%] pr-4">
 
           <div className="flex flex-col min-w-0">
-            <span className="text-white font-semibold text-2xl md:text-3xl leading-tight truncate">{icon?.displayName}</span>
+            <span className="text-white font-semibold text-lg md:text-xl leading-tight truncate">{icon?.displayName}</span>
             {icon?.subLabel && (
-              <span className="text-white/70 text-base md:text-lg mt-0.5 leading-tight truncate">{icon.subLabel}</span>
+              <span className="text-white/70 text-sm md:text-base mt-0.5 leading-tight truncate">{icon.subLabel}</span>
             )}
           </div>
 
-          <img src="/images/arrowupright.svg" className="size-5 md:size-6 opacity-50 group-hover:opacity-100 transition-all shrink-0 invert" />
+          <img src="/images/arrowupright.svg" className="size-4 md:size-5 opacity-50 group-hover:opacity-100 transition-all shrink-0 invert" />
 
         </div>
 
