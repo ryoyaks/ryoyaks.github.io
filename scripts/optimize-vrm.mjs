@@ -93,7 +93,7 @@ try {
   execSync(
     `npx gltf-transform optimize "${tmpSource}" "${tmpOpt}" ` +
       `--compress meshopt --texture-compress webp --texture-size 512 ` +
-      `--simplify-ratio 0.5 --flatten false --join false --palette false --prune false`,
+      `--simplify false --flatten false --join false --palette false --prune false --instance false`,
     { stdio: "inherit" }
   );
 } catch (e) {

@@ -1,4 +1,5 @@
 import HeroExperience from "../components/HeroExperience";
+import CanvasErrorBoundary from "../components/CanvasErrorBoundary";
 import { useContent } from "../hooks/useContent";
 
 const Hero = () => {
@@ -51,7 +52,9 @@ const Hero = () => {
         </div>
 
         <div className="absolute inset-0 z-0">
-          <HeroExperience />
+          <CanvasErrorBoundary>
+            <HeroExperience />
+          </CanvasErrorBoundary>
         </div>
 
         {hero?.scrollHint && (
