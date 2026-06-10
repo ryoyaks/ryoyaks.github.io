@@ -5,6 +5,20 @@
     "copyrightYear": 2026,
     "logo": "/images/logo.webp"
   },
+  "avatar": {
+    "url": "/media/avatar/kua_street.vrm",
+    "desktop": {
+      "scale": 1.4,
+      "position": [0.5, -1.5, 0],
+      "rotation": [0, -0.2, 0]
+    },
+    "mobile": {
+      "scale": 1.1,
+      "position": [0, -1.5, 0],
+      "rotation": [0, 0, 0]
+    },
+    "animation": null
+  },
   "hero": {
     "eyebrow": "HELLO, I'M",
     "name": "RyoyakS",
