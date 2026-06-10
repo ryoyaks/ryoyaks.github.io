@@ -1,0 +1,167 @@
+{
+  "hero": {
+    "eyebrow": "Product",
+    "headline": "Mocap that lets you keep creating",
+    "body": "Drop in a photo, video, or webcam — get an editable 3D pose. Built for illustrators, animators, and VTubers who don't want to spend half their day posing reference figures.",
+    "poster": "/syncrig-poster.webp",
+    "video": "/syncrig-demo.webm",
+    "ctas": [
+      { "label": "Join the waitlist", "href": "#syncrig-waitlist", "variant": "solid" },
+      { "label": "Watch the demo", "href": "#syncrig-demo", "variant": "outline" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "The problem",
+    "headline": "Reference posing eats your time.",
+    "body": "Hunting for the right angle. Posing wooden mannequins. Bending Blender rigs by hand. Every illustration session loses an hour to the same fight — before you make a single mark."
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "headline": "Three steps from input to export.",
+    "steps": [
+      { "n": "01", "title": "Drop", "body": "Photo, video file, or webcam input." },
+      { "n": "02", "title": "Solve", "body": "SyncRig estimates the 3D pose, frame by frame." },
+      { "n": "03", "title": "Edit & export", "body": "Fine-tune, then send to Blender or stream via VMC." }
+    ]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "headline": "What's inside.",
+    "items": [
+      { "title": "Drop anything in", "body": "Photo, video file, or live webcam — same tool, same flow. No special rig, no markers." },
+      { "title": "Editable 3D pose", "body": "Tweak joints after the solve. Pose-reference for an illustration, or hand it off to your rigging pipeline." },
+      { "title": "Runs locally", "body": "Your footage never leaves your machine. No cloud uploads, no account required." },
+      { "title": "Blender export", "body": "Send the pose straight to Blender — keyframes intact, ready to clean up or retarget." },
+      { "title": "Live VMC streaming", "body": "Broadcast directly to VMC-compatible apps for VTubing, previs, and real-time character work." },
+      { "title": "Multi-character", "body": "Track several subjects in one shot for crowd scenes and dialogue sequences.", "planned": true }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Use cases",
+    "headline": "Built for the moments you keep losing time to.",
+    "items": [
+      {
+        "id": "illustration",
+        "title": "Illustration reference",
+        "body": "Skip the figure-photo hunt. Pose a 3D body to the exact angle you need, then trace.",
+        "poster": "/syncrig-poster.webp",
+        "video": "/syncrig-demo.webm",
+        "placeholder": true
+      },
+      {
+        "id": "vtuber",
+        "title": "VTuber rigging & streaming",
+        "body": "Webcam → live 3D pose → VMC stream. Avatar tracking without a dedicated suit.",
+        "poster": "/syncrig-poster.webp",
+        "video": "/syncrig-demo.webm",
+        "placeholder": true
+      },
+      {
+        "id": "animation",
+        "title": "Animation pre-vis",
+        "body": "Block out a shot from a phone video. Send the timeline to Blender for clean-up.",
+        "poster": "/syncrig-poster.webp",
+        "video": "/syncrig-demo.webm",
+        "placeholder": true
+      },
+      {
+        "id": "research",
+        "title": "Research & teaching",
+        "body": "A drop-in mocap baseline for HCI experiments, animation classes, and biomechanics demos.",
+        "poster": "/syncrig-poster.webp",
+        "video": "/syncrig-demo.webm",
+        "placeholder": true
+      }
+    ]
+  },
+  "demo": {
+    "eyebrow": "Demo",
+    "headline": "See it work.",
+    "poster": "/syncrig-poster.webp",
+    "video": "/syncrig-demo.webm",
+    "caption": "Hover (desktop) or scroll into view (mobile) to play."
+  },
+  "tutorials": {
+    "eyebrow": "Tutorials",
+    "headline": "Get up to speed.",
+    "subline": "Step-by-step walkthroughs and tips. More land here as the toolkit grows.",
+    "items": [
+      {
+        "id": "tut-1",
+        "title": "Quick start: from photo to pose",
+        "duration": "2 min",
+        "poster": "/syncrig-poster.webp",
+        "video": null,
+        "placeholder": true
+      },
+      {
+        "id": "tut-2",
+        "title": "Exporting to Blender",
+        "duration": "—",
+        "poster": "/syncrig-poster.webp",
+        "video": null,
+        "placeholder": true
+      },
+      {
+        "id": "tut-3",
+        "title": "Live VMC streaming to VTuber rigs",
+        "duration": "—",
+        "poster": "/syncrig-poster.webp",
+        "video": null,
+        "placeholder": true
+      },
+      {
+        "id": "tut-4",
+        "title": "Working with multiple inputs",
+        "duration": "—",
+        "poster": "/syncrig-poster.webp",
+        "video": null,
+        "placeholder": true
+      }
+    ]
+  },
+  "integrations": {
+    "eyebrow": "Integrations",
+    "headline": "Where SyncRig fits.",
+    "items": [
+      { "name": "Blender", "status": "Available" },
+      { "name": "VMC protocol", "status": "Available" },
+      { "name": "Unity", "status": "Roadmap" },
+      { "name": "Unreal Engine", "status": "Roadmap" }
+    ]
+  },
+  "updates": {
+    "eyebrow": "Updates",
+    "headline": "What's new.",
+    "subline": "Release notes, behind-the-scenes, and roadmap milestones land here.",
+    "items": [
+      { "id": "update-1", "date": "TBD", "title": "Closed alpha kickoff", "body": "Inviting the first wave of waitlist users to test core capture flow.", "placeholder": true },
+      { "id": "update-2", "date": "TBD", "title": "First public demo", "body": "Live demo + Q&A walkthrough of the photo-to-pose pipeline.", "placeholder": true },
+      { "id": "update-3", "date": "TBD", "title": "Blender add-on v0.1", "body": "Direct export with retarget presets for common rigs.", "placeholder": true }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "headline": "Coming soon.",
+    "body": "We're finalising the right model for SyncRig — somewhere between a one-time license and a creator-friendly subscription. Drop your email below and we'll write to you the day it's ready."
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "headline": "Common questions.",
+    "items": [
+      { "q": "What hardware do I need?", "a": "A modern Windows or macOS machine. A webcam is optional — needed only for live capture." },
+      { "q": "Is my footage uploaded anywhere?", "a": "No. SyncRig runs entirely on your device. Nothing leaves your machine." },
+      { "q": "Can I use it commercially?", "a": "Pricing and licensing are being finalised. Join the waitlist to be notified when commercial terms are ready." },
+      { "q": "Does it track hands and face?", "a": "Body and face are supported today. Hand tracking is on the near-term roadmap." },
+      { "q": "What 3D software is supported?", "a": "Blender via direct export today. Unity and Unreal Engine integrations are in progress." }
+    ]
+  },
+  "waitlist": {
+    "eyebrow": "Waitlist",
+    "headline": "Be first to know when SyncRig launches.",
+    "body": "No spam — one email when it's ready, plus an early-access window for waitlist members.",
+    "ctaLabel": "Notify me →",
+    "mailto": "ryoyaillust892763@gmail.com",
+    "mailtoSubject": "SyncRig waitlist"
+  }
+}
