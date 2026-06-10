@@ -19,11 +19,25 @@ const Hero = () => {
             <h1 className="font-black leading-[0.9] tracking-tight mt-2 text-7xl md:text-[12rem]">
               {hero.name}
             </h1>
-            {hero.divider && (
-              <div className="mt-2 text-5xl md:text-7xl font-black opacity-60 leading-none">
-                {hero.divider}
-              </div>
-            )}
+
+            {/* Three-line meta block under the name */}
+            <div className="mt-4 md:mt-6 space-y-1">
+              {hero.altNames && (
+                <div className="text-2xl md:text-4xl font-bold tracking-wide opacity-85">
+                  {hero.altNames}
+                </div>
+              )}
+              {hero.roles && (
+                <div className="text-sm md:text-lg tracking-[0.25em] uppercase opacity-60">
+                  {hero.roles}
+                </div>
+              )}
+              {hero.flourish && (
+                <div className="text-xl md:text-2xl opacity-40 pt-1">
+                  {hero.flourish}
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -34,9 +48,9 @@ const Hero = () => {
           </CanvasErrorBoundary>
         </div>
 
-        {/* Bottom-right big title — also behind the avatar */}
+        {/* Bottom-right big title — IN FRONT of the avatar */}
         {hero?.bigTitle && (
-          <div className="absolute bottom-12 right-0 z-0 w-full text-right pr-5 md:pr-0 pointer-events-none">
+          <div className="absolute bottom-12 right-0 z-20 w-full text-right pr-5 md:pr-0 pointer-events-none">
             <h2 className="font-black leading-[0.9] tracking-tight text-5xl md:text-[10rem]">
               {hero.bigTitle}
             </h2>
