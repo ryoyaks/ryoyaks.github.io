@@ -4,6 +4,7 @@ import NotFound from "./components/NotFound";
 import { Hero, NavBar, Sidebar, Linktree } from "./sections";
 
 const Bento = lazy(() => import("./sections/Bento"));
+const SyncRig = lazy(() => import("./sections/SyncRig"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const MainContent = () => (
@@ -14,6 +15,7 @@ const MainContent = () => (
     <Linktree />
     <Suspense fallback={null}>
       <Bento />
+      <SyncRig />
       <Footer />
     </Suspense>
   </>
