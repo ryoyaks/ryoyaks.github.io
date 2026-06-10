@@ -3,7 +3,7 @@
   { "name": "myacg", "displayName": "買動漫", "subLabel": "六六六亞", "href": "https://www.myacg.com.tw/seller_market.php?seller=524453", "icon": "/images/icon/myacg.webp" },
   { "name": "hexbunnydoujin", "displayName": "黑市兔", "subLabel": "doujin", "href": "https://hexbunnydoujin.tw/?search=author&id=RyoyakS", "icon": "/images/icon/hexbunnydoujin.webp" },
   { "name": "twitter", "displayName": "Twitter (X)", "subLabel": "@RyoyakS", "href": "https://x.com/RyoyakS", "icon": "/images/icon/twitter.webp" },
-  { "name": "facebook", "displayName": "Facebook", "subLabel": "RyoyakS2nd", "href": "https://www.facebook.com/RyoyakS2nd/", "icon": "/images/icon/facebook.webp" },
+  { "name": "facebook", "displayName": "Facebook", "subLabel": "RyoyakS", "href": "https://www.facebook.com/RyoyakS/", "icon": "/images/icon/facebook.webp" },
   { "name": "pixiv", "displayName": "Pixiv", "subLabel": "15708685", "href": "https://www.pixiv.net/users/15708685", "icon": "/images/icon/pixiv.webp" },
   { "name": "fanbox", "displayName": "Fanbox", "subLabel": "@ryoyaks", "href": "https://www.fanbox.cc/@ryoyaks", "icon": "/images/icon/fanbox.webp" },
   { "name": "youtube", "displayName": "YouTube", "subLabel": "@RyoyakS", "href": "https://www.youtube.com/@RyoyakS", "icon": "/images/icon/youtube.webp" },
