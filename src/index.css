@@ -135,22 +135,22 @@ section {
   }
   .gradient-sphere {
     position: absolute;
-    width: 700px;
-    height: 700px;
+    width: 500px;
+    height: 500px;
     border-radius: 50%;
-    filter: blur(200px);
+    filter: blur(160px);
+    opacity: 0.25;
+    pointer-events: none;
   }
   .sphere-1 {
-    background: radial-gradient(circle, #1c34ff, #1c34ff);
-    top: -100px;
-    left: 300px;
-    animation: wander-left 10s ease-in-out infinite;
+    background: var(--accent-secondary);
+    top: -120px;
+    left: 200px;
   }
   .sphere-2 {
-    background: radial-gradient(circle, #ff28d5, #ff28d5);
-    top: 100px;
-    right: 300px;
-    animation: wander-right 12s ease-in-out infinite;
+    background: var(--accent);
+    top: 60px;
+    right: 200px;
   }
   /* tech stack */
   .about-gradient-sphere {

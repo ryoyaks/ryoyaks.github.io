@@ -5,44 +5,49 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="w-screen h-dvh overflow-hidden relative text-white-50 md:p-0 px-5"
+      className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)]"
     >
-      <div className="gradient-box w-full h-96 absolute bottom-0 left-0 z-20"></div>
       <GradientSpheres
         sphere1Class="gradient-sphere sphere-1"
         sphere2Class="gradient-sphere sphere-2"
       />
 
-      <div className="w-full h-full flex-center">
-        <div className="container relative w-full h-full">
-          <div className="md:mt-40 mt-20">
-            <p className="font md:text-2xl text-base">Hello, I&apos;m</p>
-            <h1 className="font-bold md:text-9xl text-5xl">
-              RyoyakS
-            </h1>
-            <h1 className="font-bold md:text-9xl text-5xl">--</h1>
-          </div>
-          <div className="absolute w-full z-30 bottom-20 right-0">
-            <div className="flex justify-between items-end">
-              <div className="flex flex-col items-center md:gap-5 gap-1">
-                <p className="md:text-base text-xs">Explore</p>
-                <img
-                  src="images/arrowdown.svg"
-                  alt="arrowdown"
-                  className="size-7 animate-bounce"
-                />
-              </div>
-              <div className="flex flex-col items-end">
-                <img src="/images/loader.gif"/>
-                <h1 className="font-bold md:text-9xl text-5xl">CONTENT CREATOR</h1>
-              </div>
-            </div>
+      <div className="container mx-auto relative w-full h-full">
+        <div className="md:pt-40 pt-28 max-w-[45%] md:max-w-[45%] relative z-10">
+          <p className="text-xs md:text-sm tracking-[0.25em] opacity-60">HELLO, I&apos;M</p>
+          <h1 className="font-black leading-[0.95] mt-2 text-6xl md:text-9xl text-[var(--fg)]">
+            RyoyakS
+          </h1>
+          <p className="mt-5 text-base md:text-xl leading-relaxed text-[var(--fg-muted)]">
+            Illustrator · 3D Creator
+            <br />
+            VR / CV / HCI Developer
+          </p>
+          <div className="mt-7 flex gap-3 flex-wrap">
+            <a
+              href="#links"
+              className="bg-[var(--accent)] text-white px-5 py-2.5 rounded-full text-sm font-semibold"
+            >
+              Explore ↓
+            </a>
+            <a
+              href="https://github.com/ryoyaks"
+              target="_blank"
+              rel="noreferrer"
+              className="border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-full text-sm"
+            >
+              GitHub ↗
+            </a>
           </div>
         </div>
-      </div>
 
-      <div className="w-full h-full absolute top-0 left-0">
-        <HeroExperience />
+        <div className="absolute inset-0 z-0">
+          <HeroExperience />
+        </div>
+
+        <div className="absolute bottom-8 left-5 md:left-0 text-[11px] tracking-[0.2em] opacity-50">
+          ↓ SCROLL
+        </div>
       </div>
     </section>
   );
