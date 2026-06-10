@@ -26,9 +26,6 @@ export function Model(props) {
         <group name="Armature001">
           <primitive object={nodes.Armature} />
         </group>
-        <group name="Armature002">
-          <primitive object={nodes.Armature_1} />
-        </group>
         <skinnedMesh name="Back_Hair001" geometry={nodes.Back_Hair001.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Back_Hair001.skeleton} />
         <group name="Body003">
           <skinnedMesh name="Body002" geometry={nodes.Body002.geometry} material={materials['Manuka_face_blue.001']} skeleton={nodes.Body002.skeleton} />
@@ -60,37 +57,6 @@ export function Model(props) {
         <skinnedMesh name="SR-side001" geometry={nodes['SR-side001'].geometry} material={materials['Silent Reverie-ryablue.001']} skeleton={nodes['SR-side001'].skeleton} />
         <skinnedMesh name="Twin_Up001" geometry={nodes.Twin_Up001.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Twin_Up001.skeleton} />
         <skinnedMesh name="Twin001" geometry={nodes.Twin001.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Twin001.skeleton} />
-        <skinnedMesh name="Back_Hair002" geometry={nodes.Back_Hair002.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Back_Hair002.skeleton} />
-        <group name="Body001">
-          <skinnedMesh name="Body001_1" geometry={nodes.Body001_1.geometry} material={materials['Manuka_face_blue.001']} skeleton={nodes.Body001_1.skeleton} />
-          <skinnedMesh name="Body001_2" geometry={nodes.Body001_2.geometry} material={materials['Manuka_face_blue.001']} skeleton={nodes.Body001_2.skeleton} />
-        </group>
-        <group name="Bracelet_L001">
-          <skinnedMesh name="RETARGETED__Bracelet_L002" geometry={nodes.RETARGETED__Bracelet_L002.geometry} material={materials['metal_1.001']} skeleton={nodes.RETARGETED__Bracelet_L002.skeleton} />
-          <skinnedMesh name="RETARGETED__Bracelet_L002_1" geometry={nodes.RETARGETED__Bracelet_L002_1.geometry} material={materials['black.001']} skeleton={nodes.RETARGETED__Bracelet_L002_1.skeleton} />
-        </group>
-        <group name="Bracelet_R001">
-          <skinnedMesh name="RETARGETED__Bracelet_R002" geometry={nodes.RETARGETED__Bracelet_R002.geometry} material={materials['black.001']} skeleton={nodes.RETARGETED__Bracelet_R002.skeleton} />
-          <skinnedMesh name="RETARGETED__Bracelet_R002_1" geometry={nodes.RETARGETED__Bracelet_R002_1.geometry} material={materials['metal_1.001']} skeleton={nodes.RETARGETED__Bracelet_R002_1.skeleton} />
-        </group>
-        <skinnedMesh name="Hair001" geometry={nodes.Hair001.geometry} material={materials['flaps_blue.001']} skeleton={nodes.Hair001.skeleton} />
-        <skinnedMesh name="Inner001" geometry={nodes.Inner001.geometry} material={materials['Inner_Black.001']} skeleton={nodes.Inner001.skeleton} />
-        <skinnedMesh name="Manuka_body001" geometry={nodes.Manuka_body001.geometry} material={materials['Manuka_body.001']} skeleton={nodes.Manuka_body001.skeleton} />
-        <skinnedMesh name="Manuka_kemono_ear001" geometry={nodes.Manuka_kemono_ear001.geometry} material={materials['Manuka_hair_blue.001']} skeleton={nodes.Manuka_kemono_ear001.skeleton} />
-        <skinnedMesh name="Manuka_kemono_tail001" geometry={nodes.Manuka_kemono_tail001.geometry} material={materials['Manuka_hair_blue.001']} skeleton={nodes.Manuka_kemono_tail001.skeleton} />
-        <skinnedMesh name="Pants001" geometry={nodes.Pants001.geometry} material={materials['Black.001']} skeleton={nodes.Pants001.skeleton} />
-        <skinnedMesh name="Pants_belt001" geometry={nodes.Pants_belt001.geometry} material={materials['Black.001']} skeleton={nodes.Pants_belt001.skeleton} />
-        <group name="Pants_ring001">
-          <skinnedMesh name="RETARGETED__Pants_ring002" geometry={nodes.RETARGETED__Pants_ring002.geometry} material={materials['Black.001']} skeleton={nodes.RETARGETED__Pants_ring002.skeleton} />
-          <skinnedMesh name="RETARGETED__Pants_ring002_1" geometry={nodes.RETARGETED__Pants_ring002_1.geometry} material={materials['metal_1.001']} skeleton={nodes.RETARGETED__Pants_ring002_1.skeleton} />
-        </group>
-        <skinnedMesh name="Pants_safetypin001" geometry={nodes.Pants_safetypin001.geometry} material={materials['metal_1.001']} skeleton={nodes.Pants_safetypin001.skeleton} />
-        <skinnedMesh name="Ribbon002" geometry={nodes.Ribbon002.geometry} material={materials['metal_1.001']} skeleton={nodes.Ribbon002.skeleton} />
-        <skinnedMesh name="Shoes001" geometry={nodes.Shoes001.geometry} material={materials['ACC.001']} skeleton={nodes.Shoes001.skeleton} />
-        <skinnedMesh name="SR-bang002" geometry={nodes['SR-bang002'].geometry} material={materials['Silent Reverie-ryablue.001']} skeleton={nodes['SR-bang002'].skeleton} />
-        <skinnedMesh name="SR-side002" geometry={nodes['SR-side002'].geometry} material={materials['Silent Reverie-ryablue.001']} skeleton={nodes['SR-side002'].skeleton} />
-        <skinnedMesh name="Twin_Up002" geometry={nodes.Twin_Up002.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Twin_Up002.skeleton} />
-        <skinnedMesh name="Twin002" geometry={nodes.Twin002.geometry} material={materials['Strawberry_milk_blue.001']} skeleton={nodes.Twin002.skeleton} />
       </group>
     </group>
   )
