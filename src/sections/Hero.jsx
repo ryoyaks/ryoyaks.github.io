@@ -11,6 +11,9 @@ const Hero = () => {
       id="home"
       className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)] film-noise"
     >
+      {/* Subtle radial bloom from upper-right corner */}
+      <div className="absolute inset-0 z-0 pointer-events-none hero-bloom" />
+
       {/* Background marquee — huge faded repeating text */}
       {hero?.marquee && (
         <div className="absolute inset-0 z-0 overflow-hidden flex items-center pointer-events-none">
@@ -59,18 +62,18 @@ const Hero = () => {
 
         {/* Bottom-right big title — IN FRONT of the avatar */}
         {hero?.bigTitle && (
-          <div className="absolute bottom-12 right-0 z-20 w-full text-right pr-5 md:pr-0 pointer-events-none">
-            <h2 className="font-black leading-[0.9] tracking-tight text-4xl md:text-[7.5rem]">
+          <div className="absolute bottom-8 md:bottom-12 right-0 z-20 w-full text-right pr-5 md:pr-0 pointer-events-none">
+            <h2 className="font-black leading-[0.9] tracking-tight text-3xl md:text-[7.5rem]">
               {hero.bigTitle}
             </h2>
           </div>
         )}
 
-        {/* Bottom-left Explore — z-20 stays clickable above the avatar */}
+        {/* Bottom-left Explore — pushed higher on mobile so it clears bigTitle */}
         {hero?.exploreLabel && (
           <a
             href="#links"
-            className="absolute bottom-10 left-5 md:left-0 z-20 flex flex-col items-start gap-2"
+            className="absolute bottom-32 md:bottom-10 left-5 md:left-0 z-20 flex flex-col items-start gap-2"
           >
             <span className="text-base md:text-xl tracking-[0.15em] opacity-80">{hero.exploreLabel}</span>
             <span className="text-2xl animate-bounce">↓</span>

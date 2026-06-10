@@ -19,6 +19,13 @@ html {
   opacity: 0.05;
 }
 
+/* Radial bloom — soft accent glow, theme-aware */
+.hero-bloom {
+  background: radial-gradient(circle at 75% 25%, var(--accent), transparent 55%);
+  opacity: 0.18;
+}
+:root[data-theme="light"] .hero-bloom { opacity: 0.1; }
+
 /* Slow background marquee text */
 .hero-marquee {
   animation: hero-marquee 60s linear infinite;
