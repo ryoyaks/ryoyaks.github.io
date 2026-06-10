@@ -1,10 +1,14 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { navItems } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
+  const onRoot = pathname === "/";
+  const prefix = (href) => (onRoot || !href.startsWith("#") ? href : `/${href}`);
 
   const toggleSideBar = () => {
     setIsOpen(!isOpen);
@@ -76,7 +80,7 @@ const SideBar = () => {
               >
                 <a
                   className="text-2xl font-bold text-[var(--fg)]"
-                  href={item.href}
+                  href={prefix(item.href)}
                 >
                   {item.name}
                 </a>

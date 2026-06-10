@@ -15,6 +15,16 @@ const MainContent = () => (
     <Linktree />
     <Suspense fallback={null}>
       <Bento />
+      <Footer />
+    </Suspense>
+  </>
+);
+
+const SyncRigPage = () => (
+  <>
+    <NavBar />
+    <Sidebar />
+    <Suspense fallback={null}>
       <SyncRig />
       <Footer />
     </Suspense>
@@ -27,6 +37,7 @@ const App = () => {
       <div className="min-h-screen">
         <Routes>
           <Route path="/" element={<MainContent />} />
+          <Route path="/syncrig" element={<SyncRigPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

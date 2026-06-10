@@ -1,11 +1,16 @@
+import { useLocation } from "react-router-dom";
 import { navItems } from "../constants";
 import ThemeToggle from "./ThemeToggle";
 
 const NavBar = () => {
+  const { pathname } = useLocation();
+  const onRoot = pathname === "/";
+  const prefix = (href) => (onRoot || !href.startsWith("#") ? href : `/${href}`);
+
   return (
     <div className="w-full flex-center fixed z-50 top-0 left-0 md:p-0 px-5">
       <div className="container md:my-6 my-4 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2 text-[var(--fg)]">
+        <a href={prefix("#home")} className="flex items-center gap-2 text-[var(--fg)]">
           <img
             src="/images/logo.webp"
             alt="logo"
@@ -17,7 +22,7 @@ const NavBar = () => {
             <a
               key={item.name}
               className="text-sm text-[var(--fg)] opacity-80 hover:opacity-100 transition-opacity"
-              href={item.href}
+              href={prefix(item.href)}
             >
               {item.name}
             </a>
@@ -26,7 +31,7 @@ const NavBar = () => {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <a
-            href="#contact"
+            href={prefix("#contact")}
             className="bg-[var(--fg)] text-[var(--bg)] font-semibold py-2 px-4 rounded-md text-sm hidden md:inline-block"
           >
             Hire Me

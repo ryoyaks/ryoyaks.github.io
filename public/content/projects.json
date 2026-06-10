@@ -7,7 +7,7 @@
     "poster": "/syncrig-poster.webp",
     "video": "/syncrig-demo.webm",
     "tags": ["mocap", "3D", "Blender", "VMC"],
-    "href": "#syncrig",
+    "href": "/syncrig",
     "ctaLabel": "Read more →"
   },
   "more": [

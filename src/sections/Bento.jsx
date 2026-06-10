@@ -1,9 +1,12 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import gsap from "gsap";
 import SectionHeader from "../components/SectionHeader";
 import VideoCard from "../components/VideoCard";
 import { iconsList } from "../constants";
 import { useContent } from "../hooks/useContent";
+
+const isInternalRoute = (href) => href && href.startsWith("/") && !href.startsWith("//");
 
 const Bento = () => {
   const gridRef = useRef(null);
@@ -68,10 +71,16 @@ const Bento = () => {
           </div>
 
           {/* Featured */}
-          <a
+          {(() => {
+            const featuredHref = featured?.href || "#works";
+            const useRouterLink = isInternalRoute(featuredHref);
+            const Tag = useRouterLink ? Link : "a";
+            const tagProps = useRouterLink ? { to: featuredHref } : { href: featuredHref };
+            return (
+          <Tag
             data-bento-tile
             id="projects"
-            href={featured?.href || "#works"}
+            {...tagProps}
             className="md:col-span-3 md:row-span-2 relative rounded-md overflow-hidden border border-[var(--border)] min-h-[260px] block group"
           >
             {featured && (
@@ -94,7 +103,9 @@ const Bento = () => {
                 </div>
               </>
             )}
-          </a>
+          </Tag>
+            );
+          })()}
 
           {/* Tools */}
           <div
