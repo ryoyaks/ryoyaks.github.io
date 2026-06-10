@@ -15,12 +15,12 @@ const Hero = () => {
         {/* Top-left identity */}
         {hero && (
           <div className="md:pt-32 pt-24 relative z-10">
-            <p className="text-sm md:text-base tracking-wide opacity-80">{hero.eyebrow}</p>
-            <h1 className="font-black leading-[0.95] mt-2 text-6xl md:text-8xl">
+            <p className="text-lg md:text-2xl tracking-wide opacity-80">{hero.eyebrow}</p>
+            <h1 className="font-black leading-[0.9] tracking-tight mt-2 text-6xl md:text-9xl">
               {hero.name}
             </h1>
             {hero.divider && (
-              <div className="mt-1 text-4xl md:text-6xl font-black opacity-70 leading-none">
+              <div className="mt-1 text-5xl md:text-7xl font-black opacity-70 leading-none">
                 {hero.divider}
               </div>
             )}
@@ -49,8 +49,8 @@ const Hero = () => {
             href="#links"
             className="absolute bottom-10 left-5 md:left-0 z-10 flex flex-col items-start gap-2"
           >
-            <span className="text-xs md:text-sm tracking-[0.15em] opacity-80">{hero.exploreLabel}</span>
-            <span className="text-xl animate-bounce">↓</span>
+            <span className="text-base md:text-xl tracking-[0.15em] opacity-80">{hero.exploreLabel}</span>
+            <span className="text-2xl animate-bounce">↓</span>
           </a>
         )}
       </div>

@@ -21,7 +21,7 @@ const NavBar = () => {
           {navItems.map((item) => (
             <a
               key={item.name}
-              className="text-sm text-[var(--fg)] opacity-80 hover:opacity-100 transition-opacity"
+              className="text-base md:text-lg text-[var(--fg)] opacity-80 hover:opacity-100 transition-opacity"
               href={prefix(item.href)}
             >
               {item.name}
