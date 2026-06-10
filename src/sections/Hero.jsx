@@ -1,4 +1,3 @@
-import GradientSpheres from "../components/GradientSpheres";
 import HeroExperience from "../components/HeroExperience";
 
 const Hero = () => {
@@ -7,11 +6,6 @@ const Hero = () => {
       id="home"
       className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)]"
     >
-      <GradientSpheres
-        sphere1Class="gradient-sphere sphere-1"
-        sphere2Class="gradient-sphere sphere-2"
-      />
-
       <div className="container mx-auto relative w-full h-full">
         <div className="md:pt-40 pt-28 max-w-[45%] md:max-w-[45%] relative z-10">
           <p className="text-xs md:text-sm tracking-[0.25em] opacity-60">HELLO, I&apos;M</p>
@@ -26,7 +20,7 @@ const Hero = () => {
           <div className="mt-7 flex gap-3 flex-wrap">
             <a
               href="#links"
-              className="bg-[var(--accent)] text-white px-5 py-2.5 rounded-full text-sm font-semibold"
+              className="bg-[var(--fg)] text-[var(--bg)] px-5 py-2.5 rounded-md text-sm font-semibold"
             >
               Explore ↓
             </a>
@@ -34,7 +28,7 @@ const Hero = () => {
               href="https://github.com/ryoyaks"
               target="_blank"
               rel="noreferrer"
-              className="border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-full text-sm"
+              className="border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-md text-sm"
             >
               GitHub ↗
             </a>

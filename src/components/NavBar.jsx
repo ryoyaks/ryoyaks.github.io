@@ -27,7 +27,7 @@ const NavBar = () => {
           <ThemeToggle />
           <a
             href="#contact"
-            className="bg-[var(--accent)] text-white font-semibold py-2 px-4 rounded-full text-sm hidden md:inline-block"
+            className="bg-[var(--fg)] text-[var(--bg)] font-semibold py-2 px-4 rounded-md text-sm hidden md:inline-block"
           >
             Hire Me
           </a>

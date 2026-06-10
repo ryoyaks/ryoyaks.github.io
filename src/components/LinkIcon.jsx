@@ -67,7 +67,7 @@ const LinkIcon = ({ icon, type = "square" }) => {
 
     return (
 
-      <div className={`${baseClass} aspect-[3/1] rounded-xl justify-between px-6 hover:-translate-y-1`}>
+      <div className={`${baseClass} aspect-[3/1] rounded-md justify-between px-6 hover:-translate-y-1`}>
 
         <div className="flex items-center gap-4">
 
