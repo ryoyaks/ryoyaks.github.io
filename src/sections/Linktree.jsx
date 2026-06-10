@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
 import LinkIcon from "../components/LinkIcon";
 import SectionHeader from "../components/SectionHeader";
+import { useContent } from "../hooks/useContent";
 
 const Linktree = () => {
-  const [links, setLinks] = useState([]);
-
-  useEffect(() => {
-    fetch("/links.json")
-      .then((r) => r.json())
-      .then(setLinks)
-      .catch(() => setLinks([]));
-  }, []);
+  const links = useContent("links", []) || [];
 
   return (
     <section id="links" className="relative md:p-0 px-5 py-20 md:py-32 text-[var(--fg)]">

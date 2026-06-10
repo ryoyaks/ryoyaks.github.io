@@ -1,6 +1,10 @@
 import HeroExperience from "../components/HeroExperience";
+import { useContent } from "../hooks/useContent";
 
 const Hero = () => {
+  const data = useContent("main");
+  const hero = data?.hero;
+
   return (
     <section
       id="home"
@@ -8,40 +12,53 @@ const Hero = () => {
     >
       <div className="container mx-auto relative w-full h-full">
         <div className="md:pt-40 pt-24 max-w-full md:max-w-[45%] relative z-10">
-          <p className="text-xs md:text-sm tracking-[0.25em] opacity-60">HELLO, I&apos;M</p>
-          <h1 className="font-black leading-[0.95] mt-2 text-6xl md:text-9xl text-[var(--fg)]">
-            RyoyakS
-          </h1>
-          <p className="mt-5 text-base md:text-xl leading-relaxed text-[var(--fg-muted)]">
-            Illustrator · 3D Creator
-            <br />
-            VR / CV / HCI Developer
-          </p>
-          <div className="mt-7 flex gap-3 flex-wrap">
-            <a
-              href="#links"
-              className="bg-[var(--fg)] text-[var(--bg)] px-5 py-2.5 rounded-md text-sm font-semibold"
-            >
-              Explore ↓
-            </a>
-            <a
-              href="https://github.com/ryoyaks"
-              target="_blank"
-              rel="noreferrer"
-              className="border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-md text-sm"
-            >
-              GitHub ↗
-            </a>
-          </div>
+          {hero && (
+            <>
+              <p className="text-xs md:text-sm tracking-[0.25em] opacity-60">{hero.eyebrow}</p>
+              <h1 className="font-black leading-[0.95] mt-2 text-6xl md:text-9xl text-[var(--fg)]">
+                {hero.name}
+              </h1>
+              <p className="mt-5 text-base md:text-xl leading-relaxed text-[var(--fg-muted)]">
+                {hero.subtitle?.map((line, i) => (
+                  <span key={i}>
+                    {line}
+                    {i < hero.subtitle.length - 1 && <br />}
+                  </span>
+                ))}
+              </p>
+              <div className="mt-7 flex gap-3 flex-wrap">
+                {hero.ctas?.map((cta) => {
+                  const external = /^https?:/.test(cta.href);
+                  return (
+                    <a
+                      key={cta.label}
+                      href={cta.href}
+                      target={external ? "_blank" : undefined}
+                      rel={external ? "noreferrer" : undefined}
+                      className={
+                        cta.variant === "solid"
+                          ? "bg-[var(--fg)] text-[var(--bg)] px-5 py-2.5 rounded-md text-sm font-semibold"
+                          : "border border-[var(--border)] text-[var(--fg)] px-5 py-2.5 rounded-md text-sm"
+                      }
+                    >
+                      {cta.label}
+                    </a>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="absolute inset-0 z-0">
           <HeroExperience />
         </div>
 
-        <div className="absolute bottom-8 left-5 md:left-0 text-[11px] tracking-[0.2em] opacity-50">
-          ↓ SCROLL
-        </div>
+        {hero?.scrollHint && (
+          <div className="absolute bottom-8 left-5 md:left-0 text-[11px] tracking-[0.2em] opacity-50">
+            {hero.scrollHint}
+          </div>
+        )}
       </div>
     </section>
   );

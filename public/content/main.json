@@ -1,0 +1,49 @@
+{
+  "site": {
+    "name": "RyoyakS",
+    "title": "RyoyakS | Content Creator & HCI Researcher",
+    "copyrightYear": 2026,
+    "logo": "/images/logo.webp"
+  },
+  "hero": {
+    "eyebrow": "HELLO, I'M",
+    "name": "RyoyakS",
+    "subtitle": ["Illustrator · 3D Creator", "VR / CV / HCI Developer"],
+    "ctas": [
+      { "label": "Explore ↓", "href": "#links", "variant": "solid" },
+      { "label": "GitHub ↗", "href": "https://github.com/ryoyaks", "variant": "outline" }
+    ],
+    "scrollHint": "↓ SCROLL"
+  },
+  "about": {
+    "eyebrow": "ABOUT",
+    "headline": "A multi-disciplinary creator from Taiwan",
+    "body": "I draw, sculpt and code. My day moves between Procreate, Blender, and Python — character illustration on one screen, motion-capture research on the other.",
+    "tags": ["Illustration", "3D / VRM", "CV · HCI", "Open to commissions"]
+  },
+  "status": {
+    "eyebrow": "STATUS",
+    "label": "Open for commissions",
+    "subLabel": "Email or Marshmallow for inquiries",
+    "active": true
+  },
+  "tools": {
+    "eyebrow": "Tools I Use",
+    "order": [
+      "blender", "photoshop", "illustrator", "clipstudiopaint", "procreate",
+      "unity", "unreal", "figma", "mrtk", "quest", "openxr"
+    ]
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "label": "Get in\ntouch →",
+    "mailto": "ryoyaillust892763@gmail.com"
+  },
+  "footer": {
+    "quickLinks": [
+      { "name": "Twitter", "href": "https://x.com/RyoyakS" },
+      { "name": "Pixiv", "href": "https://www.pixiv.net/users/15708685" },
+      { "name": "Email", "href": "mailto:ryoyaillust892763@gmail.com" }
+    ]
+  }
+}

@@ -1,19 +1,37 @@
+import { useContent } from "../hooks/useContent";
+
 const Footer = () => {
+  const data = useContent("main");
+  const site = data?.site;
+  const footer = data?.footer;
+
   return (
     <footer className="w-full bg-[var(--bg-elev)] border-t border-[var(--border)] py-10 text-[var(--fg)]">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-5 md:px-0">
         <div className="flex items-center gap-2">
           <img
-            src="/images/logo.webp"
+            src={site?.logo || "/images/logo.webp"}
             alt="logo"
             className="w-7 h-7 object-contain"
           />
-          <span className="text-sm opacity-70">© 2026 RyoyakS</span>
+          <span className="text-sm opacity-70">
+            © {site?.copyrightYear || ""} {site?.name || ""}
+          </span>
         </div>
         <div className="flex items-center gap-5 text-sm opacity-70">
-          <a href="https://x.com/RyoyakS" target="_blank" rel="noreferrer">Twitter</a>
-          <a href="https://www.pixiv.net/users/15708685" target="_blank" rel="noreferrer">Pixiv</a>
-          <a href="mailto:ryoyaillust892763@gmail.com">Email</a>
+          {footer?.quickLinks?.map((link) => {
+            const external = /^https?:/.test(link.href);
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noreferrer" : undefined}
+              >
+                {link.name}
+              </a>
+            );
+          })}
         </div>
       </div>
     </footer>

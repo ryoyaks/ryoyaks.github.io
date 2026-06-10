@@ -1,24 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import SectionHeader from "../components/SectionHeader";
 import VideoCard from "../components/VideoCard";
 import { iconsList } from "../constants";
-
-const TOOL_ORDER = [
-  "blender", "photoshop", "illustrator", "clipstudiopaint", "procreate",
-  "unity", "unreal", "figma", "mrtk", "quest", "openxr",
-];
+import { useContent } from "../hooks/useContent";
 
 const Bento = () => {
   const gridRef = useRef(null);
-  const [projects, setProjects] = useState({ featured: null, more: [] });
-
-  useEffect(() => {
-    fetch("/projects.json")
-      .then((r) => r.json())
-      .then(setProjects)
-      .catch(() => setProjects({ featured: null, more: [] }));
-  }, []);
+  const main = useContent("main");
+  const projects = useContent("projects", { featured: null, more: [] });
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -30,9 +20,14 @@ const Bento = () => {
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }
     );
-  }, []);
+  }, [main, projects]);
 
-  const featured = projects.featured;
+  const about = main?.about;
+  const status = main?.status;
+  const tools = main?.tools;
+  const contact = main?.contact;
+  const featured = projects?.featured;
+  const more = projects?.more || [];
 
   return (
     <section id="works" className="relative md:p-0 px-5 py-20 md:py-32 text-[var(--fg)]">
@@ -49,25 +44,30 @@ const Bento = () => {
             id="about"
             className="md:col-span-3 md:row-span-2 bg-[var(--bg-elev)] border border-[var(--border)] rounded-md p-6 md:p-7 flex flex-col justify-between min-h-[260px]"
           >
-            <div>
-              <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">ABOUT</div>
-              <h3 className="text-xl md:text-2xl font-bold mt-2 leading-snug">
-                A multi-disciplinary creator from Taiwan
-              </h3>
-              <p className="text-sm md:text-base opacity-70 mt-3 leading-relaxed">
-                {/* PLACEHOLDER — user writes bio later */}
-                I draw, sculpt and code. My day moves between Procreate, Blender, and Python — character illustration on one screen, motion-capture research on the other.
-              </p>
-            </div>
-            <div className="flex gap-2 flex-wrap mt-4">
-              <span className="border border-[var(--border)] px-3 py-1 rounded-sm text-xs">Illustration</span>
-              <span className="border border-[var(--border)] px-3 py-1 rounded-sm text-xs">3D / VRM</span>
-              <span className="border border-[var(--border)] px-3 py-1 rounded-sm text-xs">CV · HCI</span>
-              <span className="border border-[var(--border)] px-3 py-1 rounded-sm text-xs">Open to commissions</span>
-            </div>
+            {about && (
+              <>
+                <div>
+                  <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">{about.eyebrow}</div>
+                  <h3 className="text-xl md:text-2xl font-bold mt-2 leading-snug">
+                    {about.headline}
+                  </h3>
+                  <p className="text-sm md:text-base opacity-70 mt-3 leading-relaxed">{about.body}</p>
+                </div>
+                <div className="flex gap-2 flex-wrap mt-4">
+                  {about.tags?.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-[var(--border)] px-3 py-1 rounded-sm text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Featured · SyncRig */}
+          {/* Featured */}
           <a
             data-bento-tile
             id="projects"
@@ -86,9 +86,7 @@ const Bento = () => {
                   <div>
                     <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
                     <h3 className="text-2xl md:text-3xl font-black mt-2">{featured.name}</h3>
-                    <p className="text-sm opacity-90 mt-3 max-w-md leading-relaxed">
-                      {featured.tagline}
-                    </p>
+                    <p className="text-sm opacity-90 mt-3 max-w-md leading-relaxed">{featured.tagline}</p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">
                     {featured.ctaLabel || "Read more →"}
@@ -104,21 +102,25 @@ const Bento = () => {
             id="tools"
             className="md:col-span-3 bg-[var(--bg-elev)] border border-[var(--border)] rounded-md p-5 md:p-6"
           >
-            <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">Tools I Use</div>
-            <div className="flex gap-3 md:gap-4 mt-3 items-center flex-wrap">
-              {TOOL_ORDER.map((key) => {
-                const icon = iconsList.find((i) => i.name === key);
-                if (!icon) return null;
-                return (
-                  <div
-                    key={key}
-                    className="w-11 h-11 rounded-md overflow-hidden flex items-center justify-center bg-[var(--bg)] border border-[var(--border)] tool-shine"
-                  >
-                    <img src={icon.image} alt={icon.name} className="w-7 h-7 object-contain" />
-                  </div>
-                );
-              })}
-            </div>
+            {tools && (
+              <>
+                <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">{tools.eyebrow}</div>
+                <div className="flex gap-3 md:gap-4 mt-3 items-center flex-wrap">
+                  {tools.order?.map((key) => {
+                    const icon = iconsList.find((i) => i.name === key);
+                    if (!icon) return null;
+                    return (
+                      <div
+                        key={key}
+                        className="w-11 h-11 rounded-md overflow-hidden flex items-center justify-center bg-[var(--bg)] border border-[var(--border)] tool-shine"
+                      >
+                        <img src={icon.image} alt={icon.name} className="w-7 h-7 object-contain" />
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Status */}
@@ -126,39 +128,49 @@ const Bento = () => {
             data-bento-tile
             className="md:col-span-2 bg-[var(--bg-elev)] border border-[var(--border)] rounded-md p-5 md:p-6"
           >
-            <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">Status</div>
-            <div className="flex items-center gap-2 mt-3">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span className="text-sm font-semibold">Open for commissions</span>
-            </div>
-            <p className="text-xs opacity-60 mt-1">Email or Marshmallow for inquiries</p>
+            {status && (
+              <>
+                <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">{status.eyebrow}</div>
+                <div className="flex items-center gap-2 mt-3">
+                  <span
+                    className={`w-2 h-2 rounded-full ${
+                      status.active ? "bg-emerald-400" : "bg-gray-400"
+                    }`}
+                  />
+                  <span className="text-sm font-semibold">{status.label}</span>
+                </div>
+                <p className="text-xs opacity-60 mt-1">{status.subLabel}</p>
+              </>
+            )}
           </div>
 
           {/* Contact CTA */}
           <a
             data-bento-tile
             id="contact"
-            href="mailto:ryoyaillust892763@gmail.com"
+            href={contact?.mailto ? `mailto:${contact.mailto}` : "#"}
             className="md:col-span-1 rounded-md p-5 md:p-6 flex flex-col justify-between bg-[var(--fg)] text-[var(--bg)]"
           >
-            <div className="text-[10px] tracking-[0.2em] opacity-70 uppercase">Contact</div>
-            <div className="text-xl md:text-2xl font-black leading-tight">
-              Get in
-              <br />
-              touch →
-            </div>
+            {contact && (
+              <>
+                <div className="text-[10px] tracking-[0.2em] opacity-70 uppercase">{contact.eyebrow}</div>
+                <div className="text-xl md:text-2xl font-black leading-tight whitespace-pre-line">
+                  {contact.label}
+                </div>
+              </>
+            )}
           </a>
         </div>
 
         {/* More projects sub-grid */}
-        {projects.more && projects.more.length > 0 && (
+        {more.length > 0 && (
           <div className="mt-12 md:mt-16">
             <div className="flex justify-between items-end mb-5">
               <div className="text-[11px] tracking-[0.2em] opacity-60 uppercase">More work</div>
-              <div className="text-xs opacity-40">{projects.more.length} in the pipeline</div>
+              <div className="text-xs opacity-40">{more.length} in the pipeline</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-              {projects.more.map((p) => (
+              {more.map((p) => (
                 <div
                   key={p.id}
                   className={`border border-dashed border-[var(--border)] rounded-md p-5 md:p-6 min-h-[120px] flex flex-col justify-between ${
