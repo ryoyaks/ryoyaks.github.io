@@ -63,7 +63,11 @@ const HeroExperience = () => {
 
   return (
     <>
-      <Leva hidden={!isDebug} collapsed={false} />
+      <Leva
+        hidden={!isDebug}
+        collapsed={false}
+        titleBar={{ position: { x: 0, y: 80 } }}
+      />
       <Canvas
         camera={{ position: [camera.camX, camera.camY, camera.camZ], fov: camera.fov }}
         gl={{ toneMappingExposure: lights.exposure }}
