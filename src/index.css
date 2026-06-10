@@ -44,6 +44,31 @@ html {
   --color-pink-100: #ff28d5;
 }
 
+:root {
+  --bg: #0d0d12;
+  --bg-elev: #15131d;
+  --fg: #fdfdfd;
+  --fg-muted: rgba(253, 253, 253, 0.65);
+  --border: rgba(253, 253, 253, 0.10);
+  --accent: #ff28d5;
+  --accent-secondary: #1c34ff;
+}
+
+:root[data-theme="light"] {
+  --bg: #f4f0e8;
+  --bg-elev: #ffffff;
+  --fg: #1a1a1a;
+  --fg-muted: rgba(26, 26, 26, 0.65);
+  --border: rgba(26, 26, 26, 0.12);
+  --accent: #ff28d5;
+  --accent-secondary: #1c34ff;
+}
+
+html, body {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
 html,
 body {
   width: 100dvw;
