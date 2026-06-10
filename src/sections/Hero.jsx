@@ -16,12 +16,12 @@ const Hero = () => {
         {hero && (
           <div className="md:pt-32 pt-24 relative z-0 pointer-events-none">
             <p className="text-lg md:text-2xl tracking-wide opacity-80">{hero.eyebrow}</p>
-            <h1 className="font-black leading-[0.9] tracking-tight mt-2 text-7xl md:text-[12rem]">
+            <h1 className="font-black leading-[0.9] tracking-tight mt-2 text-6xl md:text-[9rem]">
               {hero.name}
             </h1>
 
             {/* Three-line meta block under the name */}
-            <div className="mt-4 md:mt-6 space-y-1">
+            <div className="mt-10 md:mt-16 space-y-1">
               {hero.altNames && (
                 <div className="text-2xl md:text-4xl font-bold tracking-wide opacity-85">
                   {hero.altNames}
@@ -51,7 +51,7 @@ const Hero = () => {
         {/* Bottom-right big title — IN FRONT of the avatar */}
         {hero?.bigTitle && (
           <div className="absolute bottom-12 right-0 z-20 w-full text-right pr-5 md:pr-0 pointer-events-none">
-            <h2 className="font-black leading-[0.9] tracking-tight text-5xl md:text-[10rem]">
+            <h2 className="font-black leading-[0.9] tracking-tight text-4xl md:text-[7.5rem]">
               {hero.bigTitle}
             </h2>
           </div>
