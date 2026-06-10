@@ -5,8 +5,9 @@ import { Leva, useControls } from "leva";
 import { Model } from "./models/6YAbeta1";
 
 const isDebug =
-  typeof window !== "undefined" &&
-  new URLSearchParams(window.location.search).get("debug") === "1";
+  import.meta.env.DEV ||
+  (typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("debug") === "1");
 
 const HeroExperience = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -62,7 +63,7 @@ const HeroExperience = () => {
 
   return (
     <>
-      <Leva hidden={!isDebug} collapsed />
+      <Leva hidden={!isDebug} collapsed={false} />
       <Canvas
         camera={{ position: [camera.camX, camera.camY, camera.camZ], fov: camera.fov }}
         gl={{ toneMappingExposure: lights.exposure }}
