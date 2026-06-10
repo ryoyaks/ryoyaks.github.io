@@ -15,11 +15,14 @@ const HeroExperience = () => {
   }, []);
 
   return (
-    <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-      <ambientLight intensity={1.4} color="#ffffff" />
-      <Environment preset="studio" />
-      <directionalLight position={[2, 2, 5]} intensity={2.2} color="#ffffff" />
-      <directionalLight position={[-3, 2, -2]} intensity={0.9} color="#ffffff" />
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 50 }}
+      gl={{ toneMappingExposure: 0.65 }}
+    >
+      <ambientLight intensity={0.6} color="#ffffff" />
+      <Environment preset="city" environmentIntensity={0.5} />
+      <directionalLight position={[2, 2, 5]} intensity={1.2} color="#ffffff" />
+      <directionalLight position={[-3, 2, -2]} intensity={0.4} color="#ffffff" />
       <Suspense fallback={null}>
         <Model
           scale={isMobile ? [6.5, 6.5, 6.5] : [9, 9, 9]}
