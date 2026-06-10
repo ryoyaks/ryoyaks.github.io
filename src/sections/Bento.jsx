@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import SectionHeader from "../components/SectionHeader";
 import VideoCard from "../components/VideoCard";
@@ -11,6 +11,14 @@ const TOOL_ORDER = [
 
 const Bento = () => {
   const gridRef = useRef(null);
+  const [projects, setProjects] = useState({ featured: null, more: [] });
+
+  useEffect(() => {
+    fetch("/projects.json")
+      .then((r) => r.json())
+      .then(setProjects)
+      .catch(() => setProjects({ featured: null, more: [] }));
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -20,15 +28,11 @@ const Bento = () => {
     gsap.fromTo(
       tiles,
       { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        stagger: 0.08,
-      }
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", stagger: 0.08 }
     );
   }, []);
+
+  const featured = projects.featured;
 
   return (
     <section id="works" className="relative md:p-0 px-5 py-20 md:py-32 text-[var(--fg)]">
@@ -64,45 +68,35 @@ const Bento = () => {
           </div>
 
           {/* Featured · SyncRig */}
-          <div
+          <a
             data-bento-tile
             id="projects"
-            className="md:col-span-3 md:row-span-2 relative rounded-md overflow-hidden border border-[var(--border)] min-h-[260px]"
+            href={featured?.href || "#works"}
+            className="md:col-span-3 md:row-span-2 relative rounded-md overflow-hidden border border-[var(--border)] min-h-[260px] block group"
           >
-            <VideoCard
-              poster="/syncrig-poster.webp"
-              src="/syncrig-demo.webm"
-              className="absolute inset-0"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/20 pointer-events-none" />
-            <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-white">
-              <div>
-                <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
-                <h3 className="text-2xl md:text-3xl font-black mt-2">SyncRig</h3>
-                <p className="text-sm opacity-90 mt-3 max-w-md leading-relaxed">
-                  Open-source motion-capture &amp; 3D pose reference for creators. Drop in a photo, video, or webcam — get an editable 3D pose. Exports to Blender, broadcasts via VMC.
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <a
-                  href="https://github.com/ryoyaks/SyncRig"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="bg-white text-black px-4 py-2 rounded-md text-xs font-semibold"
-                >
-                  GitHub ↗
-                </a>
-                <a
-                  href="https://github.com/ryoyaks/SyncRig/releases/latest"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="border border-white/40 px-4 py-2 rounded-md text-xs"
-                >
-                  Latest Release ↗
-                </a>
-              </div>
-            </div>
-          </div>
+            {featured && (
+              <>
+                <VideoCard
+                  poster={featured.poster}
+                  src={featured.video}
+                  className="absolute inset-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/20 pointer-events-none" />
+                <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-white">
+                  <div>
+                    <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
+                    <h3 className="text-2xl md:text-3xl font-black mt-2">{featured.name}</h3>
+                    <p className="text-sm opacity-90 mt-3 max-w-md leading-relaxed">
+                      {featured.tagline}
+                    </p>
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">
+                    {featured.ctaLabel || "Read more →"}
+                  </div>
+                </div>
+              </>
+            )}
+          </a>
 
           {/* Tools */}
           <div
@@ -155,6 +149,34 @@ const Bento = () => {
             </div>
           </a>
         </div>
+
+        {/* More projects sub-grid */}
+        {projects.more && projects.more.length > 0 && (
+          <div className="mt-12 md:mt-16">
+            <div className="flex justify-between items-end mb-5">
+              <div className="text-[11px] tracking-[0.2em] opacity-60 uppercase">More work</div>
+              <div className="text-xs opacity-40">{projects.more.length} in the pipeline</div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+              {projects.more.map((p) => (
+                <div
+                  key={p.id}
+                  className={`border border-dashed border-[var(--border)] rounded-md p-5 md:p-6 min-h-[120px] flex flex-col justify-between ${
+                    p.placeholder ? "opacity-60" : ""
+                  }`}
+                >
+                  <div>
+                    <div className="text-[10px] tracking-[0.2em] opacity-60 uppercase">
+                      {p.placeholder ? "TBD" : "Project"}
+                    </div>
+                    <h4 className="text-base md:text-lg font-bold mt-2">{p.name}</h4>
+                    <p className="text-xs md:text-sm opacity-60 mt-1 leading-relaxed">{p.tagline}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
