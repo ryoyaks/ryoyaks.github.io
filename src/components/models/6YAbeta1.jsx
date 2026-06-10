@@ -13,7 +13,13 @@ export function Model(props) {
   const { scene, animations } = useGLTF('/6YAbeta1.glb')
   const clone = React.useMemo(() => SkeletonUtils.clone(scene), [scene])
   const { nodes, materials } = useGraph(clone)
-  const { actions } = useAnimations(animations, group)
+  const { actions, names } = useAnimations(animations, group)
+  React.useEffect(() => {
+    if (names.length > 0) {
+      const action = actions[names[0]]
+      action.reset().fadeIn(0.5).play()
+    }
+  }, [actions, names])
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Scene">
