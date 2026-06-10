@@ -39,6 +39,7 @@ const Bento = () => {
           {/* About */}
           <div
             data-bento-tile
+            id="about"
             className="md:col-span-3 md:row-span-2 bg-[var(--bg-elev)] border border-[var(--border)] rounded-2xl p-6 md:p-7 flex flex-col justify-between min-h-[260px]"
           >
             <div>
@@ -62,7 +63,7 @@ const Bento = () => {
           {/* Featured · SyncRig */}
           <div
             data-bento-tile
-            id="featured"
+            id="projects"
             className="md:col-span-3 md:row-span-2 relative rounded-2xl overflow-hidden border border-[var(--border)] min-h-[260px]"
           >
             <VideoCard

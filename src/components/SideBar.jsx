@@ -14,7 +14,7 @@ const SideBar = () => {
     const tl = gsap.timeline();
 
     if (isOpen) {
-      tl.to(".side-bar-bg", {
+      tl.to(".side-bar-panel", {
         x: 0,
         opacity: 1,
         ease: "power2.inOut",
@@ -29,7 +29,7 @@ const SideBar = () => {
         "<"
       );
     } else {
-      tl.to(".side-bar-bg", {
+      tl.to(".side-bar-panel", {
         x: "100%",
         opacity: 0,
         ease: "power2.inOut",
@@ -42,22 +42,40 @@ const SideBar = () => {
 
   return (
     <div className="md:hidden block">
-      <div className="fixed z-[100] top-7 right-5" onClick={toggleSideBar}>
-        <img src="/images/menu-icon.webp" alt="menu" />
-      </div>
-      <div className="fixed z-[100] -translate-x-[100%] w-screen h-dvh side-bar-bg">
-        <div className="flex justify-end m-5" onClick={toggleSideBar}>
-          <img src="/images/x.webp" alt="close" />
-        </div>
+      <button
+        type="button"
+        onClick={toggleSideBar}
+        aria-label="Open menu"
+        className="fixed z-[100] top-7 right-5"
+      >
+        <img src="/images/menu-icon.webp" alt="" className="invert-0 dark:invert" />
+      </button>
+      <div
+        className="side-bar-panel fixed z-[100] -translate-x-[100%] w-screen h-dvh"
+        style={{
+          background: "color-mix(in srgb, var(--bg-elev) 92%, transparent)",
+          backdropFilter: "blur(10px)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <button
+          type="button"
+          onClick={toggleSideBar}
+          aria-label="Close menu"
+          className="flex justify-end m-5 ml-auto"
+        >
+          <img src="/images/x.webp" alt="" />
+        </button>
         <div className="mt-20 px-10">
           <div className="flex flex-col items-center gap-20">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <div
-                key={index}
+                key={item.name}
                 className="side-bar-item opacity-0 cursor-pointer hover:underline transition-all duration-700"
+                onClick={toggleSideBar}
               >
                 <a
-                  className="gradient-title text-2xl font-bold"
+                  className="text-2xl font-bold text-[var(--fg)]"
                   href={item.href}
                 >
                   {item.name}
