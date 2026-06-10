@@ -24,22 +24,13 @@ const ENV_PRESETS = [
 ];
 
 const LIGHT_DEFAULTS = {
-  dark: {
-    preset: "city",
-    ambient: 3.0,
-    key: 1.3,
-    fill: 5.0,
-    envIntensity: 1.1,
-    exposure: 0.7,
-  },
-  light: {
-    preset: "apartment",
-    ambient: 1.5,
-    key: 1.0,
-    fill: 2.0,
-    envIntensity: 0.7,
-    exposure: 0.85,
-  },
+  dark: { ambient: 3.0, key: 1.3, fill: 5.0, exposure: 0.7 },
+  light: { ambient: 1.5, key: 1.0, fill: 2.0, exposure: 0.85 },
+};
+
+const ENV_DEFAULTS = {
+  dark: { preset: "city", envIntensity: 1.1, background: false },
+  light: { preset: "apartment", envIntensity: 0.7, background: false },
 };
 
 const CAMERA_DEFAULTS = {
@@ -70,6 +61,7 @@ const CameraBridge = ({ position, target, fov, setMonitor, cameraRef, orbitRef }
     <OrbitControls
       makeDefault
       enableDamping
+      enableZoom={false}
       target={target}
       ref={(c) => {
         orbitRef.current = c;
@@ -104,6 +96,7 @@ const HeroExperience = () => {
 
   const cameraDefaults = isMobile ? CAMERA_DEFAULTS.mobile : CAMERA_DEFAULTS.desktop;
   const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
+  const envDefaults = ENV_DEFAULTS[theme] ?? ENV_DEFAULTS.dark;
 
   const avatar = useControls(
     "Avatar",
@@ -154,14 +147,23 @@ const HeroExperience = () => {
     [isMobile]
   );
 
+  const env = useControls(
+    `Environment (${theme})`,
+    {
+      preset: { value: envDefaults.preset, options: ENV_PRESETS },
+      envIntensity: { value: envDefaults.envIntensity, min: 0, max: 3, step: 0.05 },
+      background: { value: envDefaults.background, label: "show as bg" },
+    },
+    { collapsed: false },
+    [theme]
+  );
+
   const lights = useControls(
     `Lights (${theme})`,
     {
-      preset: { value: lightDefaults.preset, options: ENV_PRESETS },
       ambient: { value: lightDefaults.ambient, min: 0, max: 5, step: 0.05 },
       key: { value: lightDefaults.key, min: 0, max: 5, step: 0.1 },
       fill: { value: lightDefaults.fill, min: 0, max: 5, step: 0.1 },
-      envIntensity: { value: lightDefaults.envIntensity, min: 0, max: 3, step: 0.05 },
       exposure: { value: lightDefaults.exposure, min: 0.1, max: 2, step: 0.05 },
     },
     { collapsed: true },
@@ -180,7 +182,11 @@ const HeroExperience = () => {
         gl={{ toneMappingExposure: lights.exposure }}
       >
         <ambientLight intensity={lights.ambient} color="#ffffff" />
-        <Environment preset={lights.preset} environmentIntensity={lights.envIntensity} />
+        <Environment
+          preset={env.preset}
+          environmentIntensity={env.envIntensity}
+          background={env.background}
+        />
         <directionalLight position={[2, 2, 5]} intensity={lights.key} color="#ffffff" />
         <directionalLight position={[-3, 2, -2]} intensity={lights.fill} color="#ffffff" />
         <CameraBridge
