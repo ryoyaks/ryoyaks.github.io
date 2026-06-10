@@ -44,7 +44,6 @@ export function Model(props) {
         <skinnedMesh name="Manuka_body002" geometry={nodes.Manuka_body002.geometry} material={materials['Manuka_body.001']} skeleton={nodes.Manuka_body002.skeleton} />
         <skinnedMesh name="Manuka_kemono_ear002" geometry={nodes.Manuka_kemono_ear002.geometry} material={materials['Manuka_hair_blue.001']} skeleton={nodes.Manuka_kemono_ear002.skeleton} />
         <skinnedMesh name="Manuka_kemono_tail002" geometry={nodes.Manuka_kemono_tail002.geometry} material={materials['Manuka_hair_blue.001']} skeleton={nodes.Manuka_kemono_tail002.skeleton} />
-        <skinnedMesh name="Obsidian_Gloves001" geometry={nodes.Obsidian_Gloves001.geometry} material={materials['Mat_UV3_AM.001']} skeleton={nodes.Obsidian_Gloves001.skeleton} />
         <skinnedMesh name="Pants" geometry={nodes.Pants.geometry} material={materials['Black.001']} skeleton={nodes.Pants.skeleton} />
         <skinnedMesh name="Pants_belt" geometry={nodes.Pants_belt.geometry} material={materials['Black.001']} skeleton={nodes.Pants_belt.skeleton} />
         <group name="Pants_ring">
