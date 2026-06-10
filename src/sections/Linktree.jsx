@@ -1,9 +1,16 @@
+import { useEffect, useState } from "react";
 import LinkIcon from "../components/LinkIcon";
 import SectionHeader from "../components/SectionHeader";
-import { linkList } from "../constants";
 
 const Linktree = () => {
-  const links = linkList[0].links;
+  const [links, setLinks] = useState([]);
+
+  useEffect(() => {
+    fetch("/links.json")
+      .then((r) => r.json())
+      .then(setLinks)
+      .catch(() => setLinks([]));
+  }, []);
 
   return (
     <section id="links" className="relative md:p-0 px-5 py-20 md:py-32 text-[var(--fg)]">
@@ -12,7 +19,7 @@ const Linktree = () => {
           number="01"
           eyebrow="Links"
           headline="All my online presence"
-          caption={`${links.length} destinations`}
+          caption={links.length ? `${links.length} destinations` : null}
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
           {links.map((item) => (
