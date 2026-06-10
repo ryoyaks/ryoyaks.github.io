@@ -19,12 +19,16 @@ html {
   opacity: 0.05;
 }
 
-/* Radial bloom — soft accent glow, theme-aware */
+/* Radial bloom — soft blue-purple glow (75% blue / 25% pink) */
 .hero-bloom {
-  background: radial-gradient(circle at 75% 25%, var(--accent), transparent 55%);
-  opacity: 0.18;
+  background: radial-gradient(
+    circle at 75% 25%,
+    color-mix(in srgb, var(--accent-secondary) 75%, var(--accent)),
+    transparent 55%
+  );
+  opacity: 0.22;
 }
-:root[data-theme="light"] .hero-bloom { opacity: 0.1; }
+:root[data-theme="light"] .hero-bloom { opacity: 0.12; }
 
 /* Slow background marquee text */
 .hero-marquee {
