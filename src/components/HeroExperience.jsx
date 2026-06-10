@@ -1,13 +1,10 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
 import { Environment } from "@react-three/drei";
-import VRMAvatar from "./VRMAvatar";
-import { useContent } from "../hooks/useContent";
+import { Model } from "./models/6YAbeta1";
 
 const HeroExperience = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const main = useContent("main");
-  const avatar = main?.avatar;
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -16,10 +13,6 @@ const HeroExperience = () => {
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
-
-  if (!avatar) return null;
-
-  const cfg = isMobile ? avatar.mobile : avatar.desktop;
 
   return (
     <Canvas
@@ -31,12 +24,10 @@ const HeroExperience = () => {
       <directionalLight position={[2, 2, 5]} intensity={1.2} color="#ffffff" />
       <directionalLight position={[-3, 2, -2]} intensity={0.4} color="#ffffff" />
       <Suspense fallback={null}>
-        <VRMAvatar
-          url={avatar.url}
-          animationUrl={avatar.animation || null}
-          scale={cfg?.scale ?? 1}
-          position={cfg?.position ?? [0, 0, 0]}
-          rotation={cfg?.rotation ?? [0, 0, 0]}
+        <Model
+          scale={isMobile ? [6.5, 6.5, 6.5] : [9, 9, 9]}
+          position={isMobile ? [0, -7, 0] : [2, -9.5, 0]}
+          rotation={[0, isMobile ? 0 : -0.5, 0]}
         />
       </Suspense>
     </Canvas>

@@ -37,7 +37,7 @@ const App = () => {
       <div className="min-h-screen">
         <Routes>
           <Route path="/" element={<MainContent />} />
-          <Route path="/syncrig" element={<SyncRigPage />} />
+          <Route path="/projects/syncrig" element={<SyncRigPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

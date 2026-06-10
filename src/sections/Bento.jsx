@@ -94,7 +94,15 @@ const Bento = () => {
                 <div className="relative z-10 h-full p-6 md:p-7 flex flex-col justify-between text-white">
                   <div>
                     <div className="text-[10px] tracking-[0.2em] opacity-80 uppercase">Featured Project</div>
-                    <h3 className="text-2xl md:text-3xl font-black mt-2">{featured.name}</h3>
+                    {featured.logo ? (
+                      <img
+                        src={featured.logo}
+                        alt={featured.name}
+                        className="mt-2 h-7 md:h-9 w-auto object-contain"
+                      />
+                    ) : (
+                      <h3 className="text-2xl md:text-3xl font-black mt-2">{featured.name}</h3>
+                    )}
                     <p className="text-sm opacity-90 mt-3 max-w-md leading-relaxed">{featured.tagline}</p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all">

@@ -30,11 +30,27 @@ const SyncRig = () => {
         {/* 1. Product Hero */}
         {hero && (
           <section className="relative h-[60vh] md:h-[70vh] min-h-[420px] overflow-hidden rounded-md border border-[var(--border)] mb-16 md:mb-24">
-            <VideoCard poster={hero.poster} src={hero.video} className="absolute inset-0" />
+            <video
+              src={hero.video}
+              poster={hero.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20 pointer-events-none" />
             <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-12 text-white">
               <div className="text-[10px] md:text-xs tracking-[0.3em] opacity-80 uppercase">{hero.eyebrow}</div>
-              <h1 className="text-3xl md:text-6xl font-black mt-2 leading-tight max-w-3xl">{hero.headline}</h1>
+              {hero.logo && (
+                <img
+                  src={hero.logo}
+                  alt="SyncRig"
+                  className="mt-3 h-10 md:h-14 w-auto object-contain"
+                />
+              )}
+              <h1 className="text-3xl md:text-6xl font-black mt-3 leading-tight max-w-3xl">{hero.headline}</h1>
               <p className="text-sm md:text-lg opacity-90 mt-4 max-w-2xl leading-relaxed">{hero.body}</p>
               <div className="flex gap-3 mt-6 flex-wrap">
                 {hero.ctas?.map((cta) => (

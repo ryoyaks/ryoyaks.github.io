@@ -1,6 +1,7 @@
 {
   "hero": {
     "eyebrow": "Product",
+    "logo": "/media/syncrig/banner.webp",
     "headline": "Mocap that lets you keep creating",
     "body": "Drop in a photo, video, or webcam — get an editable 3D pose. Built for illustrators, animators, and VTubers who don't want to spend half their day posing reference figures.",
     "poster": "/media/syncrig/demo-poster.webp",
