@@ -28,14 +28,9 @@ const NavBar = () => {
             </a>
           ))}
         </div>
-        <div className="flex items-center gap-3">
+        {/* Desktop-only theme toggle. Mobile gets one inside the side bar. */}
+        <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <a
-            href={prefix("#contact")}
-            className="bg-[var(--fg)] text-[var(--bg)] font-semibold py-2 px-4 rounded-md text-sm hidden md:inline-block"
-          >
-            Hire Me
-          </a>
         </div>
       </div>
     </div>

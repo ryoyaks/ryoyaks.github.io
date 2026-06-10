@@ -1,16 +1,23 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Leva, useControls } from "leva";
 import { Model } from "./models/6YAbeta1";
+import { useTheme } from "../hooks/useTheme";
 
 const isDebug =
   import.meta.env.DEV ||
   (typeof window !== "undefined" &&
     new URLSearchParams(window.location.search).get("debug") === "1");
 
+const LIGHT_DEFAULTS = {
+  dark: { ambient: 3.0, key: 1.3, fill: 5.0, envIntensity: 1.1, exposure: 0.7 },
+  light: { ambient: 1.5, key: 1.0, fill: 2.0, envIntensity: 0.7, exposure: 0.85 },
+};
+
 const HeroExperience = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -20,21 +27,23 @@ const HeroExperience = () => {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Tuned defaults. Open leva in dev (or ?debug=1 in prod) to re-tune.
-  const defaults = isMobile
-    ? { scale: 6, posX: 0, posY: -6, posZ: -2, rotY: 0 }
+  const avatarDefaults = isMobile
+    ? { scale: 10, posX: 1.9, posY: -9.7, posZ: -2.4, rotY: -0.25 }
     : { scale: 8, posX: 2, posY: -8.1, posZ: -2.4, rotY: -0.25 };
+
+  const lightDefaults = LIGHT_DEFAULTS[theme] ?? LIGHT_DEFAULTS.dark;
 
   const avatar = useControls(
     "Avatar",
     {
-      scale: { value: defaults.scale, min: 1, max: 20, step: 0.1 },
-      posX: { value: defaults.posX, min: -10, max: 10, step: 0.1 },
-      posY: { value: defaults.posY, min: -20, max: 5, step: 0.1 },
-      posZ: { value: defaults.posZ, min: -10, max: 10, step: 0.1 },
-      rotY: { value: defaults.rotY, min: -Math.PI, max: Math.PI, step: 0.05 },
+      scale: { value: avatarDefaults.scale, min: 1, max: 20, step: 0.1 },
+      posX: { value: avatarDefaults.posX, min: -10, max: 10, step: 0.1 },
+      posY: { value: avatarDefaults.posY, min: -20, max: 5, step: 0.1 },
+      posZ: { value: avatarDefaults.posZ, min: -10, max: 10, step: 0.1 },
+      rotY: { value: avatarDefaults.rotY, min: -Math.PI, max: Math.PI, step: 0.05 },
     },
-    { collapsed: true }
+    { collapsed: true },
+    [isMobile]
   );
 
   const camera = useControls(
@@ -50,15 +59,16 @@ const HeroExperience = () => {
   );
 
   const lights = useControls(
-    "Lights",
+    `Lights (${theme})`,
     {
-      ambient: { value: 3.0, min: 0, max: 5, step: 0.05 },
-      key: { value: 1.3, min: 0, max: 5, step: 0.1 },
-      fill: { value: 5.0, min: 0, max: 5, step: 0.1 },
-      envIntensity: { value: 1.1, min: 0, max: 2, step: 0.05 },
-      exposure: { value: 0.7, min: 0.1, max: 2, step: 0.05 },
+      ambient: { value: lightDefaults.ambient, min: 0, max: 5, step: 0.05 },
+      key: { value: lightDefaults.key, min: 0, max: 5, step: 0.1 },
+      fill: { value: lightDefaults.fill, min: 0, max: 5, step: 0.1 },
+      envIntensity: { value: lightDefaults.envIntensity, min: 0, max: 2, step: 0.05 },
+      exposure: { value: lightDefaults.exposure, min: 0.1, max: 2, step: 0.05 },
     },
-    { collapsed: true }
+    { collapsed: true },
+    [theme]
   );
 
   return (
