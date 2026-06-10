@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useEffect, useState } from "react";
+import { NeutralToneMapping } from "three";
 import { Model } from "./models/6YAbeta1";
 
 const HeroExperience = () => {
@@ -13,12 +14,12 @@ const HeroExperience = () => {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Unlit baked-toon model: no scene lights, no environment, no tone mapping.
-  // The baked textures ARE the final look.
+  // Unlit baked-toon model — no scene lights, no environment.
+  // NeutralToneMapping with exposure < 1 dims the baked colors closer to Blender preview.
   return (
     <Canvas
       camera={{ position: [0, 0, 5], fov: 50 }}
-      gl={{ toneMapping: 0 }}
+      gl={{ toneMapping: NeutralToneMapping, toneMappingExposure: 0.7 }}
     >
       <Suspense fallback={null}>
         <Model
