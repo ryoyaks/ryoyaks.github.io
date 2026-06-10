@@ -7,7 +7,7 @@ const Hero = () => {
       className="w-screen h-dvh overflow-hidden relative md:p-0 px-5 text-[var(--fg)]"
     >
       <div className="container mx-auto relative w-full h-full">
-        <div className="md:pt-40 pt-28 max-w-[45%] md:max-w-[45%] relative z-10">
+        <div className="md:pt-40 pt-24 max-w-full md:max-w-[45%] relative z-10">
           <p className="text-xs md:text-sm tracking-[0.25em] opacity-60">HELLO, I&apos;M</p>
           <h1 className="font-black leading-[0.95] mt-2 text-6xl md:text-9xl text-[var(--fg)]">
             RyoyakS

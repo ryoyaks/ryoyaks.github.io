@@ -1,32 +1,31 @@
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Environment } from "@react-three/drei";
 import { Model } from "../components/models/6YAbeta1";
-import { useTheme } from "../hooks/useTheme";
 
 const HeroExperience = () => {
-  const { theme } = useTheme();
-  const isLight = theme === "light";
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
 
   return (
     <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-      <ambientLight
-        intensity={isLight ? 2.5 : 5}
-        color={isLight ? "#fdfdfd" : "#edac97"}
-      />
-      <Environment preset={isLight ? "city" : "sunset"} />
-      <directionalLight
-        position={[2, 0, 5]}
-        intensity={isLight ? 2 : 5}
-        color={isLight ? "#ffffff" : "#dc488d"}
-      />
-      <pointLight
-        position={[2, 0, -5]}
-        intensity={isLight ? 1 : 2}
-        color={isLight ? "#9ca3af" : "#2727e9"}
-      />
+      <ambientLight intensity={1.4} color="#ffffff" />
+      <Environment preset="studio" />
+      <directionalLight position={[2, 2, 5]} intensity={2.2} color="#ffffff" />
+      <directionalLight position={[-3, 2, -2]} intensity={0.9} color="#ffffff" />
       <Suspense fallback={null}>
-        <Model scale={[9, 9, 9]} position={[2, -9.5, 0]} rotation={[0, -0.5, 0]} />
+        <Model
+          scale={isMobile ? [6.5, 6.5, 6.5] : [9, 9, 9]}
+          position={isMobile ? [0, -7, 0] : [2, -9.5, 0]}
+          rotation={[0, isMobile ? 0 : -0.5, 0]}
+        />
       </Suspense>
     </Canvas>
   );
