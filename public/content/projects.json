@@ -13,22 +13,22 @@
   },
   "more": [
     {
-      "id": "tbd-1",
-      "name": "Coming soon",
-      "tagline": "A new tool in early R&D",
-      "placeholder": true
+      "id": "xrblender",
+      "name": "XRBlender",
+      "tagline": "Step inside your 3D scene and edit it from within",
+      "status": "wip"
     },
     {
-      "id": "tbd-2",
-      "name": "Coming soon",
-      "tagline": "Illustration commission system",
-      "placeholder": true
+      "id": "vr-breakroom",
+      "name": "VR Breakroom",
+      "tagline": "Scan any space and turn it into somewhere to let off steam",
+      "status": "wip"
     },
     {
-      "id": "tbd-3",
-      "name": "Coming soon",
-      "tagline": "VTuber rig automation",
-      "placeholder": true
+      "id": "meme-searcher",
+      "name": "Meme Searcher",
+      "tagline": "Find any meme you have in mind",
+      "status": "wip"
     }
   ]
 }

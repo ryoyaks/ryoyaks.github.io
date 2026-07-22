@@ -4,10 +4,9 @@ import NotFound from "./components/NotFound";
 import PageTransition from "./components/PageTransition";
 import { NavBar } from "./sections";
 
-// Hero 帶進整個 three.js／R3F。必須 lazy，否則 /links 也會下載 3D。
-const Hero = lazy(() => import("./sections/Hero"));
+// Home 帶進整個 three.js／R3F。必須 lazy，否則 /links 也會下載 3D。
+const Home = lazy(() => import("./pages/Home"));
 const Links = lazy(() => import("./pages/Links"));
-const Bento = lazy(() => import("./sections/Bento"));
 const SyncRig = lazy(() => import("./sections/SyncRig"));
 const Footer = lazy(() => import("./components/Footer"));
 
@@ -29,8 +28,7 @@ export const AppRoutes = ({ location }) => (
       path="/"
       element={
         <Shell>
-          <Hero />
-          <Bento />
+          <Home />
         </Shell>
       }
     />

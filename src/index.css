@@ -4,44 +4,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Film noise overlay — subtle analog grain, theme-aware. */
-.film-noise::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 30;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  mix-blend-mode: overlay;
-}
-:root[data-theme="light"] .film-noise::after {
-  opacity: 0.05;
-}
-
-/* Radial bloom — soft blue-purple glow (75% blue / 25% pink) */
-.hero-bloom {
-  background: radial-gradient(
-    circle at 75% 25%,
-    color-mix(in srgb, var(--accent-secondary) 75%, var(--accent)),
-    transparent 55%
-  );
-  opacity: 0.22;
-}
-:root[data-theme="light"] .hero-bloom { opacity: 0.12; }
-
-/* Slow background marquee text */
-.hero-marquee {
-  animation: hero-marquee 60s linear infinite;
-}
-@keyframes hero-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-marquee { animation: none; }
-}
-
 /* Make leva debug panel usable on touch devices.
    Without this, page scroll steals the drag/slider gestures. */
 #leva__root,
@@ -145,42 +107,4 @@ html, body {
     background: rgba(23, 21, 31, 0.7);
     backdrop-filter: blur(10px);
   }
-
-  /* bento tool icon shine */
-  .tool-shine {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  .tool-shine:hover {
-    transform: translateY(-4px);
-  }
-  .tool-shine::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 40%,
-      rgba(255, 255, 255, 0.35) 50%,
-      transparent 60%
-    );
-    transform: translateX(-100%);
-    pointer-events: none;
-  }
-  .tool-shine:hover::after {
-    animation: tool-shine-sweep 0.6s ease forwards;
-  }
-}
-
-
-@keyframes tool-shine-sweep {
-  to {
-    transform: translateX(100%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tool-shine:hover { transform: none; }
-  .tool-shine:hover::after { animation: none; }
 }
