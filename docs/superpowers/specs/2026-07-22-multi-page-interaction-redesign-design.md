@@ -81,9 +81,9 @@
    `cp dist/index.html dist/404.html`，讓 GitHub Pages 對任何未知路徑回傳 SPA 入口。
 3. 移除 `public/_redirects`（對 GitHub Pages 無作用，留著會誤導）。
 
-**未決**：`ryoyaks.com` 是否已指向本 repo。若是，`peaceiris/actions-gh-pages` 每次強推
-`dist` 會覆蓋 gh-pages 分支，需在 action 設定 `cname: ryoyaks.com`，否則自訂網域可能失效。
-需向使用者確認後再處理。
+**自訂網域**：`ryoyaks.com` 已購買但尚未指向本 repo，故本次不處理。
+記錄供日後參考：`peaceiris/actions-gh-pages` 每次強推 `dist` 到 gh-pages 分支，
+會覆蓋分支上的 `CNAME` 檔。屆時需在 action 加上 `cname: ryoyaks.com`，否則自訂網域會失效。
 
 ## 7. 導覽：重寫
 
@@ -196,14 +196,18 @@ LookAt 的實作路徑取決於用哪個資產：
 `public/content/projects.json` 現為一個精選（SyncRig）＋三個匿名 `"Coming soon"` 佔位。
 改為一個精選 ＋ 三個**具名**進行中：
 
-| 名稱 | 狀態 |
-|---|---|
-| SyncRig | 已完成，有 demo 影片，連往 `/projects/syncrig` |
-| XRBlender | 進行中 |
-| VR Breakroom | 進行中 |
-| Meme Searcher | 進行中 |
+| 名稱 | Tagline | 狀態 |
+|---|---|---|
+| SyncRig | Mocap that lets you keep creating | 已完成，有 demo 影片，連往 `/projects/syncrig` |
+| XRBlender | 透過潛入你的 3D 創作，編輯你的世界 | 進行中 |
+| VR Breakroom | 快速掃描環境，讓任意環境變成你發洩的地方 | 進行中 |
+| Meme Searcher | 找到你想要的任何迷因圖片 | 進行中 |
 
 資料結構：`more[]` 改用真名，`placeholder: true` 換成 `status: "wip"`。
+
+**語言一致性**：SyncRig 的 tagline 是英文，三個新專案是中文，同一個區塊會混用兩種語言。
+全站現況本來就混用（`main.json` 英文、`links.json` 有中文副標），因此不視為阻擋項；
+但實作時應向使用者確認是要統一，還是刻意保持混用。
 
 視覺上移除現行的「虛線框 ＋ 60% 透明度」。該處理在說「這裡還沒好，抱歉」；
 具名 ＋ 正常對比 ＋ 小型狀態標記，說的是「這是我在做的東西」。
@@ -255,12 +259,14 @@ LookAt 的實作路徑取決於用哪個資產：
 - 既有 `README.md` 的修正（上游 fork 遺留，與本次無關）
 - `CLAUDE.md` 內容更新（可於實作後另行處理）
 
-## 17. 待使用者補充的內容
+## 17. 內容輸入
 
-以下為內容輸入，非設計缺口；設計本身不依賴其具體文字：
+已於 2026-07-22 由使用者提供，均已併入本規格：
 
-- XRBlender、VR Breakroom、Meme Searcher 三者的 tagline。
-- `ryoyaks.com` 是否已指向本 repo（影響第 6 節的 CNAME 處理）。
+- 三個進行中專案的 tagline → 第 12 節。
+- `ryoyaks.com` 尚未指向本 repo，CNAME 不在本次範圍 → 第 6 節。
+
+實作時仍需確認的一項：第 12 節的中英文混用是否刻意。
 
 ## 18. 交付順序
 
