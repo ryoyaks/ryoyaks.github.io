@@ -1,12 +1,3 @@
-export const navItems = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
-];
-
-
-
 export const iconsList = [
   // Tools (用於 TechStack 跑馬燈)
   { name: "blender", image: "/images/icon/blender.webp" },

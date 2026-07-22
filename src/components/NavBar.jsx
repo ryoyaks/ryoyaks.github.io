@@ -1,35 +1,30 @@
-import { useLocation } from "react-router-dom";
-import { navItems } from "../constants";
+import { Link } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
+// 只有兩個真正的目的地，所以不需要選單——一顆常駐的高對比按鈕就是導覽。
 const NavBar = () => {
-  const { pathname } = useLocation();
-  const onRoot = pathname === "/";
-  const prefix = (href) => (onRoot || !href.startsWith("#") ? href : `/${href}`);
-
   return (
     <div className="w-full flex-center fixed z-50 top-0 left-0 md:p-0 px-5">
       <div className="container md:my-6 my-4 flex items-center justify-between">
-        <a href={prefix("#home")} className="flex items-center gap-2 text-[var(--fg)]">
+        <Link to="/" className="flex items-center gap-2 text-[var(--fg)]" aria-label="RyoyakS">
           <img
             src="/images/logo.webp"
-            alt="logo"
+            alt=""
             className="md:size-10 size-9 object-cover object-center"
           />
-        </a>
-        <div className="md:flex items-center gap-7 hidden">
-          {navItems.map((item) => (
-            <a
-              key={item.name}
-              className="text-base md:text-lg text-[var(--fg)] opacity-80 hover:opacity-100 transition-opacity"
-              href={prefix(item.href)}
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-        {/* Desktop-only theme toggle. Mobile gets one inside the side bar. */}
-        <div className="hidden md:flex items-center gap-3">
+        </Link>
+
+        <div className="flex items-center gap-3">
+          <Link
+            to="/links"
+            className="px-4 py-2 rounded-md text-sm md:text-base font-semibold
+                       bg-[var(--fg)] text-[var(--bg)]
+                       hover:opacity-85 transition-opacity
+                       focus-visible:outline-2 focus-visible:outline-offset-2
+                       focus-visible:outline-[var(--fg)]"
+          >
+            Links
+          </Link>
           <ThemeToggle />
         </div>
       </div>
