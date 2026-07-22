@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
-import { expect, test, vi } from "vitest";
+import gsap from "gsap";
+import { afterEach, expect, test, vi } from "vitest";
 import App, { AppRoutes } from "../App";
 import PageTransition from "../components/PageTransition";
 import { stubMatchMedia } from "./setup";
@@ -34,8 +35,28 @@ test("reduced motion 下路由立即切換，不等動畫", async () => {
 
   await user.click(await screen.findByRole("link", { name: "Links" }));
 
+  // timeout 必須短於動畫換頁點（約 0.65s），否則走到動畫分支也會通過。
   expect(
-    await screen.findByRole("heading", { name: /all my online presence/i })
+    await screen.findByRole("heading", { name: /all my online presence/i }, { timeout: 500 })
+  ).toBeInTheDocument();
+});
+
+// 分頁切到背景時瀏覽器會暫停 rAF，GSAP 的 ticker 就此停擺。
+// 換頁若掛在 timeline callback 上，使用者會停在網址已變、內容沒換的狀態。
+afterEach(() => gsap.ticker.wake());
+
+test("rAF 停擺時（分頁在背景），路由仍然會切換", async () => {
+  gsap.ticker.sleep();
+  vi.stubGlobal("requestAnimationFrame", () => 0);
+  vi.stubGlobal("cancelAnimationFrame", () => {});
+
+  const user = userEvent.setup();
+  renderWithTransition("/");
+
+  await user.click(await screen.findByRole("link", { name: "Links" }));
+
+  expect(
+    await screen.findByRole("heading", { name: /all my online presence/i }, { timeout: 3000 })
   ).toBeInTheDocument();
 });
 
