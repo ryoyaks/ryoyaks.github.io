@@ -20,7 +20,12 @@
 - `/links` 頁面**不得載入任何 3D 資產或 three.js**。
 - 所有新動效必須在 `prefers-reduced-motion: reduce` 時降級。
 - 安裝相依套件時必須加 `--legacy-peer-deps`（`@react-three/*` 為 rc 版，CI 的 `npm ci` 亦使用此旗標）。
-- 每個任務結束時 `npm run lint`、`npm run test`、`npm run build` 皆須通過。
+- 每個任務結束時 `npm run test` 與 `npm run build` 皆須通過。
+- `npm run lint` **在本分支開始前就已有 129 個既有錯誤**（多數是 `src/components/models/6YAbeta1.jsx`
+  這個 gltfjsx 自動產生檔上的 `react/no-unknown-property` 誤判，另有 `useTheme.js` 的 `no-empty`
+  與 `Bento.jsx` 未使用的 `VideoCard` import）。因此標準是**不得新增 lint 錯誤**，
+  而非讓整個 lint 變綠。驗證方式：`npx eslint <本任務改動或新增的檔案>` 必須零錯誤。
+  既有錯誤不在本計畫範圍內，不要順手修（見 CLAUDE.md 第 3 節）。
 - 本計畫**不處理**：首頁區塊重構、治療層動效、avatar 平面化與 LookAt、`/lab/:slug`。那些屬規格第 18 節階段 4–6，另開計畫。
 
 ---
