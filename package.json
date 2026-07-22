@@ -6,12 +6,12 @@
   "homepage": "https://ryoyaks.github.io/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/postbuild.mjs",
+    "build": "vite build && node scripts/postbuild.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "verify:build": "node scripts/check-build.mjs",
+    "verify:build": "node scripts/check-build.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
