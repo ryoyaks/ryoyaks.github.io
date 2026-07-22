@@ -133,8 +133,8 @@
 只掛一個 `02 Works` 標題——標題與內容不符，且整頁只有兩個節點，沒有節奏。
 拆成三個編號區塊給頁面一根脊椎（madness.ai 的手法）。
 
-**做法：重寫，不是改造。** `Bento.jsx`、`SyncRig.jsx`、`HeroExperience.jsx`、
-`LinkIcon.jsx`、`VideoCard.jsx` 共約 950 行全是 fork 來的模板結構，在上述視覺方向下
+**做法：重寫，不是改造。** `Bento.jsx`、`HeroExperience.jsx`、`LinkIcon.jsx`、
+`VideoCard.jsx` 共約 640 行全是 fork 來的模板結構，在上述視覺方向下
 沒有一個留得住；逐步改造只會讓模板的版面假設一直滲出來。改為新建
 `src/pages/Home.jsx` 從空白寫起，寫完後刪除舊 section。
 
@@ -289,8 +289,8 @@ LookAt 的實作路徑取決於用哪個資產：
 3. **頁面轉場**（第 8 節）。優先級最高的體驗項目。
    驗證：任何站內導覽都經過轉場；reduced-motion 下退為淡入淡出。
 4. **首頁重寫**（第 9 節）。新建 `src/pages/Home.jsx`，三個編號區塊，Works 換真名
-   （第 12 節），完成後刪除 `Bento.jsx`／`SyncRig.jsx`／`HeroExperience.jsx`／
-   `LinkIcon.jsx`／`VideoCard.jsx`。
+   （第 12 節），完成後刪除 `Bento.jsx`／`HeroExperience.jsx`／`LinkIcon.jsx`／
+   `VideoCard.jsx`。`SyncRig.jsx` 是 `/projects/syncrig` 的頁面，不在本階段。
 5. **治療層**（第 10 節）。Lenis ＋ ScrollTrigger、巨型文字動態、游標回饋。
 6. **Avatar 平面化與 LookAt**（第 11 節）。改動面最大、風險最高，放最後。
 
