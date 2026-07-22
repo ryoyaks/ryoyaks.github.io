@@ -72,7 +72,7 @@ const Hero = () => {
         {/* Bottom-left Explore — pushed higher on mobile so it clears bigTitle */}
         {hero?.exploreLabel && (
           <a
-            href="#links"
+            href="#works"
             className="absolute bottom-32 md:bottom-10 left-5 md:left-0 z-20 flex flex-col items-start gap-2"
           >
             <span className="text-base md:text-xl tracking-[0.15em] opacity-80">{hero.exploreLabel}</span>
