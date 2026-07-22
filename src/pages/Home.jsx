@@ -27,6 +27,15 @@ const TOOL_LABELS = {
 const GIANT = "font-black uppercase leading-[0.84] tracking-[-0.035em]";
 const RULE = "text-[11px] tracking-[0.25em] uppercase opacity-60";
 
+// Hero 的字級與版面其他地方不同：細體、撐到貼邊、行距壓到幾乎相碰。
+// 重量放輕是關鍵——粗黑體在這個尺寸會變成一塊色塊而不是字。
+const HERO_TYPE =
+  "block font-light uppercase leading-[0.92] tracking-[-0.02em] text-center " +
+  "text-[19vw] md:text-[clamp(6rem,16.5vw,14rem)]";
+const HERO_LINK =
+  "text-[var(--fg)] opacity-45 hover:opacity-100 transition-opacity duration-300 " +
+  "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--fg)]";
+
 const Home = () => {
   const heroRef = useRef(null);
   const main = useContent("main");
@@ -60,73 +69,91 @@ const Home = () => {
 
   return (
     <main className="text-[var(--fg)]">
-      {/* ——  Hero：身分。靜止截圖就是一張海報。 */}
+      {/* ——  Hero：巨型字堆疊撐滿視窗、小字釘在四邊。字本身就是版面。 */}
       <section
         id="hero"
         ref={heroRef}
-        className="min-h-dvh flex flex-col px-5 md:px-0 pt-24 md:pt-32 pb-6 md:pb-8"
+        className="relative min-h-dvh flex flex-col justify-center overflow-hidden
+                   px-5 md:px-8 pt-28 pb-14 md:pt-32 md:pb-16"
       >
-        <div className="container mx-auto flex-1 flex flex-col">
-          <div
+        {/* Avatar 疊在字堆後面，但仍有硬邊界——是被排版的元素，不是背景。 */}
+        <div
+          data-reveal
+          className="absolute z-0 right-[5vw] bottom-14 w-[38vw] max-w-[150px]
+                     md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[330px]"
+        >
+          <figure className="relative aspect-[3/4] overflow-hidden border border-[var(--border)]">
+            <figcaption className={`absolute left-3 bottom-3 z-10 ${RULE}`}>Avatar</figcaption>
+            <div className="absolute inset-0">
+              <CanvasErrorBoundary>
+                <HeroExperience />
+              </CanvasErrorBoundary>
+            </div>
+          </figure>
+        </div>
+
+        {/* 置中定位句 */}
+        {about?.headline && (
+          <p
             data-reveal
-            className={`flex items-baseline justify-between gap-4 border-b border-[var(--border)] pb-3 ${RULE}`}
+            className="relative z-20 mx-auto max-w-[22ch] md:max-w-[34ch] text-center
+                       uppercase leading-tight opacity-70
+                       text-[13px] md:text-[17px] tracking-[0.01em]"
           >
-            <span>{hero?.eyebrow}</span>
-            <span className="text-right">{hero?.roles}</span>
-          </div>
+            {about.headline}
+          </p>
+        )}
 
-          <div className="relative flex-1 flex flex-col justify-between gap-10 md:gap-0 pt-8 md:pt-12">
-            {/* Avatar：被排進版面的元素，不是背景。有明確的框與尺寸，
-                並與巨型文字有刻意的疊壓關係（文字在前）。 */}
-            <div
-              data-reveal
-              className="order-2 self-end w-[62%] max-w-[240px]
-                         md:order-none md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2
-                         md:w-[32vw] md:max-w-[400px]"
-            >
-              <figure className="relative aspect-[3/4] overflow-hidden border border-[var(--fg)] bg-[var(--bg-elev)]">
-                <figcaption className={`absolute left-3 top-3 z-10 ${RULE}`}>Avatar</figcaption>
-                <div className="absolute inset-0">
-                  <CanvasErrorBoundary>
-                    <HeroExperience />
-                  </CanvasErrorBoundary>
-                </div>
-              </figure>
-            </div>
+        {/* 三行巨型字。第一行是身分，後兩行是目的地。 */}
+        <div className="relative z-20 mt-6 md:mt-10 flex flex-col items-center">
+          <h1 data-reveal className={`${HERO_TYPE} text-[var(--fg)] opacity-80`}>
+            {hero?.name}
+          </h1>
 
-            <div className="order-1 relative z-10 md:pointer-events-none">
-              <h1 data-reveal className={`${GIANT} text-[clamp(4rem,13vw,11rem)]`}>
-                {hero?.name}
-              </h1>
-              {hero?.altNames && (
-                <p data-reveal className="mt-4 text-xl md:text-3xl font-medium opacity-80">
-                  {hero.altNames}
-                </p>
-              )}
-            </div>
+          <button
+            data-reveal
+            type="button"
+            onClick={() => scrollTo("works")}
+            className={`${HERO_TYPE} ${HERO_LINK}`}
+          >
+            Works
+          </button>
 
-            {hero?.bigTitle && (
-              <h2
-                data-reveal
-                className={`order-3 relative z-10 md:pointer-events-none ${GIANT} text-[clamp(2rem,8vw,8rem)]`}
-              >
-                {hero.bigTitle}
-              </h2>
-            )}
-          </div>
+          <Link data-reveal to="/links" className={`${HERO_TYPE} ${HERO_LINK}`}>
+            Links
+          </Link>
+        </div>
 
-          <div className="flex items-end justify-between gap-4 border-t border-[var(--border)] pt-3 mt-8">
-            <button
-              type="button"
-              onClick={() => scrollTo("about")}
-              className={`${RULE} flex items-center gap-2 hover:opacity-100 transition-opacity
-                          focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--fg)]`}
-            >
-              {hero?.exploreLabel || "Explore"}
-              <span aria-hidden="true">↓</span>
-            </button>
-            <span className={RULE}>{hero?.flourish}</span>
-          </div>
+        {/* 釘在四邊的小字。與字堆重疊是刻意的。 */}
+        <div
+          data-reveal
+          className="absolute z-20 left-5 md:left-8 top-24 max-w-[60vw]
+                     md:top-1/2 md:-translate-y-1/2 md:max-w-none"
+        >
+          <div className="text-sm md:text-base font-medium">[{hero?.altNames}]</div>
+          <div className={`${RULE} mt-1`}>{hero?.roles}</div>
+        </div>
+
+        <div className="absolute z-20 inset-x-5 md:inset-x-8 bottom-6 flex items-end justify-between gap-4">
+          <button
+            type="button"
+            onClick={() => scrollTo("about")}
+            className={`${RULE} flex items-center gap-2 hover:opacity-100 transition-opacity
+                        focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--fg)]`}
+          >
+            {hero?.exploreLabel || "Explore"}
+            <span aria-hidden="true">↓</span>
+          </button>
+          {status && (
+            <span className={`${RULE} flex items-center gap-2`}>
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${
+                  status.active ? "bg-emerald-500" : "bg-[var(--fg-muted)]"
+                }`}
+              />
+              {status.label}
+            </span>
+          )}
         </div>
       </section>
 

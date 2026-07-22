@@ -4,7 +4,10 @@ import ThemeToggle from "./ThemeToggle";
 // 只有兩個真正的目的地，所以不需要選單——一顆常駐的高對比按鈕就是導覽。
 const NavBar = () => {
   return (
-    <div className="w-full flex-center fixed z-50 top-0 left-0 md:p-0 px-5">
+    <nav
+      aria-label="Main"
+      className="w-full flex-center fixed z-50 top-0 left-0 md:p-0 px-5"
+    >
       <div className="container md:my-6 my-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-[var(--fg)]" aria-label="RyoyakS">
           <img
@@ -28,7 +31,7 @@ const NavBar = () => {
           <ThemeToggle />
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import gsap from "gsap";
@@ -33,7 +33,11 @@ test("reduced motion 下路由立即切換，不等動畫", async () => {
   const user = userEvent.setup();
   renderWithTransition("/");
 
-  await user.click(await screen.findByRole("link", { name: "Links" }));
+  await user.click(
+    await within(screen.getByRole("navigation", { name: "Main" })).findByRole("link", {
+      name: "Links",
+    })
+  );
 
   // timeout 必須短於動畫換頁點（約 0.65s），否則走到動畫分支也會通過。
   expect(
@@ -53,7 +57,11 @@ test("rAF 停擺時（分頁在背景），路由仍然會切換", async () => {
   const user = userEvent.setup();
   renderWithTransition("/");
 
-  await user.click(await screen.findByRole("link", { name: "Links" }));
+  await user.click(
+    await within(screen.getByRole("navigation", { name: "Main" })).findByRole("link", {
+      name: "Links",
+    })
+  );
 
   expect(
     await screen.findByRole("heading", { name: /all my online presence/i }, { timeout: 3000 })
