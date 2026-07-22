@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import PageTransition from "./components/PageTransition";
 import { NavBar } from "./sections";
 
 // Hero 帶進整個 three.js／R3F。必須 lazy，否則 /links 也會下載 3D。
@@ -56,7 +57,9 @@ export const AppRoutes = ({ location }) => (
 const App = () => (
   <Router>
     <div className="min-h-screen">
-      <AppRoutes />
+      <PageTransition>
+        {(location) => <AppRoutes location={location} />}
+      </PageTransition>
     </div>
   </Router>
 );
