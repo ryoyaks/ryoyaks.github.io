@@ -199,15 +199,16 @@ LookAt 的實作路徑取決於用哪個資產：
 | 名稱 | Tagline | 狀態 |
 |---|---|---|
 | SyncRig | Mocap that lets you keep creating | 已完成，有 demo 影片，連往 `/projects/syncrig` |
-| XRBlender | 透過潛入你的 3D 創作，編輯你的世界 | 進行中 |
-| VR Breakroom | 快速掃描環境，讓任意環境變成你發洩的地方 | 進行中 |
-| Meme Searcher | 找到你想要的任何迷因圖片 | 進行中 |
+| XRBlender | Step inside your 3D scene and edit it from within | 進行中 |
+| VR Breakroom | Scan any space and turn it into somewhere to let off steam | 進行中 |
+| Meme Searcher | Find any meme you have in mind | 進行中 |
 
 資料結構：`more[]` 改用真名，`placeholder: true` 換成 `status: "wip"`。
 
-**語言一致性**：SyncRig 的 tagline 是英文，三個新專案是中文，同一個區塊會混用兩種語言。
-全站現況本來就混用（`main.json` 英文、`links.json` 有中文副標），因此不視為阻擋項；
-但實作時應向使用者確認是要統一，還是刻意保持混用。
+**語言**：使用者已決定 Works 區塊統一使用英文。上表三句英文為譯自使用者提供的中文原句
+（XRBlender「透過潛入你的 3D 創作，編輯你的世界」／VR Breakroom「快速掃描環境，
+讓任意環境變成你發洩的地方」／Meme Searcher「找到你想要的任何迷因圖片」），
+語氣對齊 SyncRig 既有的那句。屬文案提案，使用者可自行覆寫，不影響版面設計。
 
 視覺上移除現行的「虛線框 ＋ 60% 透明度」。該處理在說「這裡還沒好，抱歉」；
 具名 ＋ 正常對比 ＋ 小型狀態標記，說的是「這是我在做的東西」。
