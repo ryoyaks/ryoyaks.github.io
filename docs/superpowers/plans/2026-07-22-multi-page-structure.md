@@ -36,8 +36,8 @@
 |---|---|
 | `vite.config.js` | 建置設定 ＋ Vitest 設定（單一來源） |
 | `src/test/setup.js` | 測試環境墊片：`matchMedia`、`fetch`、DOM 清理 |
-| `scripts/postbuild.mjs` | 建置後把 `dist/index.html` 複製成 `dist/404.html` |
-| `scripts/check-build.mjs` | 斷言建置產物：404 fallback 存在、資源路徑為絕對 |
+| `scripts/postbuild.js` | 建置後把 `dist/index.html` 複製成 `dist/404.html` |
+| `scripts/check-build.js` | 斷言建置產物：404 fallback 存在、資源路徑為絕對 |
 | `src/App.jsx` | 路由表（匯出可測試的 `AppRoutes`）＋ Router ＋ 轉場層 |
 | `src/pages/Links.jsx` | `/links` 頁面。只有連結，零 3D |
 | `src/components/NavBar.jsx` | 路由導覽：logo → `/`、Links 按鈕 → `/links`、ThemeToggle |
@@ -214,8 +214,8 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 **Files:**
 - Modify: `vite.config.js:9`（`base` 由 `"./"` 改 `"/"`）
 - Modify: `package.json`（`build` script、新增 `verify:build`）
-- Create: `scripts/postbuild.mjs`
-- Create: `scripts/check-build.mjs`
+- Create: `scripts/postbuild.js`
+- Create: `scripts/check-build.js`
 - Modify: `.github/workflows/deploy.yml`（build 後新增驗證步驟）
 - Delete: `public/_redirects`
 
@@ -225,7 +225,7 @@ Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 
 - [ ] **Step 1: 建立建置後複製 404 的腳本**
 
-建立 `scripts/postbuild.mjs`：
+建立 `scripts/postbuild.js`：
 
 ```js
 import { copyFileSync, existsSync } from "node:fs";
@@ -247,7 +247,7 @@ console.log("postbuild: wrote dist/404.html (SPA fallback for GitHub Pages)");
 
 - [ ] **Step 2: 建立建置產物驗證腳本**
 
-建立 `scripts/check-build.mjs`：
+建立 `scripts/check-build.js`：
 
 ```js
 import { existsSync, readFileSync } from "node:fs";
@@ -290,8 +290,8 @@ console.log("check-build: OK");
 `package.json` 的 `scripts` 改成（只列出變動與新增的兩行）：
 
 ```json
-    "build": "vite build && node scripts/postbuild.mjs",
-    "verify:build": "node scripts/check-build.mjs",
+    "build": "vite build && node scripts/postbuild.js",
+    "verify:build": "node scripts/check-build.js",
 ```
 
 - [ ] **Step 4: 執行驗證，確認它會失敗**
