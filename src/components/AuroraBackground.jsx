@@ -75,6 +75,12 @@ const FRAG = /* glsl */ `
     color += rim * rim * rim * u_rim * u_rimColor;
     color += (hash(gl_FragCoord.xy) - 0.5) * GRAIN_AMOUNT;
 
+    // Match the locked design's moodier tone: pull exposure down and darken
+    // the edges so the character reads as a figure lit by the aurora, not a wash.
+    color *= 0.6;
+    float vig = smoothstep(1.15, 0.35, length(uv - 0.5));
+    color *= 0.5 + 0.5 * vig;
+
     gl_FragColor = vec4(color, 1.0);
   }
 `;

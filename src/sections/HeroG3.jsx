@@ -71,12 +71,12 @@ export default function HeroG3() {
           <AuroraBackground reduced={reduced} />
         </div>
 
-        {/* character — huge, only a slice reads */}
+        {/* character — huge, only a slice reads; sits IN the scene (not a screen wash) */}
         <img
           src="/hero/yak-object.png"
           alt=""
           aria-hidden="true"
-          style={{ ...abs(59, -511, { width: 1732, height: "auto", zIndex: 1, opacity: 0.92, mixBlendMode: "screen" }) }}
+          style={{ ...abs(59, -511, { width: 1732, height: "auto", zIndex: 1, opacity: 0.88, mixBlendMode: "luminosity", filter: "brightness(0.92) contrast(1.05)" }) }}
         />
 
         {/* top scrim */}
