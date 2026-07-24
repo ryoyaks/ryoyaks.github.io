@@ -91,7 +91,7 @@ const VERT = /* glsl */ `
 
 const hex = (h) => new THREE.Color(h);
 
-function AuroraPlane({ reduced }) {
+function AuroraPlane() {
   const mat = useRef();
   const uniforms = useMemo(
     () => ({
@@ -111,8 +111,11 @@ function AuroraPlane({ reduced }) {
     [],
   );
 
+  // The aurora is a slow ambient colour flow (not vestibular motion), so it
+  // keeps drifting regardless of prefers-reduced-motion — only the intro
+  // pull-apart honours that setting. The visibility gate below still pauses it.
   useFrame((state, delta) => {
-    if (mat.current && !reduced) mat.current.uniforms.u_time.value += delta;
+    if (mat.current) mat.current.uniforms.u_time.value += delta;
   });
 
   return (
@@ -128,16 +131,16 @@ function AuroraPlane({ reduced }) {
 // frameloop="never" so the GPU goes idle (no wasted full-screen redraws).
 // dpr is pinned to 1 — a full-screen fragment shader is fill-rate bound, so
 // rendering at native retina density would multiply the cost for no visible gain.
-export default function AuroraBackground({ reduced = false, active = true }) {
+export default function AuroraBackground({ active = true }) {
   return (
     <Canvas
       gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
       dpr={1}
-      frameloop={reduced ? "demand" : active ? "always" : "never"}
+      frameloop={active ? "always" : "never"}
       camera={{ position: [0, 0, 1] }}
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     >
-      <AuroraPlane reduced={reduced} />
+      <AuroraPlane />
     </Canvas>
   );
 }

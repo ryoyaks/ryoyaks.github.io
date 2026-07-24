@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full bg-[var(--bg-elev)] border-t border-[var(--border)] py-10 text-[var(--fg)]">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-5 md:px-0">
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-6 md:px-12">
         <div className="flex items-center gap-2">
           <img
             src={site?.logo || "/images/logo.webp"}

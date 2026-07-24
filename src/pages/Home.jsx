@@ -36,9 +36,16 @@ const Home = () => {
   const more = projects?.more || [];
 
   return (
-    <main className="text-[var(--fg)]">
-      {/* ——  Hero：拍板設計「G3 shader (violet)」——紫色 aurora + door portal。 */}
-      <HeroG3 />
+    <>
+      {/* 門框／接縫從 hero 一路延伸到頁尾——固定在視窗兩側，隨捲動貫穿整頁。 */}
+      <div aria-hidden="true" className="g3-rail g3-rail-door-l" />
+      <div aria-hidden="true" className="g3-rail g3-rail-seam-l" />
+      <div aria-hidden="true" className="g3-rail g3-rail-door-r" />
+      <div aria-hidden="true" className="g3-rail g3-rail-seam-r" />
+
+      <main className="text-[var(--fg)]">
+        {/* ——  Hero：拍板設計「G3 shader (violet)」——紫色 aurora + door portal。 */}
+        <HeroG3 />
 
       {/* hero 的極光餘光滲進內容區，柔化 hero→section 的硬切。 */}
       <div aria-hidden="true" className="relative h-0 overflow-visible">
@@ -50,7 +57,7 @@ const Home = () => {
       </div>
 
       {/* ——  01 About：是誰、在做什麼、接不接案 */}
-      <section id="about" className="px-5 md:px-0 py-20 md:py-32">
+      <section id="about" className="px-6 md:px-12 py-20 md:py-32">
         <div className="container mx-auto">
           <SectionHeader number="01" eyebrow="About" headline={about?.headline} />
 
@@ -92,7 +99,7 @@ const Home = () => {
       </section>
 
       {/* ——  02 Tools：八格網格，像規格表而不是圖示牆 */}
-      <section id="tools" className="px-5 md:px-0 pb-20 md:pb-32">
+      <section id="tools" className="px-6 md:px-12 pb-20 md:pb-32">
         <div className="container mx-auto">
           <SectionHeader number="02" eyebrow="Tools" headline={tools?.eyebrow || "Tools I use"} />
 
@@ -123,7 +130,7 @@ const Home = () => {
       </section>
 
       {/* ——  03 Works：一個精選 ＋ 三個具名進行中 */}
-      <section id="works" className="px-5 md:px-0 pb-20 md:pb-32">
+      <section id="works" className="px-6 md:px-12 pb-20 md:pb-32">
         <div className="container mx-auto">
           <SectionHeader
             number="03"
@@ -215,7 +222,7 @@ const Home = () => {
       </section>
 
       {/* ——  Contact：大型 CTA，交棒給 footer */}
-      <section id="contact" className="px-5 md:px-0 pb-20 md:pb-28">
+      <section id="contact" className="px-6 md:px-12 pb-20 md:pb-28">
         <div className="container mx-auto border-t border-[var(--border)] pt-8">
           <div className={RULE}>{contact?.eyebrow || "Contact"}</div>
 
@@ -242,7 +249,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 };
 

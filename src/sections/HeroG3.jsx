@@ -80,7 +80,7 @@ export default function HeroG3() {
     <section className="g3h" aria-label="Hero" ref={rootRef}>
       {/* full-bleed background */}
       <div className="g3h-aurora">
-        <AuroraBackground reduced={reduced} active={onScreen} />
+        <AuroraBackground active={onScreen} />
         <div className="g3h-veil" />
       </div>
       <div className="g3h-door-l" /><div className="g3h-seam-l" />

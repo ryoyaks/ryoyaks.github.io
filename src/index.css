@@ -125,8 +125,20 @@ html {
    viewport corners/edges and scale fluidly (clamp), instead of a
    fixed 1440×900 stage, so the composition fills any screen.
    ———————————————————————————————————————————————————————————— */
+/* Page-wide portal rails — the hero's door/seam frame continued down the whole
+   site. Fixed to the viewport edges so the frame runs top-to-bottom while you
+   scroll. The hero sits above them (z-index below) and draws its own doors, so
+   the rails only show through for the sections below — one continuous frame. */
+:root { --rail-w: clamp(14px, 1.7vw, 24px); }
+.g3-rail { position: fixed; top: 0; bottom: 0; z-index: 40; pointer-events: none; }
+.g3-rail-door-l { left: 0; width: var(--rail-w); background: #141418; }
+.g3-rail-door-r { right: 0; width: var(--rail-w); background: #141418; }
+.g3-rail-seam-l { left: var(--rail-w); width: 2px; background: #7b61ff; box-shadow: 0 0 16px 1px #7b61ffcc; }
+.g3-rail-seam-r { right: var(--rail-w); width: 2px; background: #7b61ff; box-shadow: 0 0 16px 1px #7b61ffcc; }
+
 .g3h {
   position: relative;
+  z-index: 41; /* above the page rails so the hero shows its own door frame + badge */
   width: 100%;
   height: 100svh;
   min-height: 560px;
@@ -198,7 +210,7 @@ html {
    so its top ("00") overlaps the SUBJECT·006 caption. Sits behind the caption
    (z-index 5 < the caption's 6) so the caption text stays readable on top. */
 .g3h-num { right: clamp(18px, 2.4vw, 40px); top: 23%; transform: translateY(-50%) rotate(90deg); z-index: 5;
-  font-family: aeonik; font-weight: 700; font-size: clamp(52px, 6.6vw, 88px); letter-spacing: -0.03em; color: #fff; }
+  font-family: aeonik; font-weight: 700; font-size: clamp(52px, 6.6vw, 88px); letter-spacing: -0.03em; color: #3a3a40; }
 .g3h-mark { right: clamp(2px, 0.5vw, 12px); top: 50%; width: clamp(56px, 5.6vw, 83px); height: auto; }
 
 .g3h-spec { right: var(--px); bottom: calc(var(--py) + clamp(28px, 5vh, 50px)); width: clamp(150px, 15vw, 172px);
