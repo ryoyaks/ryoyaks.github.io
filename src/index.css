@@ -137,7 +137,10 @@ html {
 
 .g3h {
   position: relative;
-  z-index: 41; /* above the page rails so the hero shows its own door frame + badge */
+  /* No z-index here: keeping .g3h out of its own stacking context lets the
+     fixed badge/mark/wordmark resolve their z-index against the root (so the
+     shrunk wordmark can sit above the header, etc.). The page rails cover the
+     hero edges the same way the hero's own doors did. */
   width: 100%;
   height: 100svh;
   min-height: 560px;
@@ -203,13 +206,16 @@ html {
 .g3h-badge b { font-size: clamp(15px, 1.4vw, 20px); font-weight: 500; color: #0a0a0a; }
 .g3h-badge s { text-decoration: none; font-size: clamp(10px, 0.9vw, 12px); color: #0a0a0a; writing-mode: vertical-rl; transform: rotate(180deg); }
 
-.g3h-id { left: calc(var(--px) + clamp(50px, 4.5vw, 66px)); top: 50%; transform: translateY(-50%); width: clamp(240px, 24vw, 333px); }
+/* identity + CREATIVE STUDIO share one left edge (--col), sitting close to the
+   left seam — just clear of the fixed side badge. */
+.g3h { --col: clamp(60px, 5vw, 78px); }
+.g3h-id { left: var(--col); top: 50%; transform: translateY(-50%); width: clamp(240px, 24vw, 333px); }
 .g3h-id .nm { font-size: clamp(16px, 1.6vw, 22px); font-weight: 500; line-height: 1.2; }
 .g3h-id .rl { font-size: clamp(13px, 1.15vw, 16px); font-weight: 500; margin-top: clamp(10px, 1.6vh, 18px); }
 .g3h-id .ml { display: flex; justify-content: space-between; font-size: clamp(13px, 1.15vw, 16px); font-weight: 500; margin-top: 6px; }
 .g3h-id .ml i { font-style: italic; color: #bfbfbf; }
 
-.g3h-creative { left: var(--px); bottom: clamp(120px, 20vh, 215px); }
+.g3h-creative { left: var(--col); bottom: clamp(120px, 20vh, 215px); }
 .g3h-creative h2 { font-family: aeonik; font-weight: 700; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.06; letter-spacing: -0.02em; color: #f2f2f2; margin: 0; }
 .g3h-creative p { margin: clamp(12px, 2vh, 20px) 0 0; width: clamp(240px, 25vw, 322px); font-size: clamp(12px, 1vw, 13px); line-height: 1.5; color: #8a8a8a; }
 
@@ -248,7 +254,7 @@ html {
 
   /* lower copy: identity above CREATIVE STUDIO, both clear of the footer */
   .g3h-id { left: var(--px); top: auto; bottom: clamp(230px, 32vh, 300px); transform: none; }
-  .g3h-creative { bottom: clamp(96px, 15vh, 140px); }
+  .g3h-creative { left: var(--px); bottom: clamp(96px, 15vh, 140px); }
 
   /* footer row: colophon left, index right (was centred → overlapped colophon) */
   .g3h-index { left: auto; right: var(--px); transform: none; }
