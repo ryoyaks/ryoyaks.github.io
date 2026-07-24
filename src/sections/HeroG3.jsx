@@ -48,11 +48,23 @@ export default function HeroG3() {
         width: "100%",
         height: "100svh",
         overflow: "hidden",
-        background: "#0a0a0a",
+        background: "linear-gradient(315deg, #1a1a1a 0%, #0a0a0a 100%)",
         display: "grid",
         placeItems: "center",
       }}
     >
+      {/* aurora — full viewport so it fills edge-to-edge (no letterbox gaps) */}
+      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+        <AuroraBackground reduced={reduced} />
+      </div>
+
+      {/* portal doors + glowing violet seams, pinned to the true viewport edges */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: 24, height: "100%", zIndex: 1, background: "#141418" }} />
+      <div style={{ position: "absolute", left: 24, top: 0, width: 2, height: "100%", zIndex: 1, background: VIOLET, boxShadow: `0 0 16px 1px ${VIOLET}cc` }} />
+      <div style={{ position: "absolute", right: 0, top: 0, width: 24, height: "100%", zIndex: 1, background: "#141418" }} />
+      <div style={{ position: "absolute", right: 24, top: 0, width: 2, height: "100%", zIndex: 1, background: VIOLET, boxShadow: `0 0 16px 1px ${VIOLET}cc` }} />
+
+      {/* content stage — fixed 1440×900, scaled to fit and centred in the safe area */}
       <div
         style={{
           width: W,
@@ -61,32 +73,22 @@ export default function HeroG3() {
           overflow: "hidden",
           transform: `scale(${scale})`,
           transformOrigin: "center center",
-          background: "linear-gradient(315deg, #1a1a1a 0%, #0a0a0a 100%)",
+          background: "transparent",
           fontFamily: "Satoshi, aeonik, sans-serif",
           color: FG,
+          zIndex: 2,
         }}
       >
-        {/* aurora shader background */}
-        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <AuroraBackground reduced={reduced} />
-        </div>
-
         {/* character — huge, only a slice reads; sits IN the scene (not a screen wash) */}
         <img
           src="/hero/yak-object.png"
           alt=""
           aria-hidden="true"
-          style={{ ...abs(59, -511, { width: 1732, height: "auto", zIndex: 1, opacity: 0.88, mixBlendMode: "luminosity", filter: "brightness(0.92) contrast(1.05)" }) }}
+          style={{ ...abs(59, -511, { width: 1732, height: "auto", zIndex: 1, opacity: 0.8, filter: "brightness(0.7) contrast(1.05) sepia(1) hue-rotate(212deg) saturate(2.2)" }) }}
         />
 
         {/* top scrim */}
         <div style={{ ...abs(0, 0, { width: W, height: 120, zIndex: 2, background: "linear-gradient(180deg, #080607 0%, rgba(6,4,5,0) 100%)" }) }} />
-
-        {/* portal doors + glowing violet seams */}
-        <div style={{ ...abs(0, 0, { width: 24, height: H, zIndex: 6, background: "#141418" }) }} />
-        <div style={{ ...abs(24, 0, { width: 2, height: H, zIndex: 6, background: VIOLET, boxShadow: `0 0 16px 1px ${VIOLET}cc` }) }} />
-        <div style={{ ...abs(1416, 0, { width: 24, height: H, zIndex: 6, background: "#141418" }) }} />
-        <div style={{ ...abs(1414, 0, { width: 2, height: H, zIndex: 6, background: VIOLET, boxShadow: `0 0 16px 1px ${VIOLET}cc` }) }} />
 
         {/* giant faint marquee — infinite left scroll */}
         <div style={{ ...abs(0, 574, { width: W, height: 300, zIndex: 3, overflow: "hidden" }) }}>
