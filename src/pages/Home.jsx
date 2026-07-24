@@ -40,6 +40,15 @@ const Home = () => {
       {/* ——  Hero：拍板設計「G3 shader (violet)」——紫色 aurora + door portal。 */}
       <HeroG3 />
 
+      {/* hero 的極光餘光滲進內容區，柔化 hero→section 的硬切。 */}
+      <div aria-hidden="true" className="relative h-0 overflow-visible">
+        <div
+          className="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-40
+                     w-[92vw] max-w-[1300px] h-[380px] rounded-full opacity-60 blur-[120px]"
+          style={{ background: "radial-gradient(ellipse, rgba(123,97,255,0.55), transparent 68%)" }}
+        />
+      </div>
+
       {/* ——  01 About：是誰、在做什麼、接不接案 */}
       <section id="about" className="px-5 md:px-0 py-20 md:py-32">
         <div className="container mx-auto">

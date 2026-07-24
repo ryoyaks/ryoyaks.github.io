@@ -84,12 +84,14 @@ html {
 }
 
 :root {
-  --bg: #0d0d12;
-  --bg-elev: #15131d;
+  /* Aligned to the G3 hero's dark-violet world so the page reads as one
+     surface from the aurora hero down through the sections. */
+  --bg: #0a0a0a;
+  --bg-elev: #141418;
   --fg: #fdfdfd;
   --fg-muted: rgba(253, 253, 253, 0.65);
-  --border: rgba(253, 253, 253, 0.10);
-  --accent: #ff28d5;
+  --border: rgba(150, 132, 255, 0.13);
+  --accent: #7b61ff;
   --accent-secondary: #1c34ff;
   /* G3 hero violet accent (seams, carousel arrows, LIVE dot). */
   --g3-violet: #7b61ff;
@@ -115,7 +117,8 @@ html {
   --fg: #1a1a1a;
   --fg-muted: rgba(26, 26, 26, 0.65);
   --border: rgba(26, 26, 26, 0.12);
-  --accent: #ff28d5;
+  /* Deeper violet so the accent keeps contrast on the cream ground. */
+  --accent: #5b3fd9;
   --accent-secondary: #1c34ff;
 }
 
