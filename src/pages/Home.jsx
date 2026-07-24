@@ -1,8 +1,5 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import gsap from "gsap";
-import CanvasErrorBoundary from "../components/CanvasErrorBoundary";
-import HeroExperience from "../components/HeroExperience";
+import HeroG3 from "../sections/HeroG3";
 import SectionHeader from "../components/SectionHeader";
 import { iconsList } from "../constants";
 import { useContent } from "../hooks/useContent";
@@ -27,21 +24,10 @@ const TOOL_LABELS = {
 const GIANT = "font-black uppercase leading-[0.84] tracking-[-0.035em]";
 const RULE = "text-[11px] tracking-[0.25em] uppercase opacity-60";
 
-// Hero 的字級與版面其他地方不同：細體、撐到貼邊、行距壓到幾乎相碰。
-// 重量放輕是關鍵——粗黑體在這個尺寸會變成一塊色塊而不是字。
-const HERO_TYPE =
-  "block font-light uppercase leading-[0.92] tracking-[-0.02em] text-center " +
-  "text-[19vw] md:text-[clamp(6rem,16.5vw,14rem)]";
-const HERO_LINK =
-  "text-[var(--fg)] opacity-45 hover:opacity-100 transition-opacity duration-300 " +
-  "focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--fg)]";
-
 const Home = () => {
-  const heroRef = useRef(null);
   const main = useContent("main");
   const projects = useContent("projects");
 
-  const hero = main?.hero;
   const about = main?.about;
   const status = main?.status;
   const tools = main?.tools;
@@ -49,113 +35,10 @@ const Home = () => {
   const featured = projects?.featured;
   const more = projects?.more || [];
 
-  // 唯一的動效：Hero 進場。捲動治療層是第 5 階段的事，這裡刻意不做。
-  useEffect(() => {
-    if (reduceMotion() || !heroRef.current) return;
-    const items = heroRef.current.querySelectorAll("[data-reveal]");
-    if (!items.length) return;
-    const tween = gsap.fromTo(
-      items,
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.09 }
-    );
-    return () => tween.kill();
-  }, [hero]);
-
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    el?.scrollIntoView?.({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" });
-  };
-
   return (
     <main className="text-[var(--fg)]">
-      {/* ——  Hero：巨型字堆疊撐滿視窗、小字釘在四邊。字本身就是版面。 */}
-      <section
-        id="hero"
-        ref={heroRef}
-        className="relative min-h-dvh flex flex-col justify-center overflow-hidden
-                   px-5 md:px-8 pt-28 pb-14 md:pt-32 md:pb-16"
-      >
-        {/* Avatar 疊在字堆後面，但仍有硬邊界——是被排版的元素，不是背景。 */}
-        <div
-          data-reveal
-          className="absolute z-0 right-[5vw] bottom-14 w-[38vw] max-w-[150px]
-                     md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[30vw] md:max-w-[330px]"
-        >
-          <figure className="relative aspect-[3/4] overflow-hidden border border-[var(--border)]">
-            <figcaption className={`absolute left-3 bottom-3 z-10 ${RULE}`}>Avatar</figcaption>
-            <div className="absolute inset-0">
-              <CanvasErrorBoundary>
-                <HeroExperience />
-              </CanvasErrorBoundary>
-            </div>
-          </figure>
-        </div>
-
-        {/* 置中定位句 */}
-        {about?.headline && (
-          <p
-            data-reveal
-            className="relative z-20 mx-auto max-w-[22ch] md:max-w-[34ch] text-center
-                       uppercase leading-tight opacity-70
-                       text-[13px] md:text-[17px] tracking-[0.01em]"
-          >
-            {about.headline}
-          </p>
-        )}
-
-        {/* 三行巨型字。第一行是身分，後兩行是目的地。 */}
-        <div className="relative z-20 mt-6 md:mt-10 flex flex-col items-center">
-          <h1 data-reveal className={`${HERO_TYPE} text-[var(--fg)] opacity-80`}>
-            {hero?.name}
-          </h1>
-
-          <button
-            data-reveal
-            type="button"
-            onClick={() => scrollTo("works")}
-            className={`${HERO_TYPE} ${HERO_LINK}`}
-          >
-            Works
-          </button>
-
-          <Link data-reveal to="/links" className={`${HERO_TYPE} ${HERO_LINK}`}>
-            Links
-          </Link>
-        </div>
-
-        {/* 釘在四邊的小字。與字堆重疊是刻意的。 */}
-        <div
-          data-reveal
-          className="absolute z-20 left-5 md:left-8 top-24 max-w-[60vw]
-                     md:top-1/2 md:-translate-y-1/2 md:max-w-none"
-        >
-          <div className="text-sm md:text-base font-medium">[{hero?.altNames}]</div>
-          <div className={`${RULE} mt-1`}>{hero?.roles}</div>
-        </div>
-
-        <div className="absolute z-20 inset-x-5 md:inset-x-8 bottom-6 flex items-end justify-between gap-4">
-          <button
-            type="button"
-            onClick={() => scrollTo("about")}
-            className={`${RULE} flex items-center gap-2 hover:opacity-100 transition-opacity
-                        focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--fg)]`}
-          >
-            {hero?.exploreLabel || "Explore"}
-            <span aria-hidden="true">↓</span>
-          </button>
-          {status && (
-            <span className={`${RULE} flex items-center gap-2`}>
-              <span
-                className={`w-1.5 h-1.5 rounded-full ${
-                  status.active ? "bg-emerald-500" : "bg-[var(--fg-muted)]"
-                }`}
-              />
-              {status.label}
-            </span>
-          )}
-        </div>
-      </section>
+      {/* ——  Hero：拍板設計「G3 shader (violet)」——紫色 aurora + door portal。 */}
+      <HeroG3 />
 
       {/* ——  01 About：是誰、在做什麼、接不接案 */}
       <section id="about" className="px-5 md:px-0 py-20 md:py-32">
