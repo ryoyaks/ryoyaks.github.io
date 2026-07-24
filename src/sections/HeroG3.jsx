@@ -89,8 +89,8 @@ export default function HeroG3() {
       {/* giant faint marquee — infinite left scroll */}
       <div className="g3h-marqwrap">
         <div className="g3h-marqtrack g3-marq">
-          <span>ILLUSTRATION&nbsp;&nbsp;MOCAP&nbsp;&nbsp;RIGGING&nbsp;&nbsp;TOOLING&nbsp;&nbsp;</span>
-          <span>ILLUSTRATION&nbsp;&nbsp;MOCAP&nbsp;&nbsp;RIGGING&nbsp;&nbsp;TOOLING&nbsp;&nbsp;</span>
+          <span>ILLUSTRATOR&nbsp;&nbsp;3D CREATOR&nbsp;&nbsp;DEV&nbsp;&nbsp;3D MODELING&nbsp;&nbsp;</span>
+          <span>ILLUSTRATOR&nbsp;&nbsp;3D CREATOR&nbsp;&nbsp;DEV&nbsp;&nbsp;3D MODELING&nbsp;&nbsp;</span>
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export default function HeroG3() {
         )}
       </nav>
 
-      <div className="g3h-el g3h-kicker">( ILLUSTRATION · MOCAP · RIG TOOLING )</div>
+      <div className="g3h-el g3h-kicker">( ILLUSTRATOR · 3D CREATOR · DEV )</div>
 
       <div className="g3h-el g3h-caption">
         <div className="a">SUBJECT · 006</div>
@@ -122,7 +122,7 @@ export default function HeroG3() {
 
       <div className="g3h-el g3h-id">
         <div className="nm">RyoyakS — [りょうや・六亞]</div>
-        <div className="rl">illustration · 3d · tools</div>
+        <div className="rl">illustration · 3d · dev</div>
         <div className="ml">
           <span>Commissions, collabs, questions</span>
           <a href="mailto:ryoyaillust892763@gmail.com" style={{ fontStyle: "italic", color: "#bfbfbf" }}>Write</a>
@@ -144,7 +144,7 @@ export default function HeroG3() {
         <div className="r"><span>STATUS</span><span className="live">● LIVE</span></div>
       </div>
 
-      <div className="g3h-el g3h-colophon">{"RYOYAKS STUDIO — ILLUSTRATION & RIG TOOLING\n六亞 RyoyakS · 2026 ©"}</div>
+      <div className="g3h-el g3h-colophon">{"RYOYAKS STUDIO — ILLUSTRATION & 3D MODELING\n六亞 RyoyakS · 2026 ©"}</div>
 
       <div className="g3h-el g3h-index">
         <span className="v">⟪</span>

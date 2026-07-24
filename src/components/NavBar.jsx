@@ -56,11 +56,25 @@ const NavBar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300
                   ${hidden ? "-translate-y-full" : "translate-y-0"}`}
     >
+      {/* black gradient scrim — keeps the links legible over content without a
+         solid bar; fades to transparent below the header. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/75 via-black/40 to-transparent"
+      />
+
       {/* transparent, edge-hugging bar (hero style) — logo sits by the left seam,
          nav by the right seam; no solid background. */}
-      <div className="w-full px-6 md:px-8 h-14 md:h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 text-[var(--fg)]" aria-label="RyoyakS">
+      <div className="relative w-full px-6 md:px-8 h-14 md:h-16 flex items-center justify-between">
+        {/* the hero's big RYS wordmark, "shrunk" into the header next to the mark */}
+        <Link to="/" className="flex items-center gap-2.5 text-[var(--fg)]" aria-label="RyoyakS">
           <img src="/images/logo.webp" alt="" className="md:size-9 size-8 object-contain" />
+          <span
+            className="text-xl md:text-2xl font-bold leading-none tracking-[-0.03em]"
+            style={{ fontFamily: "aeonik, sans-serif" }}
+          >
+            RYS
+          </span>
         </Link>
 
         {/* desktop: full link row */}
