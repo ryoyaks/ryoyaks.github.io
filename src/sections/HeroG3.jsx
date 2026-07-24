@@ -1,4 +1,6 @@
+import { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
 import AuroraBackground from "../components/AuroraBackground";
 
 // The locked "G3 shader (violet)" hero — flexible, edge-anchored layout.
@@ -20,9 +22,47 @@ const NAV = [
 
 export default function HeroG3() {
   const reduced = reduceMotion();
+  const rootRef = useRef(null);
+  const badgeRef = useRef(null);
+  const markRef = useRef(null);
+
+  // Intro (art-yakushev "pull-apart"): the side badge and the mark start
+  // together at centre, then separate outward to their edges while the rest
+  // fades in. Uses fromTo with viewport-derived offsets (not measured) so it
+  // is immune to StrictMode's double-invoke, and useLayoutEffect so the
+  // hidden content never flashes before the animation is set up.
+  useLayoutEffect(() => {
+    const badge = badgeRef.current;
+    const mark = markRef.current;
+    if (!badge || !mark) return;
+
+    const rest = rootRef.current.querySelectorAll(
+      ".g3h-el:not(.g3h-badge):not(.g3h-mark), .g3h-char, .g3h-marqwrap, .g3h-hair, .g3h-scrim",
+    );
+
+    if (reduced) {
+      gsap.set([badge, mark], { yPercent: -50, x: 0 });
+      gsap.set(rest, { opacity: 1 });
+      return;
+    }
+
+    const half = window.innerWidth / 2;
+    const badgeFrom = half - 34; // badge (home: left edge) → just left of centre
+    const markFrom = -(half - 88); // mark (home: right edge) → just right of centre
+
+    gsap.set([badge, mark], { yPercent: -50 });
+    gsap.set(rest, { opacity: 0 });
+
+    const tl = gsap.timeline();
+    tl.fromTo(badge, { x: badgeFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
+      .fromTo(mark, { x: markFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
+      .to(rest, { opacity: 1, duration: 0.65, stagger: 0.05, ease: "power2.out" }, "-=0.4");
+
+    return () => tl.kill();
+  }, [reduced]);
 
   return (
-    <section className="g3h" aria-label="Hero">
+    <section className="g3h" aria-label="Hero" ref={rootRef}>
       {/* full-bleed background */}
       <div className="g3h-aurora">
         <AuroraBackground reduced={reduced} />
@@ -65,7 +105,7 @@ export default function HeroG3() {
         <div className="b">RENDER PASS 04</div>
       </div>
 
-      <div className="g3h-el g3h-badge"><b>R.</b><s>Illustration</s></div>
+      <div className="g3h-el g3h-badge" ref={badgeRef}><b>R.</b><s>Illustration</s></div>
 
       <div className="g3h-el g3h-id">
         <div className="nm">RyoyakS — [りょうや・六亞]</div>
@@ -82,7 +122,7 @@ export default function HeroG3() {
       </div>
 
       <div className="g3h-el g3h-num">006</div>
-      <img className="g3h-el g3h-mark" src="/images/logo.webp" alt="RyoyakS" />
+      <img className="g3h-el g3h-mark" src="/images/logo.webp" alt="RyoyakS" ref={markRef} />
 
       <div className="g3h-el g3h-spec">
         <div className="r"><span>SPEC</span><span>v0.4</span></div>
