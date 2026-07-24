@@ -124,11 +124,16 @@ function AuroraPlane({ reduced }) {
 }
 
 // Full-bleed animated violet aurora, sized to fill its positioned parent.
-export default function AuroraBackground({ reduced = false }) {
+// `active` gates the render loop: when the hero is off-screen we set
+// frameloop="never" so the GPU goes idle (no wasted full-screen redraws).
+// dpr is pinned to 1 — a full-screen fragment shader is fill-rate bound, so
+// rendering at native retina density would multiply the cost for no visible gain.
+export default function AuroraBackground({ reduced = false, active = true }) {
   return (
     <Canvas
-      gl={{ antialias: false, alpha: false }}
-      dpr={[1, 1.5]}
+      gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
+      dpr={1}
+      frameloop={reduced ? "demand" : active ? "always" : "never"}
       camera={{ position: [0, 0, 1] }}
       style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
     >

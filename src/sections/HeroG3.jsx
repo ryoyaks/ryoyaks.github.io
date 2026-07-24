@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import AuroraBackground from "../components/AuroraBackground";
@@ -25,6 +25,21 @@ export default function HeroG3() {
   const rootRef = useRef(null);
   const badgeRef = useRef(null);
   const markRef = useRef(null);
+
+  // Perf: the aurora is a full-screen fragment shader — expensive to redraw
+  // every frame. Only run it while the hero is actually on screen; once it
+  // scrolls away we stop the render loop entirely (frameloop="never").
+  const [onScreen, setOnScreen] = useState(true);
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => setOnScreen(entry.isIntersecting),
+      { rootMargin: "120px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // Intro (art-yakushev "pull-apart"): the side badge and the mark start
   // together at centre, then separate outward to their edges while the rest
@@ -65,7 +80,8 @@ export default function HeroG3() {
     <section className="g3h" aria-label="Hero" ref={rootRef}>
       {/* full-bleed background */}
       <div className="g3h-aurora">
-        <AuroraBackground reduced={reduced} />
+        <AuroraBackground reduced={reduced} active={onScreen} />
+        <div className="g3h-veil" />
       </div>
       <div className="g3h-door-l" /><div className="g3h-seam-l" />
       <div className="g3h-door-r" /><div className="g3h-seam-r" />
