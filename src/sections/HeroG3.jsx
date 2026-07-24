@@ -7,9 +7,6 @@ import AuroraBackground from "../components/AuroraBackground";
 // Elements pin to the viewport corners/edges and scale fluidly (see the
 // .g3h-* rules in index.css), so the composition fills any screen rather
 // than being letterboxed inside a fixed 1440×900 stage.
-const reduceMotion = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // 導覽標籤來自定案設計，接到真實目的地：站內錨點 + /links 路由。
 const NAV = [
@@ -21,7 +18,6 @@ const NAV = [
 ];
 
 export default function HeroG3() {
-  const reduced = reduceMotion();
   const rootRef = useRef(null);
   const badgeRef = useRef(null);
   const markRef = useRef(null);
@@ -74,11 +70,22 @@ export default function HeroG3() {
     return () => io.disconnect();
   }, []);
 
+  // The intro should be seen from the top, so start the home page at the top on
+  // every mount/reload (browsers otherwise restore the previous scroll, which
+  // would land past the hero and skip the animation).
+  useLayoutEffect(() => {
+    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   // Intro (art-yakushev "pull-apart"): the side badge and the mark start
   // together at centre, then separate outward to their edges while the rest
   // fades in. Uses fromTo with viewport-derived offsets (not measured) so it
   // is immune to StrictMode's double-invoke, and useLayoutEffect so the
   // hidden content never flashes before the animation is set up.
+  // Plays regardless of prefers-reduced-motion (a brief one-time reveal, and
+  // consistent with the aurora/marquee), so it shows on every load. A safety
+  // onComplete guarantees the content ends visible even if the tween is cut.
   useLayoutEffect(() => {
     const badge = badgeRef.current;
     const mark = markRef.current;
@@ -88,12 +95,6 @@ export default function HeroG3() {
       ".g3h-el:not(.g3h-badge):not(.g3h-mark), .g3h-char, .g3h-marqwrap, .g3h-hair, .g3h-scrim",
     );
 
-    if (reduced) {
-      gsap.set([badge, mark], { yPercent: -50, x: 0 });
-      gsap.set(rest, { opacity: 1 });
-      return;
-    }
-
     const half = window.innerWidth / 2;
     const badgeFrom = half - 34; // badge (home: left edge) → just left of centre
     const markFrom = -(half - 88); // mark (home: right edge) → just right of centre
@@ -101,13 +102,14 @@ export default function HeroG3() {
     gsap.set([badge, mark], { yPercent: -50 });
     gsap.set(rest, { opacity: 0 });
 
-    const tl = gsap.timeline();
+    const reveal = () => gsap.set(rest, { opacity: 1, clearProps: "opacity" });
+    const tl = gsap.timeline({ onInterrupt: reveal });
     tl.fromTo(badge, { x: badgeFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
       .fromTo(mark, { x: markFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
       .to(rest, { opacity: 1, duration: 0.65, stagger: 0.05, ease: "power2.out" }, "-=0.4");
 
     return () => tl.kill();
-  }, [reduced]);
+  }, []);
 
   return (
     <section className="g3h" aria-label="Hero" ref={rootRef}>
