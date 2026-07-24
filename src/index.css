@@ -194,10 +194,11 @@ html {
 .g3h-creative h2 { font-family: aeonik; font-weight: 700; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.06; letter-spacing: -0.02em; color: #f2f2f2; margin: 0; }
 .g3h-creative p { margin: clamp(12px, 2vh, 20px) 0 0; width: clamp(240px, 25vw, 322px); font-size: clamp(12px, 1vw, 13px); line-height: 1.5; color: #8a8a8a; }
 
-/* Numeral 006 — matches the design: rotated 90° (clockwise), its visual centre
-   ~8% in from the right edge and ~38% down (abs ≈ 1249,286 on the 1440×900 art). */
-.g3h-num { right: clamp(18px, 2.4vw, 40px); top: 38%; transform: translateY(-50%) rotate(90deg); z-index: 5;
-  font-family: aeonik; font-weight: 700; font-size: clamp(52px, 6.6vw, 88px); letter-spacing: -0.03em; color: #4f4f57; }
+/* Numeral 006 — rotated 90° (clockwise), ~8% in from the right edge, and raised
+   so its top ("00") overlaps the SUBJECT·006 caption. Sits behind the caption
+   (z-index 5 < the caption's 6) so the caption text stays readable on top. */
+.g3h-num { right: clamp(18px, 2.4vw, 40px); top: 23%; transform: translateY(-50%) rotate(90deg); z-index: 5;
+  font-family: aeonik; font-weight: 700; font-size: clamp(52px, 6.6vw, 88px); letter-spacing: -0.03em; color: #fff; }
 .g3h-mark { right: clamp(2px, 0.5vw, 12px); top: 50%; width: clamp(56px, 5.6vw, 83px); height: auto; }
 
 .g3h-spec { right: var(--px); bottom: calc(var(--py) + clamp(28px, 5vh, 50px)); width: clamp(150px, 15vw, 172px);
@@ -211,11 +212,28 @@ html {
 .g3h-index { left: 50%; transform: translateX(-50%); bottom: var(--py); display: flex; align-items: center; gap: clamp(10px, 1.2vw, 16px); font-size: clamp(11px, 0.92vw, 13px); }
 .g3h-index .v { color: #7b61ff; } .g3h-index .c { color: #b0b0ae; font-weight: 500; letter-spacing: 0.08em; }
 
-/* narrow screens: drop the decorative right-edge marks + caption, tuck identity in */
+/* ————————————————————————————————————————————————————————————
+   Narrow screens. The edge-composed desktop layout collapses to a
+   clean vertical rhythm: RYS → nav → kicker at the top, then the
+   identity + CREATIVE STUDIO block anchored above the footer. The
+   decorative right-edge marks (caption/006/mark/badge) and the spec
+   card are dropped so nothing overlaps the wordmark or the copy.
+   ———————————————————————————————————————————————————————————— */
 @media (max-width: 760px) {
-  .g3h-caption, .g3h-num, .g3h-mark, .g3h-badge { display: none; }
-  .g3h-id { left: var(--px); top: auto; bottom: clamp(200px, 34vh, 320px); transform: none; }
-  .g3h-kicker { top: clamp(96px, 15vh, 150px); }
+  .g3h-caption, .g3h-num, .g3h-mark, .g3h-badge, .g3h-spec { display: none; }
+
+  /* nav drops to its own full-width row under RYS (no longer over it) */
+  .g3h-nav { left: var(--px); right: auto; top: calc(var(--py) + clamp(60px, 15vw, 70px));
+    gap: clamp(12px, 3.4vw, 20px); flex-wrap: wrap; }
+  .g3h-kicker { top: calc(var(--py) + clamp(96px, 24vw, 120px)); }
+
+  /* lower copy: identity above CREATIVE STUDIO, both clear of the footer */
+  .g3h-id { left: var(--px); top: auto; bottom: clamp(230px, 32vh, 300px); transform: none; }
+  .g3h-creative { bottom: clamp(96px, 15vh, 140px); }
+
+  /* footer row: colophon left, index right (was centred → overlapped colophon) */
+  .g3h-index { left: auto; right: var(--px); transform: none; }
+
   .g3h-marqtrack { font-size: clamp(84px, 16vh, 160px); }
 }
 
