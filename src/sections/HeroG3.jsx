@@ -25,6 +25,39 @@ export default function HeroG3() {
   const rootRef = useRef(null);
   const badgeRef = useRef(null);
   const markRef = useRef(null);
+  const wordmarkRef = useRef(null);
+
+  // Continuous scroll-linked shrink: the big RYS wordmark scales down (origin
+  // top-left, so it stays pinned to the corner) into the header-logo size as you
+  // scroll through the first ~half viewport — bynikistudio's wordmark behaviour.
+  useEffect(() => {
+    const wm = wordmarkRef.current;
+    if (!wm) return;
+    let sSmall = 1;
+    const recalc = () => {
+      wm.style.transform = "none";
+      const h = wm.getBoundingClientRect().height || 90;
+      sSmall = Math.min(1, 30 / h); // land at ~30px tall (header-logo size)
+      apply();
+    };
+    let raf = 0;
+    const apply = () => {
+      raf = 0;
+      const p = Math.min(window.scrollY / (window.innerHeight * 0.55), 1);
+      wm.style.transform = `scale(${1 + (sSmall - 1) * p})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+    recalc();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", recalc);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", recalc);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   // Perf: the aurora is a full-screen fragment shader — expensive to redraw
   // every frame. Only run it while the hero is actually on screen; once it
@@ -98,7 +131,7 @@ export default function HeroG3() {
       <div className="g3h-hair" />
 
       {/* corners + edges */}
-      <div className="g3h-el g3h-wordmark"><b>RYS</b><i>©</i></div>
+      <div className="g3h-el g3h-wordmark" ref={wordmarkRef}><b>RYS</b><i>©</i></div>
 
       <nav className="g3h-el g3h-nav" aria-label="Sections">
         {NAV.map((item) =>

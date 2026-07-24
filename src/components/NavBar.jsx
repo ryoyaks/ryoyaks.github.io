@@ -66,16 +66,22 @@ const NavBar = () => {
       {/* transparent, edge-hugging bar (hero style) — logo sits by the left seam,
          nav by the right seam; no solid background. */}
       <div className="relative w-full px-6 md:px-8 h-14 md:h-16 flex items-center justify-between">
-        {/* the hero's big RYS wordmark, "shrunk" into the header next to the mark */}
-        <Link to="/" className="flex items-center gap-2.5 text-[var(--fg)]" aria-label="RyoyakS">
-          <img src="/images/logo.webp" alt="" className="md:size-9 size-8 object-contain" />
-          <span
-            className="text-xl md:text-2xl font-bold leading-none tracking-[-0.03em]"
-            style={{ fontFamily: "aeonik, sans-serif" }}
-          >
-            RYS
-          </span>
-        </Link>
+        {/* On home the hero's RYS wordmark scroll-shrinks into this top-left slot,
+           so the header renders no logo there (avoids a duplicate). Other pages
+           have no hero, so they keep a static logo. */}
+        {overHero ? (
+          <span aria-hidden="true" />
+        ) : (
+          <Link to="/" className="flex items-center gap-2.5 text-[var(--fg)]" aria-label="RyoyakS">
+            <img src="/images/logo.webp" alt="" className="md:size-9 size-8 object-contain" />
+            <span
+              className="text-xl md:text-2xl font-bold leading-none tracking-[-0.03em]"
+              style={{ fontFamily: "aeonik, sans-serif" }}
+            >
+              RYS
+            </span>
+          </Link>
+        )}
 
         {/* desktop: full link row */}
         <nav className="hidden md:flex items-center gap-7" aria-label="Sections">

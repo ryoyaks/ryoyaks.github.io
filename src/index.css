@@ -174,7 +174,12 @@ html {
 .g3h-hair { position: absolute; left: var(--px); right: var(--px); top: 52%; height: 1px; z-index: 4; background: rgba(255, 255, 255, 0.13); }
 
 .g3h-el { position: absolute; z-index: 6; }
-.g3h-wordmark { left: var(--px); top: var(--py); display: flex; align-items: flex-start; gap: 0.4vw; }
+/* RYS wordmark is fixed + scaled by scroll (see HeroG3): it shrinks in place
+   (origin top-left) from hero size down to the header-logo size as you scroll,
+   staying pinned to the top-left corner the whole way. Above the header scrim
+   (z 51) so it never dims. */
+.g3h-wordmark { position: fixed; z-index: 51; left: var(--px); top: clamp(14px, 2.4vh, 22px);
+  transform-origin: left top; will-change: transform; display: flex; align-items: flex-start; gap: 0.4vw; }
 .g3h-wordmark b { font-family: aeonik; font-weight: 700; font-size: clamp(58px, 7.6vw, 128px); line-height: 0.92; letter-spacing: -0.03em; color: #fff; }
 .g3h-wordmark i { font-style: normal; font-size: clamp(12px, 1.1vw, 18px); color: #fff; }
 
