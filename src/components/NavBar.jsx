@@ -54,10 +54,11 @@ const NavBar = () => {
     <header
       aria-label="Main"
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300
-                  border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-md
                   ${hidden ? "-translate-y-full" : "translate-y-0"}`}
     >
-      <div className="w-full mx-auto max-w-[1600px] px-6 md:px-10 h-14 md:h-16 flex items-center justify-between">
+      {/* transparent, edge-hugging bar (hero style) — logo sits by the left seam,
+         nav by the right seam; no solid background. */}
+      <div className="w-full px-6 md:px-8 h-14 md:h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-[var(--fg)]" aria-label="RyoyakS">
           <img src="/images/logo.webp" alt="" className="md:size-9 size-8 object-contain" />
         </Link>

@@ -86,9 +86,6 @@ export default function HeroG3() {
       <div className="g3h-door-l" /><div className="g3h-seam-l" />
       <div className="g3h-door-r" /><div className="g3h-seam-r" />
 
-      {/* character — centred, bleeds top/bottom, sits in the aurora */}
-      <img className="g3h-char" src="/hero/yak-object.png" alt="" aria-hidden="true" />
-
       {/* giant faint marquee — infinite left scroll */}
       <div className="g3h-marqwrap">
         <div className="g3h-marqtrack g3-marq">

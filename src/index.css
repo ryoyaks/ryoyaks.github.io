@@ -116,9 +116,8 @@ html {
   animation: g3-marquee 34s linear infinite;
   will-change: transform;
 }
-@media (prefers-reduced-motion: reduce) {
-  .g3-marq { animation: none; }
-}
+/* The marquee is a slow ambient scroll (like the aurora), so it keeps moving
+   regardless of prefers-reduced-motion — only the intro honours that setting. */
 
 /* ————————————————————————————————————————————————————————————
    G3 hero — flexible edge-anchored layout. Elements pin to the
@@ -189,8 +188,11 @@ html {
 .g3h-caption .a { color: #c9c9c6; } .g3h-caption .b { color: #7a7a76; }
 
 /* badge + mark are vertically centred via GSAP yPercent (the intro animates
-   their x, and GSAP owns the whole transform), so no CSS translate here. */
-.g3h-badge { left: 0; top: 50%; width: clamp(42px, 3.6vw, 53px); height: clamp(130px, 19vh, 171px);
+   their x, and GSAP owns the whole transform), so no CSS translate here.
+   They are position:fixed so they stay pinned to the viewport (float in place)
+   as the page scrolls past the hero — like nudot/niki's side badge. z above the
+   rails, below the nav. */
+.g3h-badge { position: fixed; z-index: 45; left: 0; top: 50%; width: clamp(42px, 3.6vw, 53px); height: clamp(130px, 19vh, 171px);
   background: #fff; display: flex; flex-direction: column; justify-content: space-between; align-items: center;
   padding: clamp(8px, 1vh, 12px) 10px clamp(10px, 1.4vh, 14px); }
 .g3h-badge b { font-size: clamp(15px, 1.4vw, 20px); font-weight: 500; color: #0a0a0a; }
@@ -211,7 +213,7 @@ html {
    (z-index 5 < the caption's 6) so the caption text stays readable on top. */
 .g3h-num { right: clamp(18px, 2.4vw, 40px); top: 23%; transform: translateY(-50%) rotate(90deg); z-index: 5;
   font-family: aeonik; font-weight: 700; font-size: clamp(52px, 6.6vw, 88px); letter-spacing: -0.03em; color: #3a3a40; }
-.g3h-mark { right: clamp(2px, 0.5vw, 12px); top: 50%; width: clamp(56px, 5.6vw, 83px); height: auto; }
+.g3h-mark { position: fixed; z-index: 45; right: clamp(16px, 2vw, 40px); top: 50%; width: clamp(56px, 5.6vw, 83px); height: auto; }
 
 .g3h-spec { right: var(--px); bottom: calc(var(--py) + clamp(28px, 5vh, 50px)); width: clamp(150px, 15vw, 172px);
   background: #141416; border: 1px solid #333; border-radius: 4px; padding: clamp(10px, 1.2vw, 12px); display: flex; flex-direction: column; gap: 9px; }
