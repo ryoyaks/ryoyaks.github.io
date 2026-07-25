@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import AuroraBackground from "../components/AuroraBackground";
+import { introGate } from "../lib/intro";
 
 // The locked "G3 shader (violet)" hero — flexible, edge-anchored layout.
 // Elements pin to the viewport corners/edges and scale fluidly (see the
@@ -102,13 +103,27 @@ export default function HeroG3() {
     gsap.set([badge, mark], { yPercent: -50 });
     gsap.set(rest, { opacity: 0 });
 
-    const reveal = () => gsap.set(rest, { opacity: 1, clearProps: "opacity" });
-    const tl = gsap.timeline({ onInterrupt: reveal });
-    tl.fromTo(badge, { x: badgeFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
-      .fromTo(mark, { x: markFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, 0.3)
-      .to(rest, { opacity: 1, duration: 0.65, stagger: 0.05, ease: "power2.out" }, "-=0.4");
+    let tl;
+    let played = false;
+    const play = () => {
+      if (played) return;
+      played = true;
+      const reveal = () => gsap.set(rest, { opacity: 1, clearProps: "opacity" });
+      tl = gsap.timeline({ onInterrupt: reveal });
+      tl.fromTo(badge, { x: badgeFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" })
+        .fromTo(mark, { x: markFrom }, { x: 0, duration: 1.1, ease: "power3.inOut" }, "<")
+        .to(rest, { opacity: 1, duration: 0.65, stagger: 0.05, ease: "power2.out" }, "-=0.55");
+    };
 
-    return () => tl.kill();
+    // Play as the boot curtain lifts; fallback timer covers the case where the
+    // boot overlay never runs (so the hero can't stay hidden).
+    introGate.then(play);
+    const fallback = setTimeout(play, 3500);
+
+    return () => {
+      clearTimeout(fallback);
+      if (tl) tl.kill();
+    };
   }, []);
 
   return (

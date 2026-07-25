@@ -152,6 +152,28 @@ html {
   --py: clamp(20px, 3vh, 46px);
   --door: clamp(14px, 1.7vw, 24px);
 }
+/* ————————————————————————————————————————————————————————————
+   Boot-log preloader (BootIntro) — terminal curtain that lifts on load.
+   ———————————————————————————————————————————————————————————— */
+.boot-overlay {
+  position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+  padding: 24px; will-change: transform;
+  background: radial-gradient(120% 80% at 50% 32%, #140f2e 0%, #08060f 56%, #050409 100%);
+  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+}
+.boot-term { width: min(560px, 92vw); color: #b9b4cf; font-size: clamp(12px, 1.5vw, 15px); line-height: 1.95; }
+.boot-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid rgba(150, 132, 255, 0.18); }
+.boot-brand { font-weight: 700; letter-spacing: 0.02em; color: #efeaff; }
+.boot-sub { font-size: 0.82em; color: #6f6a86; letter-spacing: 0.08em; text-transform: uppercase; }
+.boot-line { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+.boot-key { color: #a7a2be; overflow: hidden; text-overflow: ellipsis; }
+.boot-caret { color: #7b61ff; }
+.boot-dots { flex: 1 1 auto; min-width: 20px; border-bottom: 1px dotted rgba(150, 132, 255, 0.28); transform: translateY(-4px); }
+.boot-val { color: #6f6a86; letter-spacing: 0.06em; }
+.boot-val-hi { color: #7b61ff; font-weight: 600; }
+.boot-foot { margin-top: 12px; color: #7b61ff; }
+
 .g3h-aurora { position: absolute; inset: 0; z-index: 0; }
 /* Dim the shader (it reads too bright on its own). Lives inside the aurora
    wrapper so it darkens only the WebGL layer, not the character or text above. */

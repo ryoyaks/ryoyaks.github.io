@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import BootIntro from "./components/BootIntro";
 import NotFound from "./components/NotFound";
 import PageTransition from "./components/PageTransition";
 import { NavBar } from "./sections";
@@ -55,6 +56,7 @@ export const AppRoutes = ({ location }) => (
 const App = () => (
   <Router>
     <div className="min-h-screen">
+      <BootIntro />
       <PageTransition>
         {(location) => <AppRoutes location={location} />}
       </PageTransition>
