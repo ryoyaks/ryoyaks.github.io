@@ -7,8 +7,8 @@
   { "name": "pixiv", "displayName": "Pixiv", "subLabel": "15708685", "href": "https://www.pixiv.net/users/15708685", "icon": "/images/icon/pixiv.webp" },
   { "name": "fanbox", "displayName": "Fanbox", "subLabel": "@ryoyaks", "href": "https://www.fanbox.cc/@ryoyaks", "icon": "/images/icon/fanbox.webp" },
   { "name": "youtube", "displayName": "YouTube", "subLabel": "@RyoyakS", "href": "https://www.youtube.com/@RyoyakS", "icon": "/images/icon/youtube.webp" },
-  { "name": "twitch", "displayName": "Twitch", "subLabel": "streams", "href": "https://www.fanbox.cc/@ryoyaks", "icon": "/images/icon/twitch.webp" },
-  { "name": "marshmallow", "displayName": "Marshmallow", "subLabel": "留言給我", "href": "https://www.fanbox.cc/@ryoyaks", "icon": "/images/icon/marshmallow.webp" },
-  { "name": "paypal", "displayName": "PayPal", "subLabel": "買杯咖啡", "href": "https://www.fanbox.cc/@ryoyaks", "icon": "/images/icon/paypal.webp" },
+  { "name": "twitch", "displayName": "Twitch", "subLabel": "streams", "href": "https://www.twitch.tv/ryoyaks", "icon": "/images/icon/twitch.webp" },
+  { "name": "marshmallow", "displayName": "Marshmallow", "subLabel": "留言給我", "href": "https://marshmallow-qa.com/y13ihmzhufhr9yp", "icon": "/images/icon/marshmallow.webp" },
+  { "name": "paypal", "displayName": "PayPal", "subLabel": "買杯咖啡", "href": "https://www.paypal.com/paypalme/Ryoy4kS?country.x=TW&locale.x=zh_TW", "icon": "/images/icon/paypal.webp" },
   { "name": "email", "displayName": "Email", "subLabel": "委託 / 聯絡", "href": "mailto:ryoyaillust892763@gmail.com", "icon": "/images/icon/email.webp" }
 ]
