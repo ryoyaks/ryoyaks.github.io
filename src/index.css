@@ -80,6 +80,21 @@ html {
     font-style: normal;
     font-display: swap;
   }
+  /* Silkscreen — pixel/Win95 face for the boot-log dialog popups. */
+  @font-face {
+    font-family: "Silkscreen";
+    src: url("/fonts/Silkscreen-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Silkscreen";
+    src: url("/fonts/Silkscreen-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
 }
 
 @theme {
@@ -153,26 +168,52 @@ html {
   --door: clamp(14px, 1.7vw, 24px);
 }
 /* ————————————————————————————————————————————————————————————
-   Boot-log preloader (BootIntro) — terminal curtain that lifts on load.
+   Boot-log preloader (BootIntro) — a cluster of retro Win95-style error /
+   dialog popups; the front one runs the log + progress bar. At 100% they all
+   snap shut and the hero's pull-apart takes over.
    ———————————————————————————————————————————————————————————— */
 .boot-overlay {
-  position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
-  padding: 24px; will-change: transform;
-  background: radial-gradient(120% 80% at 50% 32%, #140f2e 0%, #08060f 56%, #050409 100%);
-  font-family: ui-monospace, "SFMono-Regular", "Cascadia Code", Consolas, monospace;
+  position: fixed; inset: 0; z-index: 100; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: #0a0812; font-family: "Silkscreen", ui-monospace, monospace;
 }
-.boot-term { width: min(560px, 92vw); color: #b9b4cf; font-size: clamp(12px, 1.5vw, 15px); line-height: 1.95; }
-.boot-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-  padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid rgba(150, 132, 255, 0.18); }
-.boot-brand { font-weight: 700; letter-spacing: 0.02em; color: #efeaff; }
-.boot-sub { font-size: 0.82em; color: #6f6a86; letter-spacing: 0.08em; text-transform: uppercase; }
-.boot-line { display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
-.boot-key { color: #a7a2be; overflow: hidden; text-overflow: ellipsis; }
-.boot-caret { color: #7b61ff; }
-.boot-dots { flex: 1 1 auto; min-width: 20px; border-bottom: 1px dotted rgba(150, 132, 255, 0.28); transform: translateY(-4px); }
-.boot-val { color: #6f6a86; letter-spacing: 0.06em; }
-.boot-val-hi { color: #7b61ff; font-weight: 600; }
-.boot-foot { margin-top: 12px; color: #7b61ff; }
+.boot-stage { position: relative; width: 960px; height: 680px; transform-origin: center center; }
+
+.boot-win { position: absolute; border: 2px solid #000; background: #f2f0fa; color: #14101f;
+  box-shadow: 6px 6px 0 rgba(123, 97, 255, 0.85); }
+.boot-win.dark { background: #0e0b18; color: #ece8fb; border-color: #ece8fb; }
+
+.boot-bar { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  height: 22px; padding: 0 4px 0 8px; background: #7b61ff; color: #fff; }
+.boot-win.dark .boot-bar { background: #ece8fb; color: #0e0b18; }
+.boot-title { font-size: 10px; letter-spacing: 0.03em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.boot-x { flex: none; display: grid; place-items: center; width: 15px; height: 14px; font-size: 8px;
+  border: 2px solid currentColor; }
+
+.boot-content { padding: 14px 12px; font-size: 11px; line-height: 1.6; }
+.boot-row { display: flex; align-items: center; gap: 10px; }
+.boot-icon { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 2px solid currentColor;
+  display: grid; place-items: center; font-size: 12px; }
+.boot-msg { font-size: 15px; letter-spacing: 0.02em; }
+.boot-msg.big { font-size: 26px; line-height: 1.05; }
+.boot-thumb { display: block; width: 90px; height: 90px; margin: 2px auto; object-fit: contain;
+  filter: grayscale(1) contrast(1.1); }
+
+.boot-btns { display: flex; gap: 8px; padding: 0 12px 12px; }
+.boot-btn { font-size: 10px; padding: 4px 10px; border: 2px solid #000; background: #e2def0; color: #14101f; }
+.boot-win.dark .boot-btn { border-color: #ece8fb; background: transparent; color: #ece8fb; }
+
+/* front loader window */
+.boot-loader { z-index: 10; }
+.boot-log { font-size: 10px; line-height: 1.9; color: #6b6580; white-space: nowrap; }
+.boot-log b { color: #7b61ff; font-weight: 400; }
+.boot-load-label { margin-top: 8px; font-size: 12px; }
+.boot-meter { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.boot-track { flex: 1; height: 16px; border: 2px solid #000; background: #fff; padding: 2px; }
+.boot-fill { height: 100%; width: 0%; background: repeating-linear-gradient(90deg, #7b61ff 0 9px, transparent 9px 12px); }
+.boot-pct { font-size: 11px; min-width: 42px; text-align: right; }
+.boot-live { display: flex; align-items: center; gap: 7px; margin-top: 10px; font-size: 12px; color: #7b61ff; }
+.boot-live .dot { width: 8px; height: 8px; border-radius: 50%; background: #7b61ff; }
 
 .g3h-aurora { position: absolute; inset: 0; z-index: 0; }
 /* Dim the shader (it reads too bright on its own). Lives inside the aurora
