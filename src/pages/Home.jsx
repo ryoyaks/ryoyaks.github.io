@@ -21,7 +21,7 @@ const TOOL_LABELS = {
 };
 
 // 巨型文字即圖像：整頁只有三種字級——Hero 的名字、區塊標題、內文。
-const GIANT = "font-black uppercase leading-[0.84] tracking-[-0.035em]";
+const GIANT = "[font-family:aeonik] font-black uppercase leading-[0.84] tracking-[-0.035em]";
 const RULE = "text-[11px] tracking-[0.25em] uppercase opacity-60";
 
 const Home = () => {
@@ -86,7 +86,7 @@ const Home = () => {
                 <div className="flex items-center gap-2 mt-4">
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      status.active ? "bg-emerald-500" : "bg-[var(--fg-muted)]"
+                      status.active ? "bg-[var(--accent)]" : "bg-[var(--fg-muted)]"
                     }`}
                   />
                   <span className="text-base font-semibold">{status.label}</span>
